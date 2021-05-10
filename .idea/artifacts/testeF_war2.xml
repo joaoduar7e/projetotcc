@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="testeF:war2">
+    <output-path>$PROJECT_DIR$/out/artifacts/testeF_war2</output-path>
+    <root id="root">
+      <element id="artifact" artifact-name="testeF:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="jpa-descriptors" facet="testeF/jpa/JPA" />
+        </element>
+      </element>
+      <element id="archive" name="teste_f.rar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/target/testeF-SNAPSHOT/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
