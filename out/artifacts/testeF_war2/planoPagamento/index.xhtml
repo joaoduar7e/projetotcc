@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+
+        <h:form>
+
+            <p:panelGrid columns="2"
+                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:row styleClass="my-heading-row">
+                </p:row>
+
+                <p:outputLabel value="Descrição"/>
+                <p:inputText value="#{planoPagamentoControle.planoPagamento.nome}" id="nome" size="40"
+                             placeholder="Escreva o nome!"
+                             required="true" requiredMessage="O nome é obrigatório!"/>
+
+                <p:outputLabel value="Observação"/>
+                <p:inputText value="#{planoPagamentoControle.planoPagamento.observacao}" id="observacao" size="40"
+                             placeholder="Escreva a observação!"/>
+
+                <p:row>
+                    <p:column styleClass="ui-grid-col-6">
+
+                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                         action="list.xhtml"/>
+                    </p:column>
+                    <p:column styleClass="ui-grid-col-6">
+                        <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                         actionListener="#{planoPagamentoControle.salvar()}" action="list.xhtml"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+<script>
+    <style type="text/css">
+        .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+        text - align: center;
+    }
+
+        .customPanelGrid .ui-panelgrid-content {
+        align - items: center;
+    }
+    </style>
+
+</script>
+
+</html>
+

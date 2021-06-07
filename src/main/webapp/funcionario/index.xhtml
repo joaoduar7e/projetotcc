@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+
+        <h:form id="cadFun">
+
+            <p:panelGrid columns="4"
+                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                    Dados funcionário
+                </p:row>
+
+                <p:outputLabel value="Cliente"/>
+                <p:autoComplete value="#{funcionarioControle.funcionario.cliente}"
+                                completeMethod="#{funcionarioControle.getListaClientesFiltrando}"
+                                var="fun" id="cliente" forceSelection="true"
+                                size="40"
+                                itemLabel="#{fun.nome}"
+                                itemValue="#{fun}"
+                                converter="#{funcionarioControle.clienteConverter}"/>
+
+                <p:outputLabel value="Nome" for="nome"/>
+                <p:inputText value="#{funcionarioControle.funcionario.nome}" id="nome" size="40"
+                             requiredMessage="O nome é obrigatório!"  required="true" />
+
+                <p:outputLabel value="Sobrenome" for="sobrenome"/>
+                <p:inputText value="#{funcionarioControle.funcionario.sobrenome}" id="sobrenome" size="40"
+                             placeholder="Escreva o sobrenome do cliente!"/>
+
+                <p:outputLabel value="Data de admissão"/>
+                <p:datePicker id="dateA" value="#{funcionarioControle.funcionario.dataAdmissao}" size="40"
+                              showIcon="true" style="width:auto"/>
+
+                <p:outputLabel value="Data de nascimento"/>
+                <p:datePicker id="dateN" value="#{funcionarioControle.funcionario.dataNascimento}" size="40"
+                              showIcon="true" style="width:auto"/>
+
+                <p:outputLabel value="Salario"/>
+                <p:inputNumber value="#{funcionarioControle.funcionario.salario}" id="apelido" size="40"
+                               placeholder="Insira o salario do funcionário!">
+                </p:inputNumber>
+
+                <p:outputLabel value="Função"/>
+                <p:inputText value="#{funcionarioControle.funcionario.funcao}" id="funcao" size="40"
+                             placeholder="Escreva a funcao do funcionario!"
+                             required="true" requiredMessage="A funcao é obrigatória!" />
+
+                <p:outputLabel value="Telefone" for="telefone"/>
+                <p:inputMask mask="(99)9999-9999"
+                             value="#{funcionarioControle.funcionario.telefone}" id="telefone" size="40"
+                             placeholder="O Telefone deve contém apenas números"> </p:inputMask>
+
+                <p:row styleClass="my-heading-row" style="font-weight: bold">
+                    Endereço
+                </p:row>
+
+
+                <p:outputLabel value="Cidade"/>
+                <p:selectOneMenu value="#{funcionarioControle.funcionario.cidade}" id="cidade"
+                                 required="true" requiredMessage="A cidade é obrigatório!"
+                                 converter="#{funcionarioControle.cidadeConverter}">
+                    <f:selectItems  value="#{funcionarioControle.listaCidade}" var="cidade"
+                                    itemLabel="#{cidade.nome}"
+                                    itemValue="#{cidade}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Logradouro"/>
+                <p:inputText value="#{funcionarioControle.funcionario.logradouro}" id="endereco" size="40"
+                             placeholder="Escreva o endereço do cliente!"/>
+
+                <p:outputLabel value="Número"/>
+                <p:inputText value="#{funcionarioControle.funcionario.numero}" id="numero" size="40"
+                             placeholder="Escreva o número de endereço do cliente!"/>
+
+                <p:outputLabel value="Bairro"/>
+                <p:inputText value="#{funcionarioControle.funcionario.bairro}" id="bairro" size="40"
+                             placeholder="Escreva o bairro de endereço do cliente!"/>
+
+                <p:outputLabel value="Observação"/>
+                <p:inputText value="#{funcionarioControle.funcionario.observacao}" id="obs" size="40"
+                             placeholder="Escreva o bairro de endereço do cliente!"/>
+
+                <p:row>
+                    <p:column styleClass="ui-grid-col-6">
+
+                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                         action="list.xhtml"/>
+                    </p:column>
+                    <p:column styleClass="ui-grid-col-6">
+                        <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                         actionListener="#{funcionarioControle.salvar()}"  action="list.xhtml"/>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+</html>
+

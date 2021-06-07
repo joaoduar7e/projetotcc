@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+        <div class="card">
+            <h:form id="form">
+                <p:dataTable var="maquinario" value="#{maquinarioControle.listaMaquinario}" rows="10"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                             paginatorPosition="bottom"
+                             rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                             emptyMessage="Nenhuma máquina encontrada">
+                    <f:facet name="header">
+                        Lista de Maquinário
+                    </f:facet>
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{maquinario.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{maquinario.nome}"/>
+                    </p:column>
+                    <p:column headerText="Marca">
+                        <h:outputText value="#{maquinario.marca}"/>
+                    </p:column>
+                    <p:column headerText="Ano">
+                        <h:outputText value="#{maquinario.ano}">
+                            <f:convertNumber pattern="#0000" locale="pt_BR"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Observação">
+                        <h:outputText value="#{maquinario.observacao}"/>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton icon="pi pi-info-circle"
+                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                         actionListener="#{maquinarioControle.editar(maquinario)}" action="view.xhtml"
+                                         ajax="false"/>
+                        <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning ui-button-flat"
+                                         action="index.xhtml"
+                                         actionListener="#{maquinarioControle.editar(maquinario)}"
+                                         ajax="false" />
+                        <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
+                                         actionListener="#{maquinarioControle.excluir(maquinario)}"
+                                         ajax="false" />
+                    </p:column>
+                </p:dataTable>
+
+                <p:panelGrid columns="4"
+                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                     action="index.xhtml"
+                                     actionListener="#{maquinarioControle.novo()}"/>
+                </p:panelGrid>
+            </h:form>
+        </div>
+
+
+    </ui:define>
+</ui:composition>
+</html>
+
