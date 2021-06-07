@@ -5,6 +5,8 @@
  */
 package facade;
 
+import utils.Transacional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
@@ -23,10 +25,12 @@ public abstract class AbstractFacade<T> {
         this.entityClass = entityClass;
     }
 
+    @Transacional
     public void salvar(T entity) {
         getEntityManager().merge(entity);
     }
 
+    @Transacional
     public void remover(T entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }

@@ -63,6 +63,12 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.0" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.0" />
           <element id="library" level="project" name="Maven: net.sf.jasperreports:jasperreports-fonts:6.14.0" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.core:deltaspike-core-api:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.core:deltaspike-core-impl:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.modules:deltaspike-jsf-module-api:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.modules:deltaspike-jsf-module-impl:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.modules:deltaspike-security-module-api:1.2.1" />
+          <element id="library" level="project" name="Maven: org.apache.deltaspike.modules:deltaspike-security-module-impl:1.2.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

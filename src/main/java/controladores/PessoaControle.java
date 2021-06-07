@@ -2,18 +2,22 @@ package controladores;
 
 import entidades.Pessoa;
 import facade.PessoaFacade;
+import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
-import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
+
 import javax.faces.bean.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import java.io.Serializable;
 import java.util.List;
 
-@ManagedBean
-@SessionScoped
-public class PessoaControle {
+@Named
+@ViewAccessScoped
+public class PessoaControle implements Serializable {
     private Pessoa pessoa = new Pessoa();
-    @EJB
-    private PessoaFacade pessoaFacade;
+    @Inject
+    transient private PessoaFacade pessoaFacade;
 
     public void novo(){
         pessoa = new Pessoa();

@@ -1,13 +1,14 @@
 <component name="ArtifactManager">
   <artifact type="war" name="testeF:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="testeF_war.war">
+    <properties id="maven-jee-properties">
+      <options>
+        <module>testeF</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="testeF-SNAPSHOT.war">
       <element id="artifact" artifact-name="testeF:war exploded" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="jpa-descriptors" facet="testeF/jpa/JPA" />
-        </element>
-      </element>
     </root>
   </artifact>
 </component>

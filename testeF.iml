@@ -18,6 +18,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="projetotccPU" />
+          <factory-entry name="tccPU" />
           <factory-entry name="testeF" />
         </datasource-mapping>
         <naming-strategy-map />
@@ -85,5 +86,11 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.0" level="project" />
     <orderEntry type="library" name="Maven: net.sf.jasperreports:jasperreports-fonts:6.14.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.core:deltaspike-core-api:1.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.core:deltaspike-core-impl:1.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.deltaspike.modules:deltaspike-jsf-module-api:1.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-jsf-module-impl:1.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-security-module-api:1.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-security-module-impl:1.2.1" level="project" />
   </component>
 </module>

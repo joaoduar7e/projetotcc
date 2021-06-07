@@ -5,9 +5,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Pessoa implements Serializable {
+@Entity
+@Table(name = "pessoa")
+public class Pessoa implements Serializable, ClassePai  {
 
-    private static final long serialVersionUID = 1l;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

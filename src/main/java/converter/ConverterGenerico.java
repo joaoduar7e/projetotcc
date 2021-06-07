@@ -5,6 +5,7 @@
  */
 package converter;
 
+import entidades.ClassePai;
 import facade.AbstractFacade;
 
 import javax.faces.component.UIComponent;
@@ -12,11 +13,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
 /**
- *
  * @author Joao Duarte
  */
 
-    // serve para recuperar um objeto
 public class ConverterGenerico implements Converter {
 
     private AbstractFacade facade;
@@ -32,12 +31,8 @@ public class ConverterGenerico implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return null;
+        return ((ClassePai) value).getId().toString();
     }
 
-//    @Override
-//    public String getAsString(FacesContext context, UIComponent component, Object value) {
-//        return ((ClassePai) value).getId().toString();
-//    }
 
 }

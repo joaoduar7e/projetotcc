@@ -2,13 +2,12 @@ package facade;
 
 import entidades.Pessoa;
 
-import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-@Stateless
+
 public class PessoaFacade extends AbstractFacade<Pessoa> {
-    @PersistenceContext(unitName = "projetotccPU")
+    @Inject
     private EntityManager em;
 
     @Override
