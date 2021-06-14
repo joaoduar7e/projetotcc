@@ -24,11 +24,14 @@
                         Lista de clientes
                     </f:facet>
 
-                    <p:column headerText="ID">
+                    <p:column headerText="ID" width="10%">
                         <h:outputText value="#{cliente.id}"/>
                     </p:column>
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{cliente.nome} - #{cliente.apelido} "/>
+                    <p:column headerText="Nome" style="text-align: center" sortBy="#{cliente.nome}" filterBy="#{cliente.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
+                        <h:outputText value="#{cliente.nome} #{cliente.sobrenome} "/>
+                    </p:column>
+                    <p:column headerText="Apelido" style="text-align: center">
+                        <h:outputText value="#{cliente.apelido}"/>
                     </p:column>
                     <p:column headerText="Telefone">
                         <h:outputText value="#{cliente.telefone}"/>

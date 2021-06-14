@@ -23,15 +23,14 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Nome"/>
+                <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText value="#{maquinarioControle.maquinario.nome}" id="nome" size="40"
                              placeholder="Escreva o nome do maquinário!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
                 <p:outputLabel value="Marca"/>
                 <p:inputText value="#{maquinarioControle.maquinario.nome}" id="marca" size="40"
-                             placeholder="Escreva a marca do maquinário!"
-                             required="true" requiredMessage="A marca é obrigatório!"/>
+                             placeholder="Escreva a marca do maquinário!"/>
 
                 <p:outputLabel for="date"
                                value="Ano"/>
@@ -43,7 +42,7 @@
 
                 <p:outputLabel value="Observação"/>
                 <p:inputText value="#{maquinarioControle.maquinario.observacao}" id="observacao" size="40"
-                             placeholder="Escreva a observação!"/>
+                             placeholder="Escreva a observação do maquinário!"/>
 
                 <p:row>
                     <p:column styleClass="ui-grid-col-6">

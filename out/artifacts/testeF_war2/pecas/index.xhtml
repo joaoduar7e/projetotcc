@@ -23,12 +23,12 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Descrição"/>
+                <p:outputLabel value="Descrição" for="nome"/>
                 <p:inputText value="#{pecasControle.pecas.descricao}" id="nome" size="40"
                              placeholder="Escreva a Descrição da peça!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Preço"/>
+                <p:outputLabel value="Preço" for="preco"/>
                 <p:inputNumber value="#{pecasControle.pecas.preco}" id="preco" size="40"
                                placeholder="Escreva o preço da peça!"
                                required="true" requiredMessage="O preco é obrigatorio!">

@@ -23,7 +23,7 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Funcionário"/>
+                <p:outputLabel value="Funcionário" for="funcionario"/>
                 <p:selectOneMenu value="#{usuarioControle.usuario.funcionario}" id="funcionario"
                                  required="true" requiredMessage="O funcionário é obrigatório!"
                                  converter="#{usuarioControle.funcionarioConverter}">
@@ -33,13 +33,14 @@
                 </p:selectOneMenu>
 
 
-                <p:outputLabel value="Login"/>
+                <p:outputLabel value="Login" for="nome"/>
                 <p:inputText value="#{usuarioControle.usuario.login}" id="nome" size="40"
                              placeholder="Escreva o nome de login!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Senha"/>
-                <p:password id="toggle" value="#{usuarioControle.usuario.senha}" toggleMask="true" redisplay="true"/>
+                <p:outputLabel value="Senha" for="toggle"/>
+                <p:password id="toggle" value="#{usuarioControle.usuario.senha}" toggleMask="true" redisplay="true"
+                            required="true" requiredMessage="A senha é obrigatório!"/>
 
                 <p:row>
                     <p:column styleClass="ui-grid-col-6">

@@ -24,13 +24,13 @@
                         Lista de funcionários
                     </f:facet>
 
-                    <p:column headerText="ID">
+                    <p:column headerText="ID" >
                         <h:outputText value="#{func.id}"/>
                     </p:column>
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{func.nome}"/>
+                    <p:column headerText="Nome" style="text-align: center" sortBy="#{func.nome}" filterBy="#{func.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
+                        <h:outputText value="#{func.nome} #{func.sobrenome}"/>
                     </p:column>
-                    <p:column headerText="Apelido">
+                    <p:column headerText="Apelido" style="text-align: center" sortBy="#{func.apelido}" filterBy="#{func.apelido}"  filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{func.apelido}"/>
                     </p:column>
                     <p:column headerText="Telefone">

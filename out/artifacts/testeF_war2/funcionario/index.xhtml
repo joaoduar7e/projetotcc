@@ -14,6 +14,21 @@
 
         <h:form id="cadFun">
 
+            <p:panelGrid columns="2"
+                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+                <p:outputLabel value="Cliente"/>
+                <p:autoComplete value="#{funcionarioControle.funcionario.cliente}"
+                                completeMethod="#{funcionarioControle.getListaClientesFiltrando}"
+                                var="fun" id="cliente" forceSelection="true"
+                                size="40"
+                                itemLabel="#{fun.nome}"
+                                itemValue="#{fun}"
+                                converter="#{funcionarioControle.clienteConverter}"/>
+            </p:panelGrid>
+
             <p:panelGrid columns="4"
                          columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
                          layout="grid"
@@ -24,18 +39,9 @@
                     Dados funcionário
                 </p:row>
 
-                <p:outputLabel value="Cliente"/>
-                <p:autoComplete value="#{funcionarioControle.funcionario.cliente}"
-                                completeMethod="#{funcionarioControle.getListaClientesFiltrando}"
-                                var="fun" id="cliente" forceSelection="true"
-                                size="40"
-                                itemLabel="#{fun.nome}"
-                                itemValue="#{fun}"
-                                converter="#{funcionarioControle.clienteConverter}"/>
-
                 <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText value="#{funcionarioControle.funcionario.nome}" id="nome" size="40"
-                             requiredMessage="O nome é obrigatório!"  required="true" />
+                             requiredMessage="O nome é obrigatório!" required="true"/>
 
                 <p:outputLabel value="Sobrenome" for="sobrenome"/>
                 <p:inputText value="#{funcionarioControle.funcionario.sobrenome}" id="sobrenome" size="40"
@@ -49,20 +55,20 @@
                 <p:datePicker id="dateN" value="#{funcionarioControle.funcionario.dataNascimento}" size="40"
                               showIcon="true" style="width:auto"/>
 
-                <p:outputLabel value="Salario"/>
+                <p:outputLabel value="Salário"/>
                 <p:inputNumber value="#{funcionarioControle.funcionario.salario}" id="apelido" size="40"
-                               placeholder="Insira o salario do funcionário!">
+                               placeholder="Insira o salário do funcionário!">
                 </p:inputNumber>
 
-                <p:outputLabel value="Função"/>
+                <p:outputLabel value="Função" for="funcao"/>
                 <p:inputText value="#{funcionarioControle.funcionario.funcao}" id="funcao" size="40"
-                             placeholder="Escreva a funcao do funcionario!"
-                             required="true" requiredMessage="A funcao é obrigatória!" />
+                             placeholder="Escreva a função do funcionario!"
+                             required="true" requiredMessage="A funcao é obrigatória!"/>
 
                 <p:outputLabel value="Telefone" for="telefone"/>
                 <p:inputMask mask="(99)9999-9999"
                              value="#{funcionarioControle.funcionario.telefone}" id="telefone" size="40"
-                             placeholder="O Telefone deve contém apenas números"> </p:inputMask>
+                             placeholder="O Telefone deve conter apenas números"> </p:inputMask>
 
                 <p:row styleClass="my-heading-row" style="font-weight: bold">
                     Endereço
@@ -102,7 +108,7 @@
                     </p:column>
                     <p:column styleClass="ui-grid-col-6">
                         <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{funcionarioControle.salvar()}"  action="list.xhtml"/>
+                                         actionListener="#{funcionarioControle.salvar()}" action="list.xhtml"/>
                     </p:column>
                 </p:row>
             </p:panelGrid>

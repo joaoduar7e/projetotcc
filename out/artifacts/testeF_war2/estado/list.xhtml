@@ -24,7 +24,7 @@
                         Lista de Estados
                     </f:facet>
 
-                    <p:column headerText="Nome">
+                    <p:column headerText="Nome" style="text-align: center" sortBy="#{estado.nome}" filterBy="#{estado.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{estado.nome}"/>
                     </p:column>
                     <p:column headerText="Sigla">

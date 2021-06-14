@@ -23,15 +23,15 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Nome"/>
+                <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText value="#{estadoControle.estado.nome}" id="nome" size="40"
                              placeholder="Escreva o nome do estado!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
 
-                <p:outputLabel value="Sigla"/>
+                <p:outputLabel value="Sigla" for="sigla"/>
                 <p:inputText value="#{estadoControle.estado.sigla}" id="sigla" size="40"
-                             placeholder="Escreva a sigla!"/>
+                             placeholder="Escreva a sigla do estado!" required="true" requiredMessage="A sigla é obrigatória!"/>
                 <p:row>
                     <p:column styleClass="ui-grid-col-6">
 
@@ -40,7 +40,7 @@
                     </p:column>
                     <p:column styleClass="ui-grid-col-6">
                         <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{estadoControle.salvar()}"  action="list.xhtml"/>
+                                         actionListener="#{estadoControle.salvar()}" action="list.xhtml"/>
                     </p:column>
                 </p:row>
             </p:panelGrid>

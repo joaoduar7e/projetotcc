@@ -31,18 +31,18 @@
                                 itemValue="#{cid}"
                                 converter="#{locaisControle.cidadeConverter}"/>
 
-                <p:outputLabel value="Descrição"/>
+                <p:outputLabel value="Descrição" for="nome"/>
                 <p:inputText value="#{locaisControle.locais.descricao}" id="nome" size="40"
-                             placeholder="Escreva o nome do locais!"
+                             placeholder="Escreva o nome do local!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
                 <p:outputLabel value="Observação"/>
                 <p:inputText value="#{locaisControle.locais.observacao}" id="obs" size="40"
-                             placeholder="Escreva o preco do local!"/>
+                             placeholder="Escreva a observação do local!"/>
 
                 <p:outputLabel value="Distância"/>
                 <p:inputText value="#{locaisControle.locais.distancia}" id="distancia" size="40"
-                             placeholder="Escreva o distancia do local!"/>
+                             placeholder="Escreva o distância do local!"/>
                 
 
 

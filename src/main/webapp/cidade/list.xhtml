@@ -24,7 +24,8 @@
                         Lista de Cidade
                     </f:facet>
 
-                    <p:column headerText="Nome">
+                    <p:column headerText="Nome" style="text-align: center"  sortBy="#{cidade.nome}"
+                              filterBy="#{cidade.nome}" filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{cidade.nome}"/>
                     </p:column>
                     <p:column headerText="Estado">

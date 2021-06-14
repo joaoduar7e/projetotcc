@@ -11,7 +11,6 @@
 
     <ui:define name="body">
 
-
         <h:form>
 
             <p:panelGrid columns="4"
@@ -27,7 +26,7 @@
                 <p:outputLabel value="CPF / CNPJ" for="cpfcnpj"/>
 
                 <p:inputMask id="cpfcnpj" value="#{clienteControle.cliente.cpfcpnj}"
-                             requiredMessage="Campo CPF/CNPJ é obrigatório!"
+                             requiredMessage="Campo CPF/CNPJ é obrigatório!" type="number"
                              required="true" placeHolder="">
                 </p:inputMask>
 
@@ -38,7 +37,7 @@
                 <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText value="#{clienteControle.cliente.nome}" id="nome" size="40"
                              placeholder="Escreva o nome do cliente!"
-                            requiredMessage="O nome é obrigatório!"  required="true" />
+                             requiredMessage="O nome é obrigatório!" required="true"/>
 
                 <p:outputLabel value="Sobrenome" for="sobrenome"/>
                 <p:inputText value="#{clienteControle.cliente.sobrenome}" id="sobrenome" size="40"
@@ -51,7 +50,8 @@
                 <p:outputLabel value="Telefone" for="telefone"/>
                 <p:inputMask mask="(99)9999-9999"
                              value="#{clienteControle.cliente.telefone}" id="telefone" size="40"
-                             placeholder="O Telefone deve contém apenas números"> </p:inputMask>
+                             placeholder="O Telefone deve conter apenas números"
+                             required="true" requiredMessage="O telefone é obrigatório"> </p:inputMask>
 
                 <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
                     Endereço
@@ -69,8 +69,7 @@
 
                 <p:outputLabel value="Logradouro"/>
                 <p:inputText value="#{clienteControle.cliente.logradouro}" id="endereco" size="40"
-                             placeholder="Escreva o endereço do cliente!" required="true"
-                             requiredMessage="O endereço é obrigatório!"/>
+                             placeholder="Escreva o logradouro de endereço do cliente!"/>
 
                 <p:outputLabel value="Número"/>
                 <p:inputText value="#{clienteControle.cliente.numero}" id="numero" size="40"
@@ -101,7 +100,6 @@
 
     </ui:define>
 </ui:composition>
-
 
 </html>
 

@@ -27,7 +27,7 @@
                     <p:column headerText="ID">
                         <h:outputText value="#{tipoServico.id}"/>
                     </p:column>
-                    <p:column headerText="Descrição">
+                    <p:column headerText="Descrição" style="text-align: center" sortBy="#{tipoServico.descricao}" filterBy="#{tipoServico.descricao}"  filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{tipoServico.descricao}"/>
                     </p:column>
                     <p:column headerText="Observação">

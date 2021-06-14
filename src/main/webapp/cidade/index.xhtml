@@ -23,12 +23,12 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Nome"/>
+                <p:outputLabel value="Nome" for="nome"/>
                 <p:inputText value="#{cidadeControle.cidade.nome}" id="nome" size="40"
-                             placeholder="Escreva o nome do tipo de serviço!"
+                             placeholder="Escreva o nome da cidade!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Estado"/>
+                <p:outputLabel value="Estado" for="estado"/>
                 <p:selectOneMenu value="#{cidadeControle.cidade.estado}" id="estado"
                                  required="true" requiredMessage="O estado é obrigatório!"
                                  converter="#{cidadeControle.estadoConverter}">

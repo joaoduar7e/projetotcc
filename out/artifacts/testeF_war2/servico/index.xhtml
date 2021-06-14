@@ -23,20 +23,19 @@
                 <p:row styleClass="my-heading-row">
                 </p:row>
 
-                <p:outputLabel value="Descrição"/>
+                <p:outputLabel value="Descrição" for="nome"/>
                 <p:inputText value="#{servicoControle.servico.descricao}" id="nome" size="40"
                              placeholder="Escreva o nome do servico!"
                              required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Preço"/>
+                <p:outputLabel value="Preço" for="preco"/>
                 <p:inputNumber value="#{servicoControle.servico.preco}" id="preco" size="40"
                              placeholder="Escreva o preco do servico!"
                              required="true" requiredMessage="O preco é preco!">
-                    <f:convertNumber pattern="0.00"/>
                 </p:inputNumber>
                 
 
-                <p:outputLabel value="Tipo de serviço"/>
+                <p:outputLabel value="Tipo de serviço" for="tipoServico"/>
                 <p:selectOneMenu value="#{servicoControle.servico.tipoServico}" id="tipoServico"
                                          required="true" requiredMessage="O tipo serviço é obrigatório!"
                                          converter="#{servicoControle.tipoServicoConverter}">

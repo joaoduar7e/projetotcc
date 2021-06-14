@@ -30,7 +30,7 @@
                     <p:column headerText="Funcionário">
                         <h:outputText value="#{usuario.funcionario.nome}"/>
                     </p:column>
-                    <p:column headerText="Login">
+                    <p:column headerText="Login" style="text-align: center" sortBy="#{usuario.login}" filterBy="#{usuario.login}"  filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{usuario.login}"/>
                     </p:column>
                     <p:column headerText="Ações">
