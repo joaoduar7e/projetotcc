@@ -57,7 +57,9 @@
 
                 <p:outputLabel value="Salário"/>
                 <p:inputNumber value="#{funcionarioControle.funcionario.salario}" id="apelido" size="40"
-                               placeholder="Insira o salário do funcionário!">
+                               placeholder="Insira o salário do funcionário!"
+                               decimalPlaces="2" decimalSeparator=","
+                               thousandSeparator="." symbol="R$">
                 </p:inputNumber>
 
                 <p:outputLabel value="Função" for="funcao"/>
