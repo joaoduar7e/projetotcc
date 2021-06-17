@@ -80,4 +80,6 @@ public class CidadeControle implements Serializable {
         cidadeFacade.salvar(cidade);
         cidade = new Cidade();
     }
+
+
 }

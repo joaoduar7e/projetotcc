@@ -23,7 +23,7 @@ public class JpaUtil {
 
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/projetotccPU", "postgres", "postgres");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/projetotcc", "postgres", "postgres");
         } catch (Exception e) {
             e.printStackTrace();
         }

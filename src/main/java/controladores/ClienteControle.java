@@ -69,5 +69,4 @@ public class ClienteControle implements Serializable {
         clienteFacade.salvar(cliente);
     }
 
-
 }

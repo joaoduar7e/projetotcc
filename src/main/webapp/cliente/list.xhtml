@@ -27,7 +27,8 @@
                     <p:column headerText="ID" width="10%">
                         <h:outputText value="#{cliente.id}"/>
                     </p:column>
-                    <p:column headerText="Nome" style="text-align: center" sortBy="#{cliente.nome}" filterBy="#{cliente.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
+                    <p:column headerText="Nome" style="text-align: center" sortBy="#{cliente.nome}"
+                              filterBy="#{cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{cliente.nome} #{cliente.sobrenome} "/>
                     </p:column>
                     <p:column headerText="Apelido" style="text-align: center">
@@ -41,25 +42,32 @@
                                          styleClass="rounded-button ui-button-info-outline ui-button-flat"
                                          actionListener="#{clienteControle.editar(cliente)}" action="view.xhtml"
                                          ajax="false"/>
-                        <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning ui-button-flat"
+                        <p:commandButton icon="pi pi-pencil"
+                                         styleClass="rounded-button ui-button-warning ui-button-flat"
                                          action="index.xhtml"
                                          actionListener="#{clienteControle.editar(cliente)}"
-                                         ajax="false" />
+                                         ajax="false"/>
                         <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
                                          actionListener="#{clienteControle.excluir(cliente)}"
-                                         ajax="false" />
+                                         ajax="false"/>
                     </p:column>
                 </p:dataTable>
 
                 <p:panelGrid columns="4"
-                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             columnClasses="ui-grid-col-6,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
                              layout="grid"
                              styleClass="ui-panelgrid-blank ui-fluid"
                              style="border:0px none; background-color:transparent;">
 
-                    <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                    <p:commandButton value="Novo" ajax="false"
+                                     styleClass="ui-button-raised"
                                      action="index.xhtml"
                                      actionListener="#{clienteControle.novo()}"/>
+
+                    <p:commandButton value="PDF" ajax="false"
+                                     styleClass="ui-button-secondary"
+                                     action="#{relatorioControle.geraRelatorioCliente()}"
+                                     icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
                 </p:panelGrid>
             </h:form>
         </div>

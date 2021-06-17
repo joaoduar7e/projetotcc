@@ -16,7 +16,7 @@
     <h:form>
 
         <p:menubar>
-            <p:menuitem value="Home" icon="pi pi-fw pi-home" action="/index.xhtml"/>
+
 
             <p:submenu label="Cadastros" icon="pi pi-fw pi-plus-circle">
 
@@ -40,8 +40,8 @@
                 <p:menuitem value="Right" icon="pi pi-fw pi-align-right"/>
             </p:submenu>
 
-            <p:submenu label="Relatórios" icon="pi pi-fw pi-file" disabled="true">
-                <p:menuitem value="New" icon="pi pi-fw pi-user-plus"/>
+            <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
+                <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false" outcome="/relatorio/relCliente/relCliente.xhtml"/>
                 <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
             </p:submenu>
 
