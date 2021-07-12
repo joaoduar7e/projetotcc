@@ -17,10 +17,10 @@ import java.util.List;
  */
 @Entity
 
-public class Vendas implements Serializable{
+public class Vendas implements Serializable, ClassePai{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; 
     @Temporal(TemporalType.TIMESTAMP) //annotation para persistir a data //timestamp grava data e hora
     private Date dataVenda;
@@ -115,7 +115,8 @@ public class Vendas implements Serializable{
     }
        @Override
     public String toString() {
-        return "entidades.Vendas[ id=" + id + " ]";
+        return "Vendas" +
+                "[ id=" + id + " ]";
     }
 
 }

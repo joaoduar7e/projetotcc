@@ -17,7 +17,7 @@ public class Pecas implements Serializable, ClassePai  {
     private Long id;
 
     private String descricao;
-    private BigDecimal qtdEst;
+    private Double qtdEst;
     private BigDecimal preco;
 
 
@@ -40,11 +40,11 @@ public class Pecas implements Serializable, ClassePai  {
         this.descricao = descricao;
     }
 
-    public BigDecimal getQtdEst() {
+    public Double getQtdEst() {
         return qtdEst;
     }
 
-    public void setQtdEst(BigDecimal qtdEst) {
+    public void setQtdEst(Double qtdEst) {
         this.qtdEst = qtdEst;
     }
 

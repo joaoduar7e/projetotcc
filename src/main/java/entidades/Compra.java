@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
  *
  * @author Joao Duarte
  */
-public class Compra implements Serializable {
+public class Compra implements Serializable, ClassePai {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataCompra;
@@ -107,7 +107,7 @@ public class Compra implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Compra[ id=" + id + " ]";
+        return "Compra[ id=" + id + " ]";
     }
     
 }

@@ -29,7 +29,7 @@ import java.util.List;
 @Named
 @ViewAccessScoped
 public class CompraControle implements Serializable {
-    private Compra compra;
+    private Compra compra = new Compra();
     private ItensCompra itensCompra;
     @Inject
     transient private CompraFacade compraFacade;

@@ -25,6 +25,7 @@ public abstract class AbstractFacade<T> {
         this.entityClass = entityClass;
     }
 
+
     @Transacional
     public void salvar(T entity) {
         getEntityManager().merge(entity);

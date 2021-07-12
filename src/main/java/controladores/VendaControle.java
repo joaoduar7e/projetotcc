@@ -32,7 +32,7 @@ import java.util.List;
 @ViewAccessScoped
 public class VendaControle implements Serializable {
 
-    private Vendas vendas;
+    private Vendas vendas = new Vendas();
     private ItensVenda itensVenda;
     @Inject
     transient private VendaFacade vendasFacade;
