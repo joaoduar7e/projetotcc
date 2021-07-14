@@ -10,11 +10,6 @@ import entidades.Vendas;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author Joao Duarte
- */
-
 public class VendaFacade extends AbstractFacade<Vendas> {
 
     @Inject

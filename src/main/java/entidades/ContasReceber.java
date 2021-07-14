@@ -5,15 +5,14 @@
  */
 package entidades;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -37,6 +36,40 @@ public class ContasReceber implements Serializable {
     @ManyToOne
     private Vendas vendas;
     private Double valor;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+            mappedBy = "contasReceber")
+    private List<BaixaContasReceber> baixaContasRecebers;
+
+    public String getSituacao(){
+        if(getValorBaixado() < valor){
+            return "Aberto";
+        }
+        return "Pago";
+    }
+
+    public Double getValorBaixado(){
+        if(baixaContasRecebers == null){
+            baixaContasRecebers = new ArrayList<BaixaContasReceber>();
+        }
+        Double valorBaixado = 0d;
+        for(BaixaContasReceber bx : baixaContasRecebers){
+            valorBaixado = valorBaixado + bx.getValor();
+        }
+        return valorBaixado;
+    }
+    public ContasReceber() {
+        baixaContasRecebers = new ArrayList<BaixaContasReceber>();
+    }
+
+    public List<BaixaContasReceber> getBaixaContasRecebers() {
+        return baixaContasRecebers;
+    }
+
+    public void setBaixaContasRecebers(List<BaixaContasReceber> baixaContasRecebers) {
+        this.baixaContasRecebers = baixaContasRecebers;
+    }
 
     public Date getDataEmissao() {
         return dataEmissao;
@@ -93,8 +126,8 @@ public class ContasReceber implements Serializable {
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    
-    
+
+
     
     public Long getId() {
         return id;
