@@ -122,7 +122,7 @@ public class VendaControle implements Serializable {
         vendas = ve;
     }
 
-    public void remover(Vendas ve) {
+    public void excluir(Vendas ve) {
         vendaFacade.remover(ve);
     }
 
@@ -155,7 +155,7 @@ public class VendaControle implements Serializable {
                 estoque = estoque - it.getQuantidade();
             }
         }
-        if (estoque - itensVenda.getQuantidade() < 0) {
+        if (estoque - itensVenda.getQuantidade() < 0 || estoque - itensVenda.getQuantidade() == 0) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(
                             FacesMessage.SEVERITY_ERROR,

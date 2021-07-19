@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-<ui:composition template="/WEB-INF/template.xhtml">te
+<ui:composition template="/WEB-INF/template.xhtml">
         <ui:define name="body">
             <h1 align="center">Lista de Vendas</h1>
             <br/>
@@ -33,6 +33,19 @@
                         <p:outputLabel value="#{ve.valorTotal}">
                             <f:convertNumber type="currency"/>                            
                         </p:outputLabel>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton icon="pi pi-info-circle"
+                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                         actionListener="#{vendaControle.editar(ve)}" action="view.xhtml"
+                                         ajax="false"/>
+                        <p:commandButton icon="pi pi-pencil" styleClass="rounded-button ui-button-warning ui-button-flat"
+                                         action="vendaedita.xhtml"
+                                         actionListener="#{vendaControle.editar(ve)}"
+                                         ajax="false" />
+                        <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
+                                         actionListener="#{vendaControle.excluir(ve)}"
+                                         ajax="false" />
                     </p:column>
                 </p:dataTable>
                 <p:panelGrid columns="4"
