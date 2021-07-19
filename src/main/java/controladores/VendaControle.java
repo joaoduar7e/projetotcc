@@ -35,7 +35,7 @@ public class VendaControle implements Serializable {
     private ConverterGenerico clienteConverter;
     @Inject
     transient private PecasFacade pecasFacade;
-    private ConverterGenerico pecasControle;
+    private ConverterGenerico pecasConverter;
     private Integer numParcelas;
     private Date DataPrimeiraParcela;
 
@@ -79,15 +79,15 @@ public class VendaControle implements Serializable {
         this.DataPrimeiraParcela = DataPrimeiraParcela;
     }
 
-    public ConverterGenerico getPecasControle() {
-        if (pecasControle == null) {
-            pecasControle = new ConverterGenerico(pecasFacade);
+    public ConverterGenerico getPecasConverter() {
+        if (pecasConverter == null) {
+            pecasConverter = new ConverterGenerico(pecasFacade);
         }
-        return pecasControle;
+        return pecasConverter;
     }
 
-    public void setPecasControle(ConverterGenerico pecasControle) {
-        this.pecasControle = pecasControle;
+    public void setPecasConverter(ConverterGenerico pecasConverter) {
+        this.pecasConverter = pecasConverter;
     }
 
     public ConverterGenerico getClienteConverter() {
@@ -106,7 +106,7 @@ public class VendaControle implements Serializable {
     }
 
     public List<Pecas> getListaPecaFiltrando(String parte) {
-        return pecasFacade.listaFiltrando(parte, "nome");
+        return pecasFacade.listaFiltrando(parte, "descricao");
     }
 
     public void novo() {
