@@ -7,8 +7,8 @@ package controladores;
 
 import converter.ConverterGenerico;
 import entidades.*;
+import facade.ClienteFacade;
 import facade.PecasFacade;
-import facade.PessoaFacade;
 import facade.VendaFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
@@ -31,11 +31,11 @@ public class VendaControle implements Serializable {
     @Inject
     transient private VendaFacade vendaFacade;
     @Inject
-    transient private PessoaFacade pessoaFacade;
-    private ConverterGenerico pessoaConverter;
+    transient private ClienteFacade clienteFacade;
+    private ConverterGenerico clienteConverter;
     @Inject
     transient private PecasFacade pecasFacade;
-    private ConverterGenerico produtoConverter;
+    private ConverterGenerico pecasControle;
     private Integer numParcelas;
     private Date DataPrimeiraParcela;
 
@@ -79,33 +79,33 @@ public class VendaControle implements Serializable {
         this.DataPrimeiraParcela = DataPrimeiraParcela;
     }
 
-    public ConverterGenerico getProdutoConverter() {
-        if (produtoConverter == null) {
-            produtoConverter = new ConverterGenerico(pecasFacade);
+    public ConverterGenerico getPecasControle() {
+        if (pecasControle == null) {
+            pecasControle = new ConverterGenerico(pecasFacade);
         }
-        return produtoConverter;
+        return pecasControle;
     }
 
-    public void setProdutoConverter(ConverterGenerico produtoConverter) {
-        this.produtoConverter = produtoConverter;
+    public void setPecasControle(ConverterGenerico pecasControle) {
+        this.pecasControle = pecasControle;
     }
 
-    public ConverterGenerico getPessoaConverter() {
-        if (pessoaConverter == null) {
-            pessoaConverter = new ConverterGenerico(pessoaFacade);
+    public ConverterGenerico getClienteConverter() {
+        if (clienteConverter == null) {
+            clienteConverter = new ConverterGenerico(clienteFacade);
         }
-        return pessoaConverter;
+        return clienteConverter;
     }
 
-    public void setPessoaConverter(ConverterGenerico pessoaConverter) {
-        this.pessoaConverter = pessoaConverter;
+    public void setClienteConverter(ConverterGenerico clienteConverter) {
+        this.clienteConverter = clienteConverter;
     }
 
-    public List<Pessoa> getListaPessoaFiltrando(String parte) {
-        return pessoaFacade.listaFiltrando(parte, "nome", "telefone");
+    public List<Cliente> getListaClienteFiltrando(String parte) {
+        return clienteFacade.listaFiltrando(parte, "nome", "telefone");
     }
 
-    public List<Pecas> getListaProdutoFiltrando(String parte) {
+    public List<Pecas> getListaPecaFiltrando(String parte) {
         return pecasFacade.listaFiltrando(parte, "nome");
     }
 

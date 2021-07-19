@@ -22,10 +22,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @author Joao Duarte
- */
-
 @Named
 @ViewAccessScoped
 public class CompraControle implements Serializable {
