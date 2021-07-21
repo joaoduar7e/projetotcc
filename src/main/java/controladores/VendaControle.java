@@ -9,6 +9,7 @@ import converter.ConverterGenerico;
 import entidades.*;
 import facade.ClienteFacade;
 import facade.PecasFacade;
+import facade.PlanoPagamentoFacade;
 import facade.VendaFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
@@ -36,6 +37,9 @@ public class VendaControle implements Serializable {
     @Inject
     transient private PecasFacade pecasFacade;
     private ConverterGenerico pecasConverter;
+    @Inject
+    transient private PlanoPagamentoFacade planoPagamentoFacade;
+    private ConverterGenerico planoPagamentoConverter;
     private Integer numParcelas;
     private Date DataPrimeiraParcela;
 
@@ -101,12 +105,27 @@ public class VendaControle implements Serializable {
         this.clienteConverter = clienteConverter;
     }
 
+    public ConverterGenerico getPlanoPagamentoConverter() {
+        if (planoPagamentoConverter == null) {
+            planoPagamentoConverter = new ConverterGenerico(planoPagamentoFacade);
+        }
+        return planoPagamentoConverter;
+    }
+
+    public void setPlanoPagamentoConverter(ConverterGenerico planoPagamentoConverter) {
+        this.planoPagamentoConverter = planoPagamentoConverter;
+    }
+
     public List<Cliente> getListaClienteFiltrando(String parte) {
         return clienteFacade.listaFiltrando(parte, "nome", "telefone");
     }
 
     public List<Pecas> getListaPecaFiltrando(String parte) {
         return pecasFacade.listaFiltrando(parte, "descricao");
+    }
+
+    public List<PlanoPagamento> getListaPlanoPagFiltrando(String parte) {
+        return planoPagamentoFacade.listaFiltrando(parte, "nome");
     }
 
     public void novo() {

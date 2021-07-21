@@ -33,6 +33,8 @@ public class Vendas implements Serializable, ClassePai {
     //efeito cascata, quando salva a venda, salva os itens de venda // fetchtype recupera os itens da venda // //mappedby indica que existe a chave estrangeira
     private List<ContasReceber> ContasRecebers;
 
+    @ManyToOne
+    private PlanoPagamento planoPagamento;
 
     public Vendas() { //metodo construtor
         dataVenda = new Date(); //pega a data do servidor
@@ -63,6 +65,14 @@ public class Vendas implements Serializable, ClassePai {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public PlanoPagamento getPlanoPagamento() {
+        return planoPagamento;
+    }
+
+    public void setPlanoPagamento(PlanoPagamento planoPagamento) {
+        this.planoPagamento = planoPagamento;
     }
 
     public Double getValorTotal() {

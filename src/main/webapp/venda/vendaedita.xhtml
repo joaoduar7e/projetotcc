@@ -8,6 +8,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:composition template="/WEB-INF/template.xhtml">
+
+
     <ui:define name="body">
         <h1 align="center">Movimento de Venda</h1>
         <br/>
@@ -59,15 +61,19 @@
                                                 itemValue="#{prod}"
                                                 converter="#{vendaControle.pecasConverter}"/>
 
+                                <p:outputLabel value="Quantidade" for="quantidade"/>
+                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade" size="10"/>
+
+
                                 <p:outputLabel value="Preço" for="preco"/>
                                 <p:inputText id="preco" value="#{vendaControle.itensVenda.preco}" size="10"/>
 
-                                <p:outputLabel value="Quantidade" for="quantidade"/>
-                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade" size="10"/>
+
                                 <p:commandButton value="Adicionar" icon="pi pi-chevron-circle-down" iconPos="right"
                                                  ajax="false" styleClass="ui-button-raised ui-button-success"
                                                  update="campoTotal painelItens"
                                                  actionListener="#{vendaControle.addItensVenda()}"/>
+
                             </p:panelGrid>
                             <br/>
                             <p:dataTable value="#{vendaControle.vendas.itensVendas}" var="it">
@@ -114,6 +120,19 @@
                                          layout="grid"
                                          styleClass="ui-panelgrid-blank ui-fluid"
                                          style="border:0px none; background-color:transparent;">
+
+                                <p:outputLabel value="Plano pagamento" for="planoPag"/>
+                                <p:autoComplete value="#{vendaControle.vendas.planoPagamento}"
+                                                size="60" id="planoPag" required="true"
+                                                requiredMessage="O cliente é obrigatório!"
+                                                emptyMessage="Nenhum plano de pagamento encontrado"
+                                                effect="blind"
+                                                forceSelection="true"
+                                                completeMethod="#{vendaControle.getListaPlanoPagFiltrando}"
+                                                var="pla"
+                                                itemValue="#{pla}"
+                                                itemLabel="#{pla.nome}"
+                                                converter="#{vendaControle.planoPagamentoConverter}"/>
 
                                 <p:outputLabel value="Número de parcelas"/>
                                 <p:inputText value="#{vendaControle.numParcelas}"/>
