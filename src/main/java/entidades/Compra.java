@@ -8,11 +8,11 @@ package entidades;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
 
 
 @Entity
@@ -30,6 +30,8 @@ public class Compra implements Serializable, ClassePai {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
     private List<ItensCompra> itensCompras;
+    private Integer numParcelas;
+    private Date DataPrimeiraParcela;
 
     public Compra() {
         dataCompra = new Date();
@@ -77,7 +79,21 @@ public class Compra implements Serializable, ClassePai {
         this.id = id;
     }
 
+    public Integer getNumParcelas() {
+        return numParcelas;
+    }
 
+    public void setNumParcelas(Integer numParcelas) {
+        this.numParcelas = numParcelas;
+    }
+
+    public Date getDataPrimeiraParcela() {
+        return DataPrimeiraParcela;
+    }
+
+    public void setDataPrimeiraParcela(Date dataPrimeiraParcela) {
+        DataPrimeiraParcela = dataPrimeiraParcela;
+    }
 
     @Override
     public String toString() {

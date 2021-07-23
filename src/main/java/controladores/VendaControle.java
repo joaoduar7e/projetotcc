@@ -46,7 +46,7 @@ public class VendaControle implements Serializable {
     public void gerarParcelas() {
         vendas.setContasRecebers(new ArrayList<ContasReceber>());
         Date dataTemp = DataPrimeiraParcela;
-        
+
         for (int i = 1; i <= numParcelas; i++) {
 
             ContasReceber cr = new ContasReceber();
@@ -62,7 +62,7 @@ public class VendaControle implements Serializable {
             c.setTime(dataTemp);
             c.add(Calendar.MONTH, 1);
             dataTemp = c.getTime();
-            
+
             vendas.getContasRecebers().add(cr);
         }
     }
@@ -133,8 +133,16 @@ public class VendaControle implements Serializable {
         itensVenda = new ItensVenda();
     }
 
-    public void salvar() {
-        vendaFacade.salvar(vendas);
+
+    public void salvar() throws Exception {
+        try {
+            vendaFacade.salvar(vendas);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Falha ao salvar", e);
+        }
+
     }
 
     public void editar(Vendas ve) {

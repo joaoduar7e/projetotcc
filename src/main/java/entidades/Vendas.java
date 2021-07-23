@@ -83,6 +83,7 @@ public class Vendas implements Serializable, ClassePai {
         return valorTotal;
     }
 
+
     public List<ItensVenda> getItensVendas() {
         return itensVendas;
     }

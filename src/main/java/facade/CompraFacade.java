@@ -6,9 +6,6 @@
 package facade;
 
 import entidades.Compra;
-import entidades.ItensCompra;
-import entidades.Pecas;
-import entidades.Servico;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -25,15 +22,5 @@ public class CompraFacade  extends AbstractFacade<Compra> {
 
     public CompraFacade() {
         super(Compra.class);
-    }
-    @Override
-    public void salvar(Compra ve){
-        for(ItensCompra it : ve.getItensCompras()){
-            Pecas p = it.getPecas();
-            p.setQtdEst(p.getQtdEst() - it.getQuantidade());
-            em.merge(p);
-        }
-        super.salvar(ve);
-        
     }
 }

@@ -11,7 +11,7 @@
 
 
     <ui:define name="body">
-        <h1 align="center">Movimento de Venda</h1>
+        <h2 align="center" style="font-weight: bold;">Movimento de Venda</h2>
         <br/>
         <h:form>
             <div class="card">
@@ -42,7 +42,8 @@
                                                 converter="#{vendaControle.clienteConverter}"/>
                             </p:panelGrid>
                         </p:panel>
-                        <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false" styleClass="ui-button-raised" immediate="true"
+                        <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
+                                         styleClass="ui-button-raised" immediate="true"
                                          action="vendalista.xhtml"/>
                     </p:tab>
                     <p:tab title="Peças">
@@ -62,7 +63,7 @@
                                                 converter="#{vendaControle.pecasConverter}"/>
 
                                 <p:outputLabel value="Quantidade" for="quantidade"/>
-                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade" size="10"/>
+                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade"  size="10"/>
 
 
                                 <p:outputLabel value="Preço" for="preco"/>
@@ -108,7 +109,8 @@
                                            style="font-size: large; color: brown">
                                 <f:convertNumber type="currency"/>
                             </p:outputLabel>
-                            <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false" styleClass="ui-button-raised" immediate="true"
+                            <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
+                                             styleClass="ui-button-raised" immediate="true"
                                              action="vendalista.xhtml"/>
                         </p:panel>
 
@@ -143,11 +145,11 @@
                                 <p:commandButton value="Gerar Parcela" actionListener="#{vendaControle.gerarParcelas()}"
                                                  ajax="true"/>
                             </p:panelGrid>
-                            <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
-                            <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
-                                           style="font-size: large; color: brown">
-                                <f:convertNumber type="currency"/>
-                            </p:outputLabel>
+                                <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
+                                <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
+                                               style="font-size: large; color: brown">
+                                    <f:convertNumber type="currency"/>
+                                </p:outputLabel>
                         </p:panel>
                         <p:row>
                             <p:panelGrid columns="2"

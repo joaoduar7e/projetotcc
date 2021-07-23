@@ -15,8 +15,6 @@ import facade.CompraFacade;
 import facade.PecasFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -31,31 +29,32 @@ public class CompraControle implements Serializable {
     transient private CompraFacade compraFacade;
     @Inject
     transient private ClienteFacade clienteFacade;
-    private ConverterGenerico pessoaConverter;
+    private ConverterGenerico clienteConverter;
     @Inject
     transient private PecasFacade pecasFacade;
-    private ConverterGenerico produtoConverter;
+    private ConverterGenerico pecasConverter;
 
-    public ConverterGenerico getProdutoConverter() {
-        if (produtoConverter == null) {
-            produtoConverter = new ConverterGenerico(pecasFacade);
+
+    public ConverterGenerico getPecasConverter() {
+        if (pecasConverter == null) {
+            pecasConverter = new ConverterGenerico(pecasFacade);
         }
-        return produtoConverter;
+        return pecasConverter;
     }
 
-    public void setProdutoConverter(ConverterGenerico produtoConverter) {
-        this.produtoConverter = produtoConverter;
+    public void setPecasConverter(ConverterGenerico pecasConverter) {
+        this.pecasConverter = pecasConverter;
     }
 
     public ConverterGenerico getClienteConverter() {
-        if (pessoaConverter == null) {
-            pessoaConverter = new ConverterGenerico(clienteFacade);
+        if (clienteConverter == null) {
+            clienteConverter = new ConverterGenerico(clienteFacade);
         }
-        return pessoaConverter;
+        return clienteConverter;
     }
 
-    public void setAlunoConverter(ConverterGenerico pessoaConverter) {
-        this.pessoaConverter = pessoaConverter;
+    public void setAlunoConverter(ConverterGenerico clienteConverter) {
+        this.clienteConverter = clienteConverter;
     }
 
     public List<Cliente> getListaClienteFiltrando(String parte) {
@@ -66,20 +65,24 @@ public class CompraControle implements Serializable {
         return pecasFacade.listaFiltrando(parte, "descricao");
     }
 
+    public List<Compra> getListaCompra() {
+        return compraFacade.listaTodos();
+    }
+
     public void novo() {
         compra = new Compra();
         itensCompra = new ItensCompra();
     }
 
     public void salvar() {
-
+        compraFacade.salvar(compra);
     }
 
     public void editar(Compra ve) {
         compra = ve;
     }
 
-    public void remover(Compra ve) {
+    public void excluir(Compra ve) {
         compraFacade.remover(ve);
     }
 
@@ -99,36 +102,24 @@ public class CompraControle implements Serializable {
         this.itensCompra = itensCompra;
     }
 
-    public List<Compra> getListaCompras() {
-        return compraFacade.listaTodos();
-    }
-
     public void addItensCompra() {
-        if (itensCompra.getPecas().getQtdEst() < itensCompra.getQuantidade()) {
-            FacesContext.getCurrentInstance().addMessage(
-                    null, new FacesMessage(
-                            FacesMessage.SEVERITY_ERROR,
-                            "Estoque Zero",
-                            null));
-        } else {
+        Double estoque = itensCompra.getPecas().getQtdEst();
+        ItensCompra itTemp = null;
+        for (ItensCompra it : compra.getItensCompras()) {
+            if (it.getPecas().getId().equals(itensCompra.getPecas().getId())) {
+                itTemp = it;
+            }
+        }
+
+        if (itTemp == null) {
             itensCompra.setCompra(compra);
             compra.getItensCompras().add(itensCompra);
-            itensCompra = new ItensCompra();
-        }
-        Pecas p = itensCompra.getPecas();
-        ItensCompra i = null;
-        for (ItensCompra item : compra.getItensCompras()) {
-            if (item.getPecas().equals(p)) i = item;
-        }
-        if (i == null) {
-            itensCompra.setCompra(compra);
-            ItensCompra ItensCompra = null;
-            compra.getItensCompras().add(ItensCompra);
         } else {
-            i.setQuantidade(i.getQuantidade() + itensCompra.getQuantidade());
-            i.setPreco(itensCompra.getPreco());
-
+            itTemp.setQuantidade(itTemp.getQuantidade() + itensCompra.getQuantidade());
+            itTemp.setPreco(itensCompra.getPreco());
         }
+        itensCompra = new ItensCompra();
+
     }
 
     public void removerItensCompra(ItensCompra it) {
