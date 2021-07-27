@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="body">
+        <h1 align="center">Movimento de Compra</h1>
+        <br/>
+        <h:form>
+            <div class="card">
+                <p:tabView>
+                    <p:tab title="Cliente">
+                        <p:panel header="Clientes">
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
+                                <p:outputLabel value="Data" for="data"/>
+                                <p:calendar value="#{compraControle.compra.dataCompra}" id="data"
+                                            pattern="dd/MM/yyyy" locale="pt_BR" disabled="true"
+                                            required="true" requiredMessage="A data é obrigatória!"/>
+
+                                <p:outputLabel value=" Cliente" for="cliente"/>
+                                <p:autoComplete value="#{compraControle.compra.cliente}"
+                                                size="60" id="cliente" required="true"
+                                                requiredMessage="O cliente é obrigatório!"
+                                                emptyMessage="Nenhum cliente encontrado"
+                                                effect="blind"
+                                                forceSelection="true"
+                                                completeMethod="#{compraControle.getListaClienteFiltrando}"
+                                                var="alu"
+                                                itemValue="#{alu}"
+                                                itemLabel="#{alu.nome}"
+                                                converter="#{compraControle.clienteConverter}"/>
+                            </p:panelGrid>
+                        </p:panel>
+                        <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                         action="compralista.xhtml"/>
+                    </p:tab>
+                    <p:tab title="Peças">
+                        <p:panel header="Peças" id="painelItens">
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
+                                <p:outputLabel value="Peças" for="pecas"/>
+                                <p:autoComplete value="#{compraControle.itensCompra.pecas}"
+                                                id="pecas"
+                                                completeMethod="#{compraControle.getListaPecasFiltrando}"
+                                                var="prod"
+                                                itemLabel="#{prod.descricao}"
+                                                itemValue="#{prod}"
+                                                converter="#{compraControle.pecasConverter}"/>
+
+                                <p:outputLabel value="Quantidade" for="quantidade"/>
+                                <p:inputText value="#{compraControle.itensCompra.quantidade}" id="quantidade" size="10"/>
+
+
+                                <p:outputLabel value="Preço" for="preco"/>
+                                <p:inputText id="preco" value="#{compraControle.itensCompra.preco}" size="10"/>
+
+
+                                <p:commandButton value="Adicionar" icon="pi pi-chevron-circle-down" iconPos="right"
+                                                 ajax="false" styleClass="ui-button-raised ui-button-success"
+                                                 update="campoTotal painelItens"
+                                                 actionListener="#{compraControle.addItensCompra()}"/>
+
+                            </p:panelGrid>
+                            <br/>
+                            <p:dataTable value="#{compraControle.compra.itensCompras}" var="it">
+                                <f:facet name="header">
+                                    Lista de peças
+                                </f:facet>
+                                <p:column headerText="Peças">
+                                    #{it.pecas.descricao}
+                                </p:column>
+                                <p:column headerText="Preço">
+                                    <p:outputLabel value="#{it.preco}">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Quantidade">
+                                    #{it.quantidade}
+                                </p:column>
+                                <p:column headerText="Subtotal">
+                                    <p:outputLabel value="#{it.subTotal}">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Operação">
+                                    <p:commandButton icon="pi pi-times"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                     ajax="false" immediate="true"
+                                                     actionListener="#{compraControle.removerItensCompra(it)}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <p:outputLabel value="Total da compra:" style="font-size: large; color: brown"/>
+                            <p:outputLabel value="#{compraControle.compra.valorTotal}" id="campoTotal"
+                                           style="font-size: large; color: brown">
+                                <f:convertNumber type="currency"/>
+                            </p:outputLabel>
+                            <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="compralista.xhtml"/>
+                        </p:panel>
+
+                    </p:tab>
+                    <p:tab title="Fechamento">
+                        <p:panel header="Parcelas">
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
+
+                                <p:outputLabel value="Data primeira parcela"/>
+                                <p:calendar value="#{compraControle.compra.dataPrimeiraParcela}"
+                                            locale="pt_BR" pattern="dd/MM/yyyy"/>
+                            </p:panelGrid>
+                            <p:outputLabel value="Total da compra:" style="font-size: large; color: brown"/>
+                            <p:outputLabel value="#{compraControle.compra.valorTotal}"
+                                           style="font-size: large; color: brown">
+                                <f:convertNumber type="currency"/>
+                            </p:outputLabel>
+                        </p:panel>
+                        <p:row>
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
+                                <p:column styleClass="ui-grid-col-6">
+
+                                    <p:commandButton value="Cancelar" ajax="false" styleClass="ui-button-raised"
+                                                     immediate="true"
+                                                     action="compralista.xhtml"/>
+                                </p:column>
+                                <p:column styleClass="ui-grid-col-6">
+                                    <p:commandButton value="Salvar" ajax="false"
+                                                     styleClass="ui-button-raised ui-button-success"
+                                                     actionListener="#{compraControle.salvar()}"
+                                                     action="compralista.xhtml"/>
+                                </p:column>
+                            </p:panelGrid>
+                        </p:row>
+                    </p:tab>
+                </p:tabView>
+            </div>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</html>

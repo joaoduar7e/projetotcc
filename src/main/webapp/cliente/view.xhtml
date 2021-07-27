@@ -26,16 +26,16 @@
 
 
                 <p:outputLabel value="Nome"/>
-                <h:outputText value="#{clienteControle.cliente.nome}" id="nome" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.nome}" id="nome" styleClass="hardblue font" size="40"/>
 
                 <p:outputLabel value="Sobrenome"/>
-                <h:outputText value="#{clienteControle.cliente.nome}" id="sobrenome" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.sobrenome}" id="sobrenome" styleClass="hardblue font" size="40"/>
 
                 <p:outputLabel value="Data nascimento"/>
-                <h:outputText value="#{clienteControle.cliente.dataNascimento}" id="dtN" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.dataNascimento}" id="dtN" styleClass="hardblue font" size="40"/>
 
                 <p:outputLabel value="Telefone"/>
-                <h:outputText value="#{clienteControle.cliente.telefone}" id="telefone" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.telefone}" id="telefone" size="40" styleClass="hardblue font"/>
 
 
                 <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
@@ -43,19 +43,19 @@
                 </p:row>
 
                 <p:outputLabel value="Cidade"/>
-                <h:outputText value="#{clienteControle.cliente.cidade.nome}" id="Cidade" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.cidade.nome}" id="Cidade" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Logradouro"/>
-                <h:outputText value="#{clienteControle.cliente.logradouro}" id="logradouro" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.logradouro}" id="logradouro" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Número"/>
-                <h:outputText value="#{clienteControle.cliente.numero}" id="num" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.numero}" id="num" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Bairro"/>
-                <h:outputText value="#{clienteControle.cliente.bairro}" id="bairro" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.bairro}" id="bairro" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Observação"/>
-                <h:outputText value="#{clienteControle.cliente.observacao}" id="obs" size="40"/>
+                <h:outputText value="#{clienteControle.cliente.observacao}" id="obs" size="40" styleClass="hardblue font"/>
 
 
 
@@ -73,18 +73,5 @@
 
     </ui:define>
 </ui:composition>
-<script>
-    <style type="text/css">
-        .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
-        text - align: center;
-    }
-
-        .customPanelGrid .ui-panelgrid-content {
-        align - items: center;
-    }
-    </style>
-
-</script>
-
 </html>
 

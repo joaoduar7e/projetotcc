@@ -25,10 +25,10 @@
                 </p:row>
 
                 <p:outputLabel value="Descrição"/>
-                <h:outputText value="#{planoPagamentoControle.planoPagamento.nome}" id="desc" size="40"/>
+                <h:outputText value="#{planoPagamentoControle.planoPagamento.nome}" id="desc" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Observação"/>
-                <h:outputText value="#{planoPagamentoControle.planoPagamento.observacao}" id="obs" size="40"/>
+                <h:outputText value="#{planoPagamentoControle.planoPagamento.observacao}" id="obs" size="40" styleClass="hardblue font"/>
 
                 <p:row>
                     <p:column styleClass="ui-grid-col-12">
@@ -44,18 +44,6 @@
 
     </ui:define>
 </ui:composition>
-<script>
-    <style type="text/css">
-        .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
-        text - align: center;
-    }
-
-        .customPanelGrid .ui-panelgrid-content {
-        align - items: center;
-    }
-    </style>
-
-</script>
 
 </html>
 

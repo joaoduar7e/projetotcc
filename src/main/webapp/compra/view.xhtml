@@ -10,6 +10,7 @@
 <ui:composition template="/WEB-INF/template.xhtml">
     <ui:define name="body">
 
+
         <h:form>
 
             <p:panelGrid columns="2"
@@ -23,22 +24,18 @@
                 </p:row>
 
                 <p:outputLabel value="Cliente"/>
-                <h:outputText value="#{vendaControle.vendas.cliente.nome}" id="fun" size="40"
-                              styleClass="hardblue font"/>
+                <h:outputText value="#{compraControle.compra.cliente.nome}" id="fun" size="40" styleClass="hardblue font"/>
 
                 <p:outputLabel value="Telefone"/>
-                <h:outputText value="#{vendaControle.vendas.cliente.telefone}" id="tel" styleClass="hardblue font"
-                              size="40"/>
+                <h:outputText value="#{compraControle.compra.cliente.telefone}" id="tel"
+                              styleClass="hardblue font" size="40"/>
+
                 <p:outputLabel value="Valor Total"/>
-                <h:outputText value="#{vendaControle.vendas.valorTotal}" id="login" styleClass="hardblue font"
-                              size="40"/>
+                <h:outputText value="#{compraControle.compra.valorTotal}" id="login"
+                              styleClass="hardblue font" size="40"/>
 
-                <p:outputLabel value="Plano de Pagamento"/>
-                <h:outputText value="#{vendaControle.vendas.planoPagamento.nome}" id="plano" styleClass="hardblue font"
-                              size="40"/>
             </p:panelGrid>
-
-            <p:dataTable value="#{vendaControle.vendas.itensVendas}" var="it">
+            <p:dataTable value="#{compraControle.compra.itensCompras}" var="it">
                 <p:column headerText="Peças">
                     #{it.pecas.descricao}
                 </p:column>
@@ -51,21 +48,21 @@
                     #{it.quantidade}
                 </p:column>
                 <p:column headerText="Subtotal">
-                    <p:outputLabel value="#{it.subtotal}">
+                    <p:outputLabel value="#{it.subTotal}">
                         <f:convertNumber type="currency"/>
                     </p:outputLabel>
                 </p:column>
             </p:dataTable>
+            <p:outputLabel value=""/>
 
             <p:row>
                 <p:column styleClass="ui-grid-col-12">
 
                     <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
-                                     action="vendalista.xhtml"/>
+                                     action="compralista.xhtml"/>
                 </p:column>
 
             </p:row>
-
         </h:form>
 
     </ui:define>
