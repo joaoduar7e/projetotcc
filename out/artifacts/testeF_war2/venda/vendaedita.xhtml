@@ -67,7 +67,10 @@
 
 
                                 <p:outputLabel value="Preço" for="preco"/>
-                                <p:inputText id="preco" value="#{vendaControle.itensVenda.preco}" size="10"/>
+                                <p:inputNumber value="#{vendaControle.itensVenda.preco}" id="preco" size="10"
+                                               decimalPlaces="2" decimalSeparator=","
+                                               thousandSeparator="." symbol="R$">
+                                </p:inputNumber>
 
 
                                 <p:commandButton value="Adicionar" icon="pi pi-chevron-circle-down" iconPos="right"
@@ -124,17 +127,13 @@
                                          style="border:0px none; background-color:transparent;">
 
                                 <p:outputLabel value="Plano pagamento" for="planoPag"/>
-                                <p:autoComplete value="#{vendaControle.vendas.planoPagamento}"
-                                                size="60" id="planoPag" required="true"
-                                                requiredMessage="O cliente é obrigatório!"
-                                                emptyMessage="Nenhum plano de pagamento encontrado"
-                                                effect="blind"
-                                                forceSelection="true"
-                                                completeMethod="#{vendaControle.getListaPlanoPagFiltrando}"
-                                                var="pla"
-                                                itemValue="#{pla}"
-                                                itemLabel="#{pla.nome}"
-                                                converter="#{vendaControle.planoPagamentoConverter}"/>
+                                <p:selectOneMenu value="#{vendaControle.vendas.planoPagamento}" id="planoPag"
+                                                 required="true" requiredMessage="O plano de pagamento é obrigatório!"
+                                                 converter="#{vendaControle.planoPagamentoConverter}">
+                                    <f:selectItems value="#{vendaControle.listaPlanoPag}" var="planoPag"
+                                                   itemLabel="#{planoPag.nome}"
+                                                   itemValue="#{planoPag}"/>
+                                </p:selectOneMenu>
 
                                 <p:outputLabel value="Número de parcelas"/>
                                 <p:inputText value="#{vendaControle.numParcelas}"/>

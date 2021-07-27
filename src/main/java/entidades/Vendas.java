@@ -32,7 +32,6 @@ public class Vendas implements Serializable, ClassePai {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendas")
     //efeito cascata, quando salva a venda, salva os itens de venda // fetchtype recupera os itens da venda // //mappedby indica que existe a chave estrangeira
     private List<ContasReceber> ContasRecebers;
-
     @ManyToOne
     private PlanoPagamento planoPagamento;
 
@@ -99,7 +98,6 @@ public class Vendas implements Serializable, ClassePai {
     public void setContasRecebers(List<ContasReceber> ContasRecebers) {
         this.ContasRecebers = ContasRecebers;
     }
-
 
     @Override
     public boolean equals(Object o) {

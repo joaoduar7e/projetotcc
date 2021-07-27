@@ -24,12 +24,24 @@
                     Dados do cadastro:
                 </p:row>
 
-                <p:outputLabel value="Nome"/>
-                <h:outputText value="#{estadoControle.estado.nome}" id="nome" size="40" styleClass="hardblue font"/>
+                <p:outputLabel value="Cliente"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.cliente.nome}" size="40" styleClass="hardblue font"/>
 
-                <p:outputLabel value="Sigla"/>
-                <h:outputText value="#{estadoControle.estado.sigla}" id="sigla" size="40" styleClass="hardblue font"/>
+                <p:outputLabel value="Data Vencimento"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.dataVencimento}" size="40" styleClass="hardblue font">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
 
+                <p:outputLabel value="Data Emissão"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.dataEmissao}" size="40" styleClass="hardblue font">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
+
+                <p:outputLabel value="Valor"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.valor}" size="40" styleClass="hardblue font"/>
+
+                <p:outputLabel value="Observação"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.observacao}" id="obs" size="40" styleClass="hardblue font"/>
 
                 <p:row>
                     <p:column styleClass="ui-grid-col-12">
@@ -45,18 +57,7 @@
 
     </ui:define>
 </ui:composition>
-<script>
-    <style type="text/css">
-        .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
-        text - align: center;
-    }
 
-        .customPanelGrid .ui-panelgrid-content {
-        align - items: center;
-    }
-    </style>
-
-</script>
 
 </html>
 

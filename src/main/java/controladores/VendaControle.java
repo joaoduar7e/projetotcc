@@ -54,7 +54,7 @@ public class VendaControle implements Serializable {
             cr.setNumParcela(i);
             cr.setCliente(vendas.getCliente());
             cr.setVendas(vendas);
-            cr.setObservacao("Gerada a partir da venda.");
+            cr.setObservacao("Gerada a partir da venda ");
             cr.setValor(vendas.getValorTotal() / numParcelas);
             cr.setDataVencimento(dataTemp);
 
@@ -128,6 +128,10 @@ public class VendaControle implements Serializable {
         return planoPagamentoFacade.listaFiltrando(parte, "nome");
     }
 
+    public List<PlanoPagamento> getListaPlanoPag(){
+        return planoPagamentoFacade.listaTodos();
+    }
+
     public void novo() {
         vendas = new Vendas();
         itensVenda = new ItensVenda();
@@ -188,7 +192,15 @@ public class VendaControle implements Serializable {
                             FacesMessage.SEVERITY_ERROR,
                             "Estoque insuficiente!",
                             "Restam apenas " + estoque + " unidades!"));
-        } else {
+        }
+        if (itensVenda.getPreco() == 0) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "O valor deve ser maior que R$0!",
+                            ""));
+        }
+        else {
             if (itTemp == null) {
                 itensVenda.setVenda(vendas);
                 vendas.getItensVendas().add(itensVenda);

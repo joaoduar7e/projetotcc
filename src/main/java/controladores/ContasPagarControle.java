@@ -21,7 +21,7 @@ import java.util.List;
 
 @Named
 @ViewAccessScoped
-public class ContasReceberControle implements Serializable {
+public class ContasPagarControle implements Serializable {
 
     private ContasReceber contasReceber;
     @Inject

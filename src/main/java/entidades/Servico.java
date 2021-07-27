@@ -17,8 +17,8 @@ public class Servico implements Serializable, ClassePai  {
     @ManyToOne
     private TipoServico tipoServico;
 
-
-
+    @ManyToOne
+    private Vendas vendas;
 
     // Gets e Sets
 
@@ -63,6 +63,13 @@ public class Servico implements Serializable, ClassePai  {
         this.tipoServico = tipoServico;
     }
 
+    public Vendas getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Vendas vendas) {
+        this.vendas = vendas;
+    }
 
     // Fim
     @Override

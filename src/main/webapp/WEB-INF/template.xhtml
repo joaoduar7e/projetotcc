@@ -19,7 +19,38 @@
         .font{
             font-weight: bold;
         }
+
     </h:outputStylesheet>
+
+    <h:outputScript>
+        PrimeFaces.locales['pt'] = {
+            closeText: 'Fechar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Começo',
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Só Horas',
+            timeText: 'Tempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',
+            currentText: 'Data Atual',
+            ampm: false,
+            month: 'Mês',
+            week: 'Semana',
+            day: 'Dia',
+            allDayText: 'Todo Dia'
+        };
+    </h:outputScript>
     <p:growl id="messages"/>
     <h:form>
 
@@ -46,6 +77,11 @@
             <p:submenu label="Expediente" icon="pi pi-fw pi-shopping-cart">
                 <p:menuitem value="Venda" icon="pi pi-fw pi-shopping-cart" outcome="/venda/vendalista.xhtml"/>
                 <p:menuitem value="Compra" icon="pi pi-fw pi-shopping-cart" outcome="/compra/compralista.xhtml"/>
+            </p:submenu>
+
+            <p:submenu label="Financeiro" icon="pi pi-fw pi-money-bill">
+                <p:menuitem value="Contas a Receber" icon="pi pi-fw pi-money-bill" ajax="false" outcome="/contaReceber/list.xhtml"/>
+                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
             </p:submenu>
 
             <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
