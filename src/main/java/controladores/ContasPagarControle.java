@@ -9,9 +9,9 @@ import converter.ConverterGenerico;
 import converter.MoneyConverter;
 import entidades.BaixaContasReceber;
 import entidades.Cliente;
-import entidades.ContasReceber;
+import entidades.ContasPagar;
 import facade.ClienteFacade;
-import facade.ContasReceberFacade;
+import facade.ContasPagarFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
 import javax.inject.Inject;
@@ -23,9 +23,9 @@ import java.util.List;
 @ViewAccessScoped
 public class ContasPagarControle implements Serializable {
 
-    private ContasReceber contasReceber;
+    private ContasPagar contasPagar;
     @Inject
-    transient private ContasReceberFacade contasReceberFacade;
+    transient private ContasPagarFacade contasPagarFacade;
     @Inject
     transient private ClienteFacade clienteFacade;
     private ConverterGenerico clienteConverter;
@@ -33,15 +33,15 @@ public class ContasPagarControle implements Serializable {
     private BaixaContasReceber baixaContasReceber;
     private MoneyConverter moneyConverter;
 
-    public void addBaixa(){
-        baixaContasReceber.setContasReceber(contasReceber);
-        contasReceber.getBaixaContasRecebers().add(baixaContasReceber);
-        baixaContasReceber = new BaixaContasReceber();
-        salvar();
-    }
+//    public void addBaixa(){
+//        baixaContasReceber.setContasReceber(contasPagar);
+//        contasPagar.getBaixaContasRecebers().add(baixaContasReceber);
+//        baixaContasReceber = new BaixaContasReceber();
+//        salvar();
+//    }
 
     public MoneyConverter getMoneyConverter() {
-        if(moneyConverter == null){
+        if (moneyConverter == null) {
             moneyConverter = new MoneyConverter();
         }
         return moneyConverter;
@@ -66,40 +66,45 @@ public class ContasPagarControle implements Serializable {
         return clienteFacade.listaFiltrando(parte, "nome");
     }
 
-    public BaixaContasReceber getBaixaContasReceber() {
-        return baixaContasReceber;
+//    public BaixaContasReceber getBaixaContasReceber() {
+//        return baixaContasReceber;
+//    }
+//
+//    public void setBaixaContasReceber(BaixaContasReceber baixaContasReceber) {
+//        this.baixaContasReceber = baixaContasReceber;
+//    }
+
+    public void excluir(ContasPagar cp) throws Exception {
+        contasPagarFacade.remover(cp);
     }
 
-    public void setBaixaContasReceber(BaixaContasReceber baixaContasReceber) {
-        this.baixaContasReceber = baixaContasReceber;
+    public void editar(ContasPagar contaP) {
+        contasPagar = contaP;
     }
 
-    public void editar(ContasReceber contaR){
-        contasReceber = contaR;
-    }
     public void novo() {
-        contasReceber = new ContasReceber();
+        contasPagar = new ContasPagar();
     }
 
     public void salvar() {
-        contasReceberFacade.salvar(contasReceber);
+        contasPagarFacade.salvar(contasPagar);
+    }
+//
+//    public void baixar(ContasPagar cr) {
+//        contasPagar = cr;
+//        baixaContasReceber = new BaixaContasReceber();
+//    }
+
+    public ContasPagar getContasPagar() {
+        return contasPagar;
     }
 
-    public void baixar(ContasReceber cr) {
-        contasReceber = cr;
-        baixaContasReceber = new BaixaContasReceber();
+    public void setContasPagar(ContasPagar contasPagar) {
+        this.contasPagar = contasPagar;
     }
 
-    public ContasReceber getContasReceber() {
-        return contasReceber;
-    }
-
-    public void setContasReceber(ContasReceber contasReceber) {
-        this.contasReceber = contasReceber;
-    }
-
-    public List<ContasReceber> getListaContasRecebers() {
-        return contasReceberFacade.listaTodos();
+    public List<ContasPagar> getListaContasPagar() {
+        return contasPagarFacade.listaTodos();
     }
 
 }

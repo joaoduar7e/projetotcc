@@ -6,10 +6,7 @@
 package controladores;
 
 import converter.ConverterGenerico;
-import entidades.Cliente;
-import entidades.Compra;
-import entidades.ItensCompra;
-import entidades.Pecas;
+import entidades.*;
 import facade.ClienteFacade;
 import facade.CompraFacade;
 import facade.PecasFacade;
@@ -18,6 +15,9 @@ import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Named
@@ -34,6 +34,49 @@ public class CompraControle implements Serializable {
     transient private PecasFacade pecasFacade;
     private ConverterGenerico pecasConverter;
 
+
+    private Integer numParcelas;
+    private Date DataPrimeiraParcela;
+
+    public void gerarParcelas() {
+        compra.setContasPagar(new ArrayList<ContasPagar>());
+        Date dataTemp = DataPrimeiraParcela;
+
+        for (int i = 1; i <= numParcelas; i++) {
+
+            ContasPagar cp = new ContasPagar();
+            cp.setDataEmissao(compra.getDataCompra());
+            cp.setNumParcela(i);
+            cp.setCliente(compra.getCliente());
+            cp.setCompra(compra);
+            cp.setObservacao("Gerada a partir da compra ");
+            cp.setValor(compra.getValorTotal() / numParcelas);
+            cp.setDataVencimento(dataTemp);
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(dataTemp);
+            c.add(Calendar.MONTH, 1);
+            dataTemp = c.getTime();
+
+            compra.getContasPagar().add(cp);
+        }
+    }
+
+    public Integer getNumParcelas() {
+        return numParcelas;
+    }
+
+    public void setNumParcelas(Integer numParcelas) {
+        this.numParcelas = numParcelas;
+    }
+
+    public Date getDataPrimeiraParcela() {
+        return DataPrimeiraParcela;
+    }
+
+    public void setDataPrimeiraParcela(Date dataPrimeiraParcela) {
+        DataPrimeiraParcela = dataPrimeiraParcela;
+    }
 
     public ConverterGenerico getPecasConverter() {
         if (pecasConverter == null) {

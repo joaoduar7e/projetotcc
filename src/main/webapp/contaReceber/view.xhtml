@@ -38,8 +38,9 @@
                 </h:outputText>
 
                 <p:outputLabel value="Valor"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.valor}" size="40" styleClass="hardblue font"/>
-
+                <h:outputText value="#{contasReceberControle.contasReceber.valor}" size="40" styleClass="hardblue font">
+                    <f:convertNumber type="currency"/>
+                </h:outputText>
                 <p:outputLabel value="Observação"/>
                 <h:outputText value="#{contasReceberControle.contasReceber.observacao}" id="obs" size="40" styleClass="hardblue font"/>
 

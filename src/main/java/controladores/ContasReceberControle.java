@@ -73,6 +73,9 @@ public class ContasReceberControle implements Serializable {
     public void setBaixaContasReceber(BaixaContasReceber baixaContasReceber) {
         this.baixaContasReceber = baixaContasReceber;
     }
+    public void excluir(ContasReceber cr) {
+        contasReceberFacade.remover(cr);
+    }
 
     public void editar(ContasReceber contaR){
         contasReceber = contaR;

@@ -5,19 +5,11 @@
  */
 package entidades;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-/**
- *
- * @author Joao Duarte
- */
+
 @Entity
 public class ContasPagar implements Serializable {
 
@@ -34,42 +26,42 @@ public class ContasPagar implements Serializable {
     private Integer numParcela;
     private String observacao;
     @ManyToOne
-    private Vendas vendas;
+    private Compra compra;
     private Double valor;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
-            mappedBy = "contasReceber")
-    private List<BaixaContasReceber> baixaContasRecebers;
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+//            mappedBy = "contasReceber")
+//    private List<BaixaContasReceber> baixaContasRecebers;
 
-    public String getSituacao(){
-        if(getValorBaixado() < valor){
-            return "Aberto";
-        }
-        return "Pago";
-    }
+//    public String getSituacao(){
+//        if(getValorBaixado() < valor){
+//            return "Aberto";
+//        }
+//        return "Pago";
+//    }
 
-    public Double getValorBaixado(){
-        if(baixaContasRecebers == null){
-            baixaContasRecebers = new ArrayList<BaixaContasReceber>();
-        }
-        Double valorBaixado = 0d;
-        for(BaixaContasReceber bx : baixaContasRecebers){
-            valorBaixado = valorBaixado + bx.getValor();
-        }
-        return valorBaixado;
-    }
-    public ContasPagar() {
-        baixaContasRecebers = new ArrayList<BaixaContasReceber>();
-    }
-
-    public List<BaixaContasReceber> getBaixaContasRecebers() {
-        return baixaContasRecebers;
-    }
-
-    public void setBaixaContasRecebers(List<BaixaContasReceber> baixaContasRecebers) {
-        this.baixaContasRecebers = baixaContasRecebers;
-    }
+//    public Double getValorBaixado(){
+//        if(baixaContasRecebers == null){
+//            baixaContasRecebers = new ArrayList<BaixaContasReceber>();
+//        }
+//        Double valorBaixado = 0d;
+//        for(BaixaContasReceber bx : baixaContasRecebers){
+//            valorBaixado = valorBaixado + bx.getValor();
+//        }
+//        return valorBaixado;
+//    }
+//    public ContasPagar() {
+//        baixaContasRecebers = new ArrayList<BaixaContasReceber>();
+//    }
+//
+//    public List<BaixaContasReceber> getBaixaContasRecebers() {
+//        return baixaContasRecebers;
+//    }
+//
+//    public void setBaixaContasRecebers(List<BaixaContasReceber> baixaContasRecebers) {
+//        this.baixaContasRecebers = baixaContasRecebers;
+//    }
 
     public Date getDataEmissao() {
         return dataEmissao;
@@ -111,12 +103,12 @@ public class ContasPagar implements Serializable {
         this.observacao = observacao;
     }
 
-    public Vendas getVendas() {
-        return vendas;
+    public Compra getCompra() {
+        return compra;
     }
 
-    public void setVendas(Vendas vendas) {
-        this.vendas = vendas;
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 
     public Double getValor() {

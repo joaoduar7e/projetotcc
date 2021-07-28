@@ -13,7 +13,7 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataTable var="contaR" value="#{contasReceberControle.listaContasRecebers}" rows="10"
+                <p:dataTable var="contaP" value="#{contasPagarControle.listaContasPagar}" rows="10"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -21,42 +21,46 @@
                              rowsPerPageTemplate="5,10,{ShowAll|'All'}"
                              emptyMessage="Nenhum tipoServico Encontrado">
                     <f:facet name="header">
-                        Lista de Contas a Receber
+                        Lista de Contas a Pagar
                     </f:facet>
 
                     <p:column headerText="ID">
-                        <h:outputText value="#{contaR.id}"/>
+                        <h:outputText value="#{contaP.id}"/>
                     </p:column>
-                    <p:column headerText="Cliente" style="text-align: center" sortBy="#{contaR.cliente.nome}" filterBy="#{contaR.cliente.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
-                        <h:outputText value="#{contaR.cliente.nome}"/>
+                    <p:column headerText="Cliente" style="text-align: center" sortBy="#{contaP.cliente.nome}"
+                              filterBy="#{contaP.cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
+                        <h:outputText value="#{contaP.cliente.nome}"/>
                     </p:column>
                     <p:column headerText="Num. Parcela">
-                        <h:outputText value="#{contaR.numParcela}"/>
+                        <h:outputText value="#{contaP.numParcela}"/>
                     </p:column>
                     <p:column headerText="Valor">
-                        <h:outputText value="#{contaR.valor}">
+                        <h:outputText value="#{contaP.valor}">
                             <f:convertNumber type="currency"/>
                         </h:outputText>
                     </p:column>
                     <p:column headerText="Data Emissão">
-                        <h:outputText value="#{contaR.dataEmissao}">
+                        <h:outputText value="#{contaP.dataEmissao}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
                     <p:column headerText="Data Vencimento">
-                        <h:outputText value="#{contaR.dataVencimento}">
+                        <h:outputText value="#{contaP.dataVencimento}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
                     <p:column headerText="Observação">
-                        <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
+                        <h:outputText value="#{contaP.observacao} - #{contaP.compra.id}"/>
                     </p:column>
                     <p:column headerText="Ações">
-                        <p:commandButton icon="pi pi-info-circle" styleClass="rounded-button ui-button-info-outline ui-button-flat"
-                                         actionListener="#{contasReceberControle.editar(contaR)}" action="view.xhtml"
+
+                        <p:commandButton icon="pi pi-info-circle"
+                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                         actionListener="#{contasPagarControle.editar(contaP)}" action="view.xhtml"
                                          ajax="false"/>
+
                         <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
-                                         actionListener="#{contasReceberControle.excluir(contaR)}"
+                                         actionListener="#{contasPagarControle.excluir(contaP)}"
                                          ajax="false" />
                     </p:column>
                 </p:dataTable>
@@ -69,7 +73,7 @@
 
                     <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
                                      action="index.xhtml"
-                                     actionListener="#{contasReceberControle.novo()}"/>
+                                     actionListener="#{contasPagarControle.novo()}"/>
                 </p:panelGrid>
             </h:form>
         </div>

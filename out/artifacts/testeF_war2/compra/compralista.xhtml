@@ -21,6 +21,9 @@
                     <f:facet name="header">
                         Lista de Compras
                     </f:facet>
+                    <p:column headerText="ID">
+                        #{ve.id}
+                    </p:column>
                     <p:column headerText="Data" filterBy="#{ve.dataCompra}" filterMatchMode="contains">
                         <p:outputLabel value="#{ve.dataCompra}">
                             <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>                            

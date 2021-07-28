@@ -125,8 +125,14 @@
                                          style="border:0px none; background-color:transparent;">
 
                                 <p:outputLabel value="Data primeira parcela"/>
-                                <p:calendar value="#{compraControle.compra.dataPrimeiraParcela}"
+                                <p:calendar value="#{compraControle.dataPrimeiraParcela}"
                                             locale="pt_BR" pattern="dd/MM/yyyy"/>
+
+                                <p:outputLabel value="Número de parcelas"/>
+                                <p:inputText value="#{compraControle.numParcelas}"/>
+
+                                <p:commandButton value="Gerar Parcela" actionListener="#{compraControle.gerarParcelas()}"
+                                                 ajax="true"/>
                             </p:panelGrid>
                             <p:outputLabel value="Total da compra:" style="font-size: large; color: brown"/>
                             <p:outputLabel value="#{compraControle.compra.valorTotal}"

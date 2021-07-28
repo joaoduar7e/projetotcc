@@ -12,6 +12,55 @@
     <title>Sistema Ideal Orgânico</title>
 </h:head>
 <h:body>
+    <p:growl id="messages"/>
+    <h:form>
+
+        <p:menubar>
+
+            <p:menuitem value="Home" icon="pi pi-home" ajax="false" outcome="/index.xhtml"/>
+            <p:submenu label="Cadastros" icon="pi pi-fw pi-plus-circle">
+
+                <p:menuitem value="Funcionário" icon="pi pi-fw pi-user" ajax="false" outcome="/funcionario/list.xhtml"/>
+                <p:menuitem value="Clientes" icon="pi pi-fw pi-user" ajax="false" outcome="/cliente/list.xhtml"/>
+                <p:menuitem value="Cidade" icon="pi pi-fw pi-map-marker" ajax="false" outcome="/cidade/list.xhtml"/>
+                <p:menuitem value="Estado" icon="pi pi-fw pi-flag" ajax="false" outcome="/estado/list.xhtml"/>
+                <p:menuitem value="Tipo Serviços" icon="pi pi-fw pi-table" ajax="false"
+                            outcome="/tipoServico/list.xhtml"/>
+                <p:menuitem value="Serviços" icon="pi pi-fw pi-cog" ajax="false" outcome="/servico/list.xhtml"/>
+                <p:menuitem value="Plano Pagamento" icon="pi pi-fw pi-money-bill" ajax="false"
+                            outcome="/planoPagamento/list.xhtml"/>
+                <p:menuitem value="Maquinário" icon="pi pi-fw pi-send" ajax="false" outcome="/maquinario/list.xhtml"/>
+                <p:menuitem value="Peças" icon="pi pi-fw pi-cog" ajax="false" outcome="/pecas/list.xhtml"/>
+                <p:menuitem value="Usuário" icon="pi pi-fw pi-user" ajax="false" outcome="/usuario/list.xhtml"/>
+                <p:menuitem value="Locais" icon="pi pi-fw pi-home" ajax="false" outcome="/locais/list.xhtml"/>
+            </p:submenu>
+
+            <p:submenu label="Expediente" icon="pi pi-fw pi-shopping-cart">
+                <p:menuitem value="Venda" icon="pi pi-fw pi-shopping-cart" outcome="/venda/vendalista.xhtml"/>
+                <p:menuitem value="Compra" icon="pi pi-fw pi-shopping-cart" outcome="/compra/compralista.xhtml"/>
+            </p:submenu>
+
+            <p:submenu label="Financeiro" icon="pi pi-fw pi-money-bill">
+                <p:menuitem value="Contas a Receber" icon="pi pi-fw pi-money-bill" ajax="false" outcome="/contaReceber/list.xhtml"/>
+                <p:menuitem value="Contas a Pagar" icon="pi pi-fw pi-money-bill" ajax="false" outcome="/contaPagar/list.xhtml"/>
+            </p:submenu>
+
+            <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
+                <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false" outcome="/relatorio/relCliente/relCliente.xhtml"/>
+                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
+            </p:submenu>
+
+
+            <p:divider layout="vertical"/>
+
+            <p:menuitem value="Sair" icon="pi pi-fw pi-power-off"  disabled="true"/>
+
+        </p:menubar>
+
+    </h:form>
+
+    <ui:insert name="body"/>
+
     <h:outputStylesheet>
         .hardblue {
             color: #27AAE1;
@@ -51,55 +100,6 @@
             allDayText: 'Todo Dia'
         };
     </h:outputScript>
-    <p:growl id="messages"/>
-    <h:form>
-
-        <p:menubar>
-
-            <p:menuitem value="Home" icon="pi pi-home" ajax="false" outcome="/index.xhtml"/>
-            <p:submenu label="Cadastros" icon="pi pi-fw pi-plus-circle">
-
-                <p:menuitem value="Funcionário" icon="pi pi-fw pi-user" ajax="false" outcome="/funcionario/list.xhtml"/>
-                <p:menuitem value="Clientes" icon="pi pi-fw pi-user" ajax="false" outcome="/cliente/list.xhtml"/>
-                <p:menuitem value="Cidade" icon="pi pi-fw pi-map-marker" ajax="false" outcome="/cidade/list.xhtml"/>
-                <p:menuitem value="Estado" icon="pi pi-fw pi-flag" ajax="false" outcome="/estado/list.xhtml"/>
-                <p:menuitem value="Tipo Serviços" icon="pi pi-fw pi-table" ajax="false"
-                            outcome="/tipoServico/list.xhtml"/>
-                <p:menuitem value="Serviços" icon="pi pi-fw pi-cog" ajax="false" outcome="/servico/list.xhtml"/>
-                <p:menuitem value="Plano Pagamento" icon="pi pi-fw pi-money-bill" ajax="false"
-                            outcome="/planoPagamento/list.xhtml"/>
-                <p:menuitem value="Maquinário" icon="pi pi-fw pi-send" ajax="false" outcome="/maquinario/list.xhtml"/>
-                <p:menuitem value="Peças" icon="pi pi-fw pi-cog" ajax="false" outcome="/pecas/list.xhtml"/>
-                <p:menuitem value="Usuário" icon="pi pi-fw pi-user" ajax="false" outcome="/usuario/list.xhtml"/>
-                <p:menuitem value="Locais" icon="pi pi-fw pi-home" ajax="false" outcome="/locais/list.xhtml"/>
-            </p:submenu>
-
-            <p:submenu label="Expediente" icon="pi pi-fw pi-shopping-cart">
-                <p:menuitem value="Venda" icon="pi pi-fw pi-shopping-cart" outcome="/venda/vendalista.xhtml"/>
-                <p:menuitem value="Compra" icon="pi pi-fw pi-shopping-cart" outcome="/compra/compralista.xhtml"/>
-            </p:submenu>
-
-            <p:submenu label="Financeiro" icon="pi pi-fw pi-money-bill">
-                <p:menuitem value="Contas a Receber" icon="pi pi-fw pi-money-bill" ajax="false" outcome="/contaReceber/list.xhtml"/>
-                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
-            </p:submenu>
-
-            <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
-                <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false" outcome="/relatorio/relCliente/relCliente.xhtml"/>
-                <p:menuitem value="Delete" icon="pi pi-fw pi-user-minus"/>
-            </p:submenu>
-
-
-            <p:divider layout="vertical"/>
-
-            <p:menuitem value="Sair" icon="pi pi-fw pi-power-off"  disabled="true"/>
-
-        </p:menubar>
-
-    </h:form>
-
-    <ui:insert name="body"/>
-
 </h:body>
 </html>
 

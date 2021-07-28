@@ -30,6 +30,12 @@ public class Compra implements Serializable, ClassePai {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
     private List<ItensCompra> itensCompras;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
+    private List<ContasPagar> contasPagar;
+
+
     private Integer numParcelas;
     private Date DataPrimeiraParcela;
 
@@ -93,6 +99,14 @@ public class Compra implements Serializable, ClassePai {
 
     public void setDataPrimeiraParcela(Date dataPrimeiraParcela) {
         DataPrimeiraParcela = dataPrimeiraParcela;
+    }
+
+    public List<ContasPagar> getContasPagar() {
+        return contasPagar;
+    }
+
+    public void setContasPagar(List<ContasPagar> contasPagar) {
+        this.contasPagar = contasPagar;
     }
 
     @Override
