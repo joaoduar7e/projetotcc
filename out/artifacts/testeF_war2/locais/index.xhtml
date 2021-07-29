@@ -27,6 +27,8 @@
                                 completeMethod="#{locaisControle.getListaCidadeFiltrando}"
                                 var="cid" id="cidade" forceSelection="true"
                                 size="40"
+                                widgetVar="prodWid"
+                                onclick="PF('prodWid').search('')"
                                 itemLabel="#{cid.nome}"
                                 itemValue="#{cid}"
                                 converter="#{locaisControle.cidadeConverter}"/>

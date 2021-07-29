@@ -34,6 +34,8 @@
                                                 requiredMessage="O cliente é obrigatório!"
                                                 emptyMessage="Nenhum cliente encontrado"
                                                 effect="blind"
+                                                widgetVar="prodWid"
+                                                onclick="PF('prodWid').search('')"
                                                 forceSelection="true"
                                                 completeMethod="#{compraControle.getListaClienteFiltrando}"
                                                 var="alu"

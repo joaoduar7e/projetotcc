@@ -29,6 +29,8 @@
                                 completeMethod="#{contasPagarControle.getListaClientesFiltrando}"
                                 var="fun" id="cliente" forceSelection="true"
                                 size="40"
+                                widgetVar="prodWid"
+                                onclick="PF('prodWid').search('')"
                                 itemLabel="#{fun.nome}"
                                 itemValue="#{fun}"
                                 converter="#{contasPagarControle.clienteConverter}"/>

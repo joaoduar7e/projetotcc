@@ -22,7 +22,6 @@ public class BaixaContasReceber implements Serializable {
     private ContasReceber contasReceber;
     private String formaPagamento;
     private Double valor;
-
     public BaixaContasReceber() {
         dataPagamento = new Date();
     }

@@ -29,6 +29,8 @@
                                 completeMethod="#{contasReceberControle.getListaClientesFiltrando}"
                                 var="fun" id="cliente" forceSelection="true"
                                 size="40"
+                                widgetVar="prodWid"
+                                onclick="PF('prodWid').search('')"
                                 itemLabel="#{fun.nome}"
                                 itemValue="#{fun}"
                                 converter="#{contasReceberControle.clienteConverter}"/>
@@ -40,10 +42,8 @@
                 <p:outputLabel value="Data de Vencimento"/>
                 <p:datePicker id="dateV" value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
                               showIcon="true" style="width:auto" locale="pt"/>
-
                 <p:outputLabel value="Valor"/>
-                <p:inputNumber value="#{contasReceberControle.contasReceber.valor}" id="valor" size="40"
-                               placeholder="Insira o valor da conta!"
+                <p:inputNumber value="#{contasReceberControle.contasReceber.valor}" id="valor" size="10"
                                decimalPlaces="2" decimalSeparator=","
                                thousandSeparator="." symbol="R$">
                 </p:inputNumber>

@@ -5,15 +5,19 @@
  */
 package controladores;
 
+import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import converter.MoneyConverter;
 import entidades.BaixaContasReceber;
 import entidades.Cliente;
 import entidades.ContasReceber;
+import entidades.PlanoPagamento;
 import facade.ClienteFacade;
 import facade.ContasReceberFacade;
+import facade.PlanoPagamentoFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -29,19 +33,29 @@ public class ContasReceberControle implements Serializable {
     @Inject
     transient private ClienteFacade clienteFacade;
     private ConverterGenerico clienteConverter;
+    @Inject
+    transient private PlanoPagamentoFacade planoPagamentoFacade;
+    private ConverterGenerico planoPagamentoConverter;
 
     private BaixaContasReceber baixaContasReceber;
     private MoneyConverter moneyConverter;
 
-    public void addBaixa(){
-        baixaContasReceber.setContasReceber(contasReceber);
-        contasReceber.getBaixaContasRecebers().add(baixaContasReceber);
-        baixaContasReceber = new BaixaContasReceber();
-        salvar();
+    public void addBaixa() throws Exception {
+        if (baixaContasReceber.getValor() > contasReceber.getValor()) {
+            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor da conta");
+        } else {
+            baixaContasReceber.setContasReceber(contasReceber);
+            contasReceber.getBaixaContasRecebers().add(baixaContasReceber);
+            baixaContasReceber = new BaixaContasReceber();
+            salvar();
+            FacesContext.getCurrentInstance().getExternalContext()
+                    .redirect("list.xhtml");
+        }
+
     }
 
     public MoneyConverter getMoneyConverter() {
-        if(moneyConverter == null){
+        if (moneyConverter == null) {
             moneyConverter = new MoneyConverter();
         }
         return moneyConverter;
@@ -62,6 +76,25 @@ public class ContasReceberControle implements Serializable {
         this.clienteConverter = clienteConverter;
     }
 
+    public ConverterGenerico getPlanoPagamentoConverter() {
+        if (planoPagamentoConverter == null) {
+            planoPagamentoConverter = new ConverterGenerico(planoPagamentoFacade);
+        }
+        return planoPagamentoConverter;
+    }
+
+    public void setPlanoPagamentoConverter(ConverterGenerico planoPagamentoConverter) {
+        this.planoPagamentoConverter = planoPagamentoConverter;
+    }
+
+    public List<PlanoPagamento> getListaPlanoPagFiltrando(String parte) {
+        return planoPagamentoFacade.listaFiltrando(parte, "nome");
+    }
+
+    public List<PlanoPagamento> getListaPlanoPag() {
+        return planoPagamentoFacade.listaTodos();
+    }
+
     public List<Cliente> getListaClientesFiltrando(String parte) {
         return clienteFacade.listaFiltrando(parte, "nome");
     }
@@ -73,19 +106,27 @@ public class ContasReceberControle implements Serializable {
     public void setBaixaContasReceber(BaixaContasReceber baixaContasReceber) {
         this.baixaContasReceber = baixaContasReceber;
     }
+
     public void excluir(ContasReceber cr) {
         contasReceberFacade.remover(cr);
     }
 
-    public void editar(ContasReceber contaR){
+    public void editar(ContasReceber contaR) {
         contasReceber = contaR;
     }
+
     public void novo() {
         contasReceber = new ContasReceber();
     }
 
-    public void salvar() {
-        contasReceberFacade.salvar(contasReceber);
+    public void salvar() throws Exception {
+        try {
+            contasReceberFacade.salvar(contasReceber);
+            JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+        } catch (Exception e) {
+            JsfUtil.adicionarMenssagemErro("Falha ao salvar");
+        }
+
     }
 
     public void baixar(ContasReceber cr) {
@@ -104,5 +145,6 @@ public class ContasReceberControle implements Serializable {
     public List<ContasReceber> getListaContasRecebers() {
         return contasReceberFacade.listaTodos();
     }
+
 
 }

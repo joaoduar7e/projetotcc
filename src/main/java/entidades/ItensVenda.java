@@ -23,6 +23,7 @@ public class ItensVenda implements Serializable, ClassePai  {
         return quantidade * preco;
     }
 
+
     public Double getPreco() {
         return preco;
     }

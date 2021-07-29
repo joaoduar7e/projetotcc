@@ -34,6 +34,10 @@
                         <p:outputLabel value="Valor Total"/>
                         <h:outputText value="#{vendaControle.vendas.valorTotal}" id="login" styleClass="hardblue font"
                                       size="40"/>
+                        <p:outputLabel value="Valor Pago"/>
+                        <h:outputText value="#{contasReceberControle.contasReceber.valorBaixado}" size="40" styleClass="hardblue font">
+                            <f:convertNumber type="currency"/>
+                        </h:outputText>
 
                         <p:outputLabel value="Plano de Pagamento"/>
                         <h:outputText value="#{vendaControle.vendas.planoPagamento.nome}" id="plano"

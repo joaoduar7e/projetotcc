@@ -63,6 +63,8 @@
                                 completeMethod="#{clienteControle.getListaCidadeFiltrando}"
                                 var="cid" id="cidade" forceSelection="true"
                                 size="40"
+                                widgetVar="cidWid"
+                                onclick="PF('cidWid').search('')"
                                 itemLabel="#{cid.nome}"
                                 itemValue="#{cid}"
                                 converter="#{clienteControle.cidadeConverter}"/>

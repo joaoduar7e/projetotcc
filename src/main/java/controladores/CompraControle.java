@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import entidades.*;
 import facade.ClienteFacade;
@@ -39,27 +40,33 @@ public class CompraControle implements Serializable {
     private Date DataPrimeiraParcela;
 
     public void gerarParcelas() {
-        compra.setContasPagar(new ArrayList<ContasPagar>());
-        Date dataTemp = DataPrimeiraParcela;
+        try {
+            compra.setContasPagar(new ArrayList<ContasPagar>());
+            Date dataTemp = DataPrimeiraParcela;
 
-        for (int i = 1; i <= numParcelas; i++) {
+            for (int i = 1; i <= numParcelas; i++) {
 
-            ContasPagar cp = new ContasPagar();
-            cp.setDataEmissao(compra.getDataCompra());
-            cp.setNumParcela(i);
-            cp.setCliente(compra.getCliente());
-            cp.setCompra(compra);
-            cp.setObservacao("Gerada a partir da compra ");
-            cp.setValor(compra.getValorTotal() / numParcelas);
-            cp.setDataVencimento(dataTemp);
+                ContasPagar cp = new ContasPagar();
+                cp.setDataEmissao(compra.getDataCompra());
+                cp.setNumParcela(i);
+                cp.setCliente(compra.getCliente());
+                cp.setCompra(compra);
+                cp.setObservacao("Gerada a partir da compra ");
+                cp.setValor(compra.getValorTotal() / numParcelas);
+                cp.setDataVencimento(dataTemp);
 
-            Calendar c = Calendar.getInstance();
-            c.setTime(dataTemp);
-            c.add(Calendar.MONTH, 1);
-            dataTemp = c.getTime();
+                Calendar c = Calendar.getInstance();
+                c.setTime(dataTemp);
+                c.add(Calendar.MONTH, 1);
+                dataTemp = c.getTime();
 
-            compra.getContasPagar().add(cp);
+                compra.getContasPagar().add(cp);
+                JsfUtil.adicionarMenssagemSucesso("Parcelas geradas com sucesso");
+            }
+        }catch (Exception e){
+            JsfUtil.adicionarMenssagemErro("Não foi possível gerar as parcelas");
         }
+
     }
 
     public Integer getNumParcelas() {

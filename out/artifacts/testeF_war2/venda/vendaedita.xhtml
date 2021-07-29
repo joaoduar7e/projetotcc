@@ -34,6 +34,8 @@
                                                 requiredMessage="O cliente é obrigatório!"
                                                 emptyMessage="Nenhum cliente encontrado"
                                                 effect="blind"
+                                                widgetVar="cliWid"
+                                                onclick="PF('cliWid').search('')"
                                                 forceSelection="true"
                                                 completeMethod="#{vendaControle.getListaClienteFiltrando}"
                                                 var="alu"
@@ -58,6 +60,8 @@
                                                 id="pecas"
                                                 completeMethod="#{vendaControle.getListaPecaFiltrando}"
                                                 var="prod"
+                                                widgetVar="prodWid"
+                                                onclick="PF('prodWid').search('')"
                                                 itemLabel="#{prod.descricao}"
                                                 itemValue="#{prod}"
                                                 converter="#{vendaControle.pecasConverter}"/>

@@ -5,6 +5,7 @@
  */
 package controladores;
 
+import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import entidades.*;
 import facade.ClienteFacade;
@@ -141,10 +142,9 @@ public class VendaControle implements Serializable {
     public void salvar() throws Exception {
         try {
             vendaFacade.salvar(vendas);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo com sucesso", ""));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Falha ao salvar", e);
+            JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+        }catch (Exception e){
+            JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
 
     }

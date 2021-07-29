@@ -8,11 +8,11 @@ package entidades;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
 
 /**
  *
@@ -36,7 +36,10 @@ public class ContasReceber implements Serializable {
     @ManyToOne
     private Vendas vendas;
     private Double valor;
+    @ManyToOne
+    private PlanoPagamento planoPagamento;
 
+    private Boolean pago = false ;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
             mappedBy = "contasReceber")
@@ -44,9 +47,12 @@ public class ContasReceber implements Serializable {
 
     public String getSituacao(){
         if(getValorBaixado() < valor){
+            pago = false;
             return "Aberto";
         }
+        pago = true;
         return "Pago";
+
     }
 
     public Double getValorBaixado(){
@@ -127,14 +133,28 @@ public class ContasReceber implements Serializable {
         this.valor = valor;
     }
 
+    public Boolean getPago() {
+        return pago;
+    }
 
-    
+    public void setPago(Boolean pago) {
+        this.pago = pago;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public PlanoPagamento getPlanoPagamento() {
+        return planoPagamento;
+    }
+
+    public void setPlanoPagamento(PlanoPagamento planoPagamento) {
+        this.planoPagamento = planoPagamento;
     }
 
     @Override

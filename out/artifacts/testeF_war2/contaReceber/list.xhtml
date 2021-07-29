@@ -9,9 +9,12 @@
 
 <ui:composition template="/WEB-INF/template.xhtml">
 
+
+
     <ui:define name="body">
 
-        <div class="card">
+<br/>
+    <div class="card">
             <h:form id="form">
                 <p:dataTable var="contaR" value="#{contasReceberControle.listaContasRecebers}" rows="10"
                              paginator="true"
@@ -27,7 +30,8 @@
                     <p:column headerText="ID">
                         <h:outputText value="#{contaR.id}"/>
                     </p:column>
-                    <p:column headerText="Cliente" style="text-align: center" sortBy="#{contaR.cliente.nome}" filterBy="#{contaR.cliente.nome}"  filterMatchMode="contains" filterStyle="width: 50%">
+                    <p:column headerText="Cliente" style="text-align: center" sortBy="#{contaR.cliente.nome}"
+                              filterBy="#{contaR.cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{contaR.cliente.nome}"/>
                     </p:column>
                     <p:column headerText="Num. Parcela">
@@ -51,13 +55,21 @@
                     <p:column headerText="Observação">
                         <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
                     </p:column>
+                    <p:column headerText="Situação"  style="text-align: center"  filterBy="#{contaR.situacao}" filterStyle="width: 50%" filterMatchMode="contains">
+                        #{contaR.situacao}
+                    </p:column>
                     <p:column headerText="Ações">
-                        <p:commandButton icon="pi pi-info-circle" styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                        <p:commandButton icon="pi pi-check-circle"
+                                         styleClass="rounded-button ui-button-success ui-button-flat"
+                                         actionListener="#{contasReceberControle.baixar(contaR)}" action="fech.xhtml"
+                                         ajax="false" disabled="#{contaR.pago == true}"/>
+                        <p:commandButton icon="pi pi-info-circle"
+                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
                                          actionListener="#{contasReceberControle.editar(contaR)}" action="view.xhtml"
                                          ajax="false"/>
                         <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
                                          actionListener="#{contasReceberControle.excluir(contaR)}"
-                                         ajax="false" />
+                                         ajax="false"/>
                     </p:column>
                 </p:dataTable>
 
@@ -73,8 +85,6 @@
                 </p:panelGrid>
             </h:form>
         </div>
-
-
     </ui:define>
 </ui:composition>
 </html>

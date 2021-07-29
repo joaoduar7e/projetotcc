@@ -35,7 +35,7 @@ public class Vendas implements Serializable, ClassePai {
     @ManyToOne
     private PlanoPagamento planoPagamento;
 
-    public Vendas() { //metodo construtor
+    public Vendas() { //metodo construtors
         dataVenda = new Date(); //pega a data do servidor
         valorTotal = 0d; //faz iniciar zerado o valor ao criar uma venda
         itensVendas = new ArrayList<ItensVenda>(); //instancia a lista
