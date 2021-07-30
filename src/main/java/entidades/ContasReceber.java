@@ -39,6 +39,7 @@ public class ContasReceber implements Serializable {
     @ManyToOne
     private PlanoPagamento planoPagamento;
 
+
     private Boolean pago = false ;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
@@ -62,6 +63,17 @@ public class ContasReceber implements Serializable {
         Double valorBaixado = 0d;
         for(BaixaContasReceber bx : baixaContasRecebers){
             valorBaixado = valorBaixado + bx.getValor();
+        }
+        return valorBaixado;
+    }
+
+    public Double getValorRestante(){
+        if(baixaContasRecebers == null){
+            baixaContasRecebers = new ArrayList<BaixaContasReceber>();
+        }
+        Double valorBaixado = 0d;
+        for(BaixaContasReceber bx : baixaContasRecebers){
+            valorBaixado = valor - bx.getValor();
         }
         return valorBaixado;
     }

@@ -141,6 +141,10 @@ public class VendaControle implements Serializable {
 
     public void salvar() throws Exception {
         try {
+            for(ItensVenda it : vendas.getItensVendas()){
+                it.getPecas().setQtdEst(it.getPecas().getQtdEst() - it.getQuantidade());
+                pecasFacade.pecaMerge(it.getPecas());
+            }
             vendaFacade.salvar(vendas);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
         }catch (Exception e){
@@ -185,6 +189,7 @@ public class VendaControle implements Serializable {
                 itTemp = it;
                 estoque = estoque - it.getQuantidade();
             }
+            return;
         }
         if (estoque - itensVenda.getQuantidade() < 0 || estoque - itensVenda.getQuantidade() == 0) {
             FacesContext.getCurrentInstance().addMessage(
@@ -192,6 +197,7 @@ public class VendaControle implements Serializable {
                             FacesMessage.SEVERITY_ERROR,
                             "Estoque insuficiente!",
                             "Restam apenas " + estoque + " unidades!"));
+            return;
         }
         if (itensVenda.getPreco() == 0) {
             FacesContext.getCurrentInstance().addMessage(
@@ -199,6 +205,7 @@ public class VendaControle implements Serializable {
                             FacesMessage.SEVERITY_ERROR,
                             "O valor deve ser maior que R$0!",
                             ""));
+            return;
         }
         else {
             if (itTemp == null) {

@@ -15,4 +15,8 @@ public class PecasFacade extends AbstractFacade<Pecas> {
     protected EntityManager getEntityManager(){return em;}
 
     public PecasFacade(){ super(Pecas.class);}
+
+    public void pecaMerge(Pecas p){
+        em.merge(p);
+    }
 }

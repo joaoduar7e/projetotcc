@@ -34,8 +34,8 @@
                                                 requiredMessage="O cliente é obrigatório!"
                                                 emptyMessage="Nenhum cliente encontrado"
                                                 effect="blind"
-                                                widgetVar="prodWid"
-                                                onclick="PF('prodWid').search('')"
+                                                widgetVar="cliWid"
+                                                onclick="PF('cliWid').search('')"
                                                 forceSelection="true"
                                                 completeMethod="#{compraControle.getListaClienteFiltrando}"
                                                 var="alu"
@@ -61,7 +61,9 @@
                                                 var="prod"
                                                 itemLabel="#{prod.descricao}"
                                                 itemValue="#{prod}"
-                                                converter="#{compraControle.pecasConverter}"/>
+                                                converter="#{compraControle.pecasConverter}"
+                                                widgetVar="prodWid"
+                                                onclick="PF('prodWid').search('')"/>
 
                                 <p:outputLabel value="Quantidade" for="quantidade"/>
                                 <p:inputText value="#{compraControle.itensCompra.quantidade}" id="quantidade" size="10"/>

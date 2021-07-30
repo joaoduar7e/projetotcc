@@ -67,7 +67,7 @@
                                                 converter="#{vendaControle.pecasConverter}"/>
 
                                 <p:outputLabel value="Quantidade" for="quantidade"/>
-                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade"  size="10"/>
+                                <p:inputText value="#{vendaControle.itensVenda.quantidade}" id="quantidade" size="10"/>
 
 
                                 <p:outputLabel value="Preço" for="preco"/>
@@ -92,9 +92,10 @@
                                     #{it.pecas.descricao}
                                 </p:column>
                                 <p:column headerText="Preço">
-                                    <p:outputLabel value="#{it.preco}">
-                                        <f:convertNumber type="currency"/>
-                                    </p:outputLabel>
+                                    <p:inputNumber value="#{it.preco}" minValue="1" required="true"
+                                                   requiredMessage="O preco é obrigatório!" decimalPlaces="2"
+                                                   decimalSeparator=","
+                                                   thousandSeparator="." symbol="R$"/>
                                 </p:column>
                                 <p:column headerText="Quantidade">
                                     #{it.quantidade}
@@ -148,11 +149,11 @@
                                 <p:commandButton value="Gerar Parcela" actionListener="#{vendaControle.gerarParcelas()}"
                                                  ajax="true"/>
                             </p:panelGrid>
-                                <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
-                                <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
-                                               style="font-size: large; color: brown">
-                                    <f:convertNumber type="currency"/>
-                                </p:outputLabel>
+                            <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
+                            <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
+                                           style="font-size: large; color: brown">
+                                <f:convertNumber type="currency"/>
+                            </p:outputLabel>
                         </p:panel>
                         <p:row>
                             <p:panelGrid columns="2"

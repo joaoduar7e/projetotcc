@@ -5,6 +5,8 @@
  */
 package facade;
 
+import entidades.ItensVenda;
+import entidades.Pecas;
 import entidades.Vendas;
 
 import javax.inject.Inject;

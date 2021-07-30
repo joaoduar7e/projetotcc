@@ -125,7 +125,18 @@ public class CompraControle implements Serializable {
     }
 
     public void salvar() {
-        compraFacade.salvar(compra);
+        try{
+            for(ItensCompra it : compra.getItensCompras()){
+                it.getPecas().setQtdEst(it.getPecas().getQtdEst() + it.getQuantidade());
+                pecasFacade.pecaMerge(it.getPecas());
+            }
+            compraFacade.salvar(compra);
+            JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+        }
+        catch (Exception e){
+            JsfUtil.adicionarMenssagemErro("Falha ao salvar");
+        }
+
     }
 
     public void editar(Compra ve) {

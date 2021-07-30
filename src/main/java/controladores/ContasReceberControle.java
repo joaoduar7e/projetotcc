@@ -21,6 +21,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named
@@ -43,7 +45,10 @@ public class ContasReceberControle implements Serializable {
     public void addBaixa() throws Exception {
         if (baixaContasReceber.getValor() > contasReceber.getValor()) {
             JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor da conta");
-        } else {
+        }
+        else if(baixaContasReceber.getValor() > contasReceber.getValor() - contasReceber.getValorBaixado()){
+            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor restante");
+        }   else {
             baixaContasReceber.setContasReceber(contasReceber);
             contasReceber.getBaixaContasRecebers().add(baixaContasReceber);
             baixaContasReceber = new BaixaContasReceber();
