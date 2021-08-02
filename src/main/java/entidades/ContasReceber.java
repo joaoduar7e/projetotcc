@@ -47,13 +47,17 @@ public class ContasReceber implements Serializable {
     private List<BaixaContasReceber> baixaContasRecebers;
 
     public String getSituacao(){
-        if(getValorBaixado() < valor){
+        if (getValorBaixado() != 0 && getValorBaixado() < valor) {
+            pago = false;
+            return "Parcial";
+        } else if (getValorBaixado() < valor) {
             pago = false;
             return "Aberto";
-        }
-        pago = true;
-        return "Pago";
 
+        } else {
+            pago = true;
+            return "Pago";
+        }
     }
 
     public Double getValorBaixado(){

@@ -45,7 +45,7 @@ public class VendaControle implements Serializable {
     private Date DataPrimeiraParcela;
 
     public void gerarParcelas() {
-        try{
+        try {
             vendas.setContasRecebers(new ArrayList<ContasReceber>());
             Date dataTemp = DataPrimeiraParcela;
 
@@ -66,10 +66,10 @@ public class VendaControle implements Serializable {
                 dataTemp = c.getTime();
 
                 vendas.getContasRecebers().add(cr);
-        }
+            }
             JsfUtil.adicionarMenssagemSucesso("Parcelas geradas!");
 
-        } catch (Exception e){
+        } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Erro ao gerar parcelas");
         }
     }
@@ -135,7 +135,7 @@ public class VendaControle implements Serializable {
         return planoPagamentoFacade.listaFiltrando(parte, "nome");
     }
 
-    public List<PlanoPagamento> getListaPlanoPag(){
+    public List<PlanoPagamento> getListaPlanoPag() {
         return planoPagamentoFacade.listaTodos();
     }
 
@@ -147,13 +147,13 @@ public class VendaControle implements Serializable {
 
     public void salvar() throws Exception {
         try {
-            for(ItensVenda it : vendas.getItensVendas()){
+            for (ItensVenda it : vendas.getItensVendas()) {
                 it.getPecas().setQtdEst(it.getPecas().getQtdEst() - it.getQuantidade());
                 pecasFacade.pecaMerge(it.getPecas());
             }
             vendaFacade.salvar(vendas);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
-        }catch (Exception e){
+        } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
 
@@ -187,9 +187,10 @@ public class VendaControle implements Serializable {
         return vendaFacade.listaTodos();
     }
 
-    public void atualizaItens(){
+    public void atualizaItens() {
         return;
     }
+
     public void addItensVenda() {
         Double estoque = itensVenda.getPecas().getQtdEst();
         ItensVenda itTemp = null;
@@ -200,7 +201,7 @@ public class VendaControle implements Serializable {
             }
             return;
         }
-        if (estoque - itensVenda.getQuantidade() < 0 || estoque - itensVenda.getQuantidade() == 0) {
+        if (estoque - itensVenda.getQuantidade() < 0 || estoque - itensVenda.getQuantidade() == -1) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(
                             FacesMessage.SEVERITY_ERROR,
@@ -208,15 +209,22 @@ public class VendaControle implements Serializable {
                             "Restam apenas " + estoque + " unidades!"));
             return;
         }
-        if (itensVenda.getPreco() == 0) {
+        if (itensVenda.getQuantidade() == 0 || itensVenda.getQuantidade() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "A quantidade deve ser maior que 0",
+                            ""));
+            return;
+        }
+        if (itensVenda.getPreco() == 0 || itensVenda.getPreco() == null) {
             FacesContext.getCurrentInstance().addMessage(
                     null, new FacesMessage(
                             FacesMessage.SEVERITY_ERROR,
                             "O valor deve ser maior que R$0!",
                             ""));
             return;
-        }
-        else {
+        } else {
             if (itTemp == null) {
                 itensVenda.setVenda(vendas);
                 vendas.getItensVendas().add(itensVenda);

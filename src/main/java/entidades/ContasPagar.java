@@ -5,9 +5,14 @@
  */
 package entidades;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -28,40 +33,63 @@ public class ContasPagar implements Serializable {
     @ManyToOne
     private Compra compra;
     private Double valor;
+    private Boolean pago = false;
+    @ManyToOne
+    private PlanoPagamento planoPagamento;
 
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
-//            mappedBy = "contasReceber")
-//    private List<BaixaContasReceber> baixaContasRecebers;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
+            mappedBy = "contasPagar")
+    private List<BaixaContasPagar> baixaContasPagar;
 
-//    public String getSituacao(){
-//        if(getValorBaixado() < valor){
-//            return "Aberto";
-//        }
-//        return "Pago";
-//    }
+    public String getSituacao() {
+        if (getValorBaixado() != 0 && getValorBaixado() < valor) {
+            pago = false;
+            return "Parcial";
+        } else if (getValorBaixado() < valor) {
+            pago = false;
+            return "Aberto";
+        } else {
+            pago = true;
+            return "Pago";
+        }
 
-//    public Double getValorBaixado(){
-//        if(baixaContasRecebers == null){
-//            baixaContasRecebers = new ArrayList<BaixaContasReceber>();
-//        }
-//        Double valorBaixado = 0d;
-//        for(BaixaContasReceber bx : baixaContasRecebers){
-//            valorBaixado = valorBaixado + bx.getValor();
-//        }
-//        return valorBaixado;
-//    }
-//    public ContasPagar() {
-//        baixaContasRecebers = new ArrayList<BaixaContasReceber>();
-//    }
-//
-//    public List<BaixaContasReceber> getBaixaContasRecebers() {
-//        return baixaContasRecebers;
-//    }
-//
-//    public void setBaixaContasRecebers(List<BaixaContasReceber> baixaContasRecebers) {
-//        this.baixaContasRecebers = baixaContasRecebers;
-//    }
+    }
+
+    public Double getValorBaixado() {
+        if (baixaContasPagar == null) {
+            baixaContasPagar = new ArrayList<BaixaContasPagar>();
+        }
+        Double valorBaixado = 0d;
+        for (BaixaContasPagar bx : baixaContasPagar) {
+            valorBaixado = valorBaixado + bx.getValor();
+        }
+        return valorBaixado;
+    }
+
+    public List<BaixaContasPagar> getBaixaContasPagar() {
+        return baixaContasPagar;
+    }
+
+    public void setBaixaContasPagar(List<BaixaContasPagar> baixaContasPagar) {
+        this.baixaContasPagar = baixaContasPagar;
+    }
+
+    public ContasPagar() {
+        baixaContasPagar = new ArrayList<BaixaContasPagar>();
+    }
+
+    public Double getValorRestante() {
+        if (baixaContasPagar == null) {
+            baixaContasPagar = new ArrayList<BaixaContasPagar>();
+        }
+        Double valorBaixado = 0d;
+        for (BaixaContasPagar bx : baixaContasPagar) {
+            valorBaixado = valor - bx.getValor();
+        }
+        return valorBaixado;
+    }
+
 
     public Date getDataEmissao() {
         return dataEmissao;
@@ -119,14 +147,28 @@ public class ContasPagar implements Serializable {
         this.valor = valor;
     }
 
-
-    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getPago() {
+        return pago;
+    }
+
+    public void setPago(Boolean pago) {
+        this.pago = pago;
+    }
+
+    public PlanoPagamento getPlanoPagamento() {
+        return planoPagamento;
+    }
+
+    public void setPlanoPagamento(PlanoPagamento planoPagamento) {
+        this.planoPagamento = planoPagamento;
     }
 
     @Override
@@ -151,7 +193,7 @@ public class ContasPagar implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.ContasReceber[ id=" + id + " ]";
+        return "entidades.ContasPagar[ id=" + id + " ]";
     }
-    
+
 }

@@ -5,17 +5,19 @@
  */
 package controladores;
 
+import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import converter.MoneyConverter;
-import entidades.BaixaContasReceber;
-import entidades.Cliente;
-import entidades.ContasPagar;
+import entidades.*;
 import facade.ClienteFacade;
 import facade.ContasPagarFacade;
+import facade.PlanoPagamentoFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -29,16 +31,27 @@ public class ContasPagarControle implements Serializable {
     @Inject
     transient private ClienteFacade clienteFacade;
     private ConverterGenerico clienteConverter;
+    @Inject
+    transient private PlanoPagamentoFacade planoPagamentoFacade;
+    private ConverterGenerico planoPagamentoConverter;
 
-    private BaixaContasReceber baixaContasReceber;
+   private BaixaContasPagar baixaContasPagar;
     private MoneyConverter moneyConverter;
 
-//    public void addBaixa(){
-//        baixaContasReceber.setContasReceber(contasPagar);
-//        contasPagar.getBaixaContasRecebers().add(baixaContasReceber);
-//        baixaContasReceber = new BaixaContasReceber();
-//        salvar();
-//    }
+    public void addBaixa() throws Exception {
+        if (baixaContasPagar.getValor() > contasPagar.getValor()) {
+            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor da conta");
+        }
+        else if(baixaContasPagar.getValor() > contasPagar.getValor() - contasPagar.getValorBaixado()){
+            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor restante");
+        }   else {
+            baixaContasPagar.setContasPagar(contasPagar);
+            contasPagar.getBaixaContasPagar().add(baixaContasPagar);
+            baixaContasPagar = new BaixaContasPagar();
+            salvar();
+            FacesContext.getCurrentInstance().getExternalContext().redirect("list.xhtml");
+        }
+    }
 
     public MoneyConverter getMoneyConverter() {
         if (moneyConverter == null) {
@@ -62,17 +75,36 @@ public class ContasPagarControle implements Serializable {
         this.clienteConverter = clienteConverter;
     }
 
+    public ConverterGenerico getPlanoPagamentoConverter() {
+        if (planoPagamentoConverter == null) {
+            planoPagamentoConverter = new ConverterGenerico(planoPagamentoFacade);
+        }
+        return planoPagamentoConverter;
+    }
+
+    public void setPlanoPagamentoConverter(ConverterGenerico planoPagamentoConverter) {
+        this.planoPagamentoConverter = planoPagamentoConverter;
+    }
+
+    public List<PlanoPagamento> getListaPlanoPagFiltrando(String parte) {
+        return planoPagamentoFacade.listaFiltrando(parte, "nome");
+    }
+
+    public List<PlanoPagamento> getListaPlanoPag() {
+        return planoPagamentoFacade.listaTodos();
+    }
+
     public List<Cliente> getListaClientesFiltrando(String parte) {
         return clienteFacade.listaFiltrando(parte, "nome");
     }
 
-//    public BaixaContasReceber getBaixaContasReceber() {
-//        return baixaContasReceber;
-//    }
-//
-//    public void setBaixaContasReceber(BaixaContasReceber baixaContasReceber) {
-//        this.baixaContasReceber = baixaContasReceber;
-//    }
+    public BaixaContasPagar getBaixaContasPagar() {
+        return baixaContasPagar;
+    }
+
+    public void setBaixaContasPagar(BaixaContasPagar baixaContasPagar) {
+        this.baixaContasPagar = baixaContasPagar;
+    }
 
     public void excluir(ContasPagar cp) throws Exception {
         contasPagarFacade.remover(cp);
@@ -89,11 +121,11 @@ public class ContasPagarControle implements Serializable {
     public void salvar() {
         contasPagarFacade.salvar(contasPagar);
     }
-//
-//    public void baixar(ContasPagar cr) {
-//        contasPagar = cr;
-//        baixaContasReceber = new BaixaContasReceber();
-//    }
+
+    public void baixar(ContasPagar cr) {
+        contasPagar = cr;
+        baixaContasPagar = new BaixaContasPagar();
+    }
 
     public ContasPagar getContasPagar() {
         return contasPagar;

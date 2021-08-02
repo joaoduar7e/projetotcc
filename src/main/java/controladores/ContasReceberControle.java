@@ -44,10 +44,10 @@ public class ContasReceberControle implements Serializable {
 
     public void addBaixa() throws Exception {
         if (baixaContasReceber.getValor() > contasReceber.getValor()) {
-            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor da conta");
+            JsfUtil.adicionarMenssagemErro("O valor a receber deve ser menor que o valor da conta");
         }
         else if(baixaContasReceber.getValor() > contasReceber.getValor() - contasReceber.getValorBaixado()){
-            JsfUtil.adicionarMenssagemErro("O valor a pagar deve ser menor que o valor restante");
+            JsfUtil.adicionarMenssagemErro("O valor a receber deve ser menor que o valor restante");
         }   else {
             baixaContasReceber.setContasReceber(contasReceber);
             contasReceber.getBaixaContasRecebers().add(baixaContasReceber);

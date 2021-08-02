@@ -13,6 +13,8 @@ import facade.CompraFacade;
 import facade.PecasFacade;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -63,7 +65,7 @@ public class CompraControle implements Serializable {
                 compra.getContasPagar().add(cp);
                 JsfUtil.adicionarMenssagemSucesso("Parcelas geradas com sucesso");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Não foi possível gerar as parcelas");
         }
 
@@ -125,15 +127,14 @@ public class CompraControle implements Serializable {
     }
 
     public void salvar() {
-        try{
-            for(ItensCompra it : compra.getItensCompras()){
+        try {
+            for (ItensCompra it : compra.getItensCompras()) {
                 it.getPecas().setQtdEst(it.getPecas().getQtdEst() + it.getQuantidade());
                 pecasFacade.pecaMerge(it.getPecas());
             }
             compraFacade.salvar(compra);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
 
@@ -170,8 +171,25 @@ public class CompraControle implements Serializable {
             if (it.getPecas().getId().equals(itensCompra.getPecas().getId())) {
                 itTemp = it;
             }
+            return;
         }
+        if (itensCompra.getQuantidade() == 0 || itensCompra.getQuantidade() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "A quantidade deve ser maior que 0",
+                            ""));
+            return;
 
+        }
+        if (itensCompra.getPreco() == 0 || itensCompra.getPreco() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "O valor deve ser maior que R$0!",
+                            ""));
+            return;
+        }
         if (itTemp == null) {
             itensCompra.setCompra(compra);
             compra.getItensCompras().add(itensCompra);
