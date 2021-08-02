@@ -45,26 +45,32 @@ public class VendaControle implements Serializable {
     private Date DataPrimeiraParcela;
 
     public void gerarParcelas() {
-        vendas.setContasRecebers(new ArrayList<ContasReceber>());
-        Date dataTemp = DataPrimeiraParcela;
+        try{
+            vendas.setContasRecebers(new ArrayList<ContasReceber>());
+            Date dataTemp = DataPrimeiraParcela;
 
-        for (int i = 1; i <= numParcelas; i++) {
+            for (int i = 1; i <= numParcelas; i++) {
 
-            ContasReceber cr = new ContasReceber();
-            cr.setDataEmissao(vendas.getDataVenda());
-            cr.setNumParcela(i);
-            cr.setCliente(vendas.getCliente());
-            cr.setVendas(vendas);
-            cr.setObservacao("Gerada a partir da venda ");
-            cr.setValor(vendas.getValorTotal() / numParcelas);
-            cr.setDataVencimento(dataTemp);
+                ContasReceber cr = new ContasReceber();
+                cr.setDataEmissao(vendas.getDataVenda());
+                cr.setNumParcela(i);
+                cr.setCliente(vendas.getCliente());
+                cr.setVendas(vendas);
+                cr.setObservacao("Gerada a partir da venda ");
+                cr.setValor(vendas.getValorTotal() / numParcelas);
+                cr.setDataVencimento(dataTemp);
 
-            Calendar c = Calendar.getInstance();
-            c.setTime(dataTemp);
-            c.add(Calendar.MONTH, 1);
-            dataTemp = c.getTime();
+                Calendar c = Calendar.getInstance();
+                c.setTime(dataTemp);
+                c.add(Calendar.MONTH, 1);
+                dataTemp = c.getTime();
 
-            vendas.getContasRecebers().add(cr);
+                vendas.getContasRecebers().add(cr);
+        }
+            JsfUtil.adicionarMenssagemSucesso("Parcelas geradas!");
+
+        } catch (Exception e){
+            JsfUtil.adicionarMenssagemErro("Erro ao gerar parcelas");
         }
     }
 
@@ -181,6 +187,9 @@ public class VendaControle implements Serializable {
         return vendaFacade.listaTodos();
     }
 
+    public void atualizaItens(){
+        return;
+    }
     public void addItensVenda() {
         Double estoque = itensVenda.getPecas().getQtdEst();
         ItensVenda itTemp = null;

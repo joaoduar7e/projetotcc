@@ -10,11 +10,10 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
 
-
     <ui:define name="body">
 
-<br/>
-    <div class="card">
+        <br/>
+        <div class="card">
             <h:form id="form">
                 <p:dataTable var="contaR" value="#{contasReceberControle.listaContasRecebers}" rows="10"
                              paginator="true"
@@ -27,38 +26,43 @@
                         Lista de Contas a Receber
                     </f:facet>
 
-                    <p:column headerText="ID">
+                    <p:column headerText="ID" width="50px" style="text-align: center" filterBy="#{contaR.id}"
+                              filterStyle="width: 100%;"
+                              filterMatchMode="contains">
                         <h:outputText value="#{contaR.id}"/>
                     </p:column>
-                    <p:column headerText="Cliente" style="text-align: center" sortBy="#{contaR.cliente.nome}"
+                    <p:column headerText="Cliente" style="text-align: center"
                               filterBy="#{contaR.cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{contaR.cliente.nome}"/>
                     </p:column>
-                    <p:column headerText="Num. Parcela">
+                    <p:column headerText="Num. Parcela" style="text-align: center">
                         <h:outputText value="#{contaR.numParcela}"/>
                     </p:column>
-                    <p:column headerText="Valor">
+                    <p:column headerText="Valor" filterBy="#{contaR.valor}" style="text-align: center"
+                              filterStyle="width: 50%" filterMatchMode="contains">
                         <h:outputText value="#{contaR.valor}">
                             <f:convertNumber type="currency"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Data Emissão">
+                    <p:column headerText="Data Emissão" style="text-align: center">
                         <h:outputText value="#{contaR.dataEmissao}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Data Vencimento">
+                    <p:column headerText="Data Vencimento" style="text-align: center">
                         <h:outputText value="#{contaR.dataVencimento}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Observação">
+                    <p:column headerText="Observação" style="text-align: center" filterBy="#{contaR.observacao}" filterStyle="width: 50%"
+                              filterMatchMode="contains">
                         <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
                     </p:column>
-                    <p:column headerText="Situação"  style="text-align: center"  filterBy="#{contaR.situacao}" filterStyle="width: 50%" filterMatchMode="contains">
+                    <p:column headerText="Situação" style="text-align: center" filterBy="#{contaR.situacao}"
+                              filterStyle="width: 50%" filterMatchMode="contains">
                         #{contaR.situacao}
                     </p:column>
-                    <p:column headerText="Ações">
+                    <p:column headerText="Ações" style="text-align: center">
                         <p:commandButton icon="pi pi-check-circle"
                                          styleClass="rounded-button ui-button-success ui-button-flat"
                                          actionListener="#{contasReceberControle.baixar(contaR)}" action="fech.xhtml"
