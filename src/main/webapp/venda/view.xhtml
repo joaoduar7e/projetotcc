@@ -13,39 +13,75 @@
         <h:form>
             <p:tabView>
                 <p:tab title="Informações">
-                    <p:panelGrid columns="2"
-                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
-                                 layout="grid"
-                                 styleClass="ui-panelgrid-blank ui-fluid"
-                                 style="border:0px none; background-color:transparent;">
+                    <p:panel>
+                        <p:panelGrid columns="2"
+                                     columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;">
 
-                        <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
-                            Dados da venda:
-                        </p:row>
+                            <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                                Dados da venda
+                            </p:row>
 
-                        <p:outputLabel value="Cliente"/>
-                        <h:outputText value="#{vendaControle.vendas.cliente.nome}" id="fun" size="40"
-                                      styleClass="hardblue font"/>
+                            <h:panelGroup>
+                                <p:panelGrid columns="2"
+                                             columnClasses="ui-grid-col-3,ui-grid-col-4"
+                                             layout="grid"
+                                             styleClass="ui-panelgrid-blank ui-fluid"
+                                             style="border:0px none; background-color:transparent;">
 
-                        <p:outputLabel value="Telefone"/>
-                        <h:outputText value="#{vendaControle.vendas.cliente.telefone}" id="tel"
-                                      styleClass="hardblue font"
-                                      size="40"/>
+                                    <p:outputLabel value="ID Venda"/>
+                                    <h:outputText value="#{vendaControle.vendas.id}" id="id" size="40"
+                                                  styleClass="hardblue font"/>
 
-                        <p:outputLabel value="Valor Total"/>
-                        <h:outputText value="#{vendaControle.vendas.valorTotal}" id="login" styleClass="hardblue font"
-                                      size="40">
-                            <f:convertNumber type="currency"/>
-                        </h:outputText>
+                                    <p:outputLabel value="Cliente"/>
+                                    <h:outputText value="#{vendaControle.vendas.cliente.nome}" id="fun" size="40"
+                                                  styleClass="hardblue "/>
 
-                        <p:outputLabel value="Plano de Pagamento"/>
-                        <h:outputText value="#{vendaControle.vendas.planoPagamento.nome}" id="plano"
-                                      styleClass="hardblue font"
-                                      size="40"/>
-                    </p:panelGrid>
+                                    <p:outputLabel value="Telefone"/>
+                                    <h:outputText value="#{vendaControle.vendas.cliente.telefone}" id="tel"
+                                                  styleClass="hardblue "
+                                                  size="40"/>
+                                </p:panelGrid>
+                            </h:panelGroup>
+
+                            <h:panelGroup>
+                                <p:panelGrid columns="2"
+                                             columnClasses="ui-grid-col-5,ui-grid-col-5"
+                                             layout="grid"
+                                             styleClass="ui-panelgrid-blank ui-fluid"
+                                             style="border:0px none; background-color:transparent;">
+                                    <p:outputLabel value="Data Emissão"/>
+                                    <h:outputText value="#{vendaControle.vendas.dataVenda}" id="dataE"
+                                                  styleClass="hardblue"
+                                                  size="40">
+                                        <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                    </h:outputText>
+
+                                    <p:outputLabel value="Valor Total"/>
+                                    <h:outputText value="#{vendaControle.vendas.valorTotal}" id="login"
+                                                  styleClass="hardblue"
+                                                  size="40">
+                                        <f:convertNumber type="currency"/>
+                                    </h:outputText>
+
+                                    <p:outputLabel value="Plano de Pagamento"/>
+                                    <h:outputText value="#{vendaControle.vendas.planoPagamento.nome}" id="plano"
+                                                  styleClass="hardblue"
+                                                  size="40"/>
+                                </p:panelGrid>
+                            </h:panelGroup>
+                        </p:panelGrid>
+                    </p:panel>
                 </p:tab>
                 <p:tab title="Peças">
                     <p:dataTable value="#{vendaControle.vendas.itensVendas}" var="it">
+
+                        <f:facet name="header">
+                            Lista de peças
+                        </f:facet>
+
                         <p:column headerText="Peças">
                             #{it.pecas.descricao}
                         </p:column>
@@ -67,6 +103,11 @@
 
                 <p:tab title="Serviço">
                     <p:dataTable value="#{vendaControle.vendas.itensServico}" var="is">
+
+                        <f:facet name="header">
+                            Lista de serviços
+                        </f:facet>
+
                         <p:column headerText="Serviço">
                             #{is.servico.descricao}
                         </p:column>
@@ -88,6 +129,11 @@
 
                 <p:tab title="Parcelas">
                     <p:dataTable value="#{vendaControle.vendas.contasRecebers}" var="cr">
+
+                        <f:facet name="header">
+                            Lista de parcelas
+                        </f:facet>
+
                         <p:column headerText="Cliente">
                             #{cr.cliente.nome}
                         </p:column>
@@ -108,6 +154,9 @@
                             <p:outputLabel value="#{cr.valor}">
                                 <f:convertNumber type="currency"/>
                             </p:outputLabel>
+                        </p:column>
+                        <p:column headerText="Situação">
+                            #{cr.situacao}
                         </p:column>
                     </p:dataTable>
                 </p:tab>

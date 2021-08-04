@@ -14,57 +14,65 @@
 
         <h:form>
 
-            <p:panelGrid columns="2"
-                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+            <p:panel>
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
-                    Dados do cadastro:
-                </p:row>
+                    <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                        Dados da conta a receber
+                    </p:row>
 
-                <p:outputLabel value="Cliente"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.cliente.nome}" size="40"
-                              styleClass="hardblue font"/>
+                    <p:outputLabel value="ID da venda" rendered="#{contasReceberControle.contasReceber.vendas.id != null}"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.vendas.id}" size="40"
+                                  rendered="#{contasReceberControle.contasReceber.vendas.id != null}"
+                                  styleClass="hardblue font"/>
 
-                <p:outputLabel value="Data Vencimento"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
-                              styleClass="hardred font">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </h:outputText>
+                    <p:outputLabel value="Cliente"/>
+                    <h:outputText
+                            value="#{contasReceberControle.contasReceber.cliente.nome} #{contasReceberControle.contasReceber.cliente.sobrenome}"
+                            size="40"
+                            styleClass="hardblue font"/>
 
-                <p:outputLabel value="Data Emissão"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.dataEmissao}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </h:outputText>
+                    <p:outputLabel value="Data Emissão"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.dataEmissao}" size="40"
+                                  styleClass="hardblue ">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
 
-                <p:outputLabel value="Valor da Conta"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.valor}" size="40" styleClass="hardblue font">
-                    <f:convertNumber type="currency"/>
-                </h:outputText>
+                    <p:outputLabel value="Data Vencimento"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
+                                  styleClass="hardred ">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
 
-                <p:outputLabel value="Valor Pago"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.valorBaixado}" size="40"
-                              styleClass="hardgreen font">
-                    <f:convertNumber type="currency"/>
-                </h:outputText>
 
-                <p:outputLabel value="Observação"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.observacao}" id="obs" size="40"
-                              styleClass="hardblue font"/>
+                    <p:outputLabel value="Valor da Conta"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.valor}" size="40" styleClass="hardblue ">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
 
-                <p:row>
-                    <p:column styleClass="ui-grid-col-12">
+                    <p:outputLabel value="Valor Pago"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.valorBaixado}" size="40"
+                                  styleClass="hardgreen ">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
 
-                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
-                                         action="list.xhtml"/>
-                    </p:column>
+                    <p:outputLabel value="Observação"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.observacao}" id="obs" size="40"
+                                  styleClass="hardblue "/>
+                </p:panelGrid>
+            </p:panel>
+            <p:row>
+                <p:column styleClass="ui-grid-col-4">
 
-                </p:row>
-            </p:panelGrid>
+                    <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                     action="list.xhtml"/>
+                </p:column>
 
+            </p:row>
         </h:form>
 
     </ui:define>

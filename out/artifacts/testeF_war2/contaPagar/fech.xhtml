@@ -13,78 +13,96 @@
 
 
         <h:form>
+            <p:panel>
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-            <p:panelGrid columns="2"
-                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+                    <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                        Finalizar conta a pagar
+                    </p:row>
 
-                <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
-                    Dados do cadastro:
-                </p:row>
+                    <h:panelGroup>
+                        <p:panelGrid columns="2"
+                                     columnClasses="ui-grid-col-3,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;">
 
-                <p:outputLabel value="Cliente"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.cliente.nome}" size="40"
-                              styleClass="hardblue font"/>
+                            <p:outputLabel value="ID da compra"
+                                           rendered="#{contasPagarControle.contasPagar.compra.id != null}"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.compra.id}"
+                                          rendered="#{contasPagarControle.contasPagar.compra.id != null}" size="40"
+                                          styleClass="hardblue font"/>
 
-                <p:outputLabel value="Data Vencimento"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.dataVencimento}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-                </h:outputText>
+                            <p:outputLabel value="Cliente"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.cliente.nome}" size="40"
+                                          styleClass="hardblue font"/>
 
-                <p:outputLabel value="Data Emissão"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.dataEmissao}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-                </h:outputText>
+                            <p:outputLabel value="Data Emissão"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.dataEmissao}" size="40"
+                                          styleClass="hardblue font">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
 
-                <p:outputLabel value="Valor da Conta"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.valor}" size="40" styleClass="hardblue font">
-                    <f:convertNumber type="currency"/>
-                </h:outputText>
+                            <p:outputLabel value="Data Vencimento"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.dataVencimento}" size="40"
+                                          styleClass="hardred font">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
 
-                <p:outputLabel value="Valor Pago"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.valorBaixado}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertNumber type="currency"/>
-                </h:outputText>
+                            <p:outputLabel value="Valor da Conta"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.valor}" size="40"
+                                          styleClass="hardblue font">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
 
-                <p:outputLabel value="Valor Rest"/>
-                <h:outputText value="#{contasPagarControle.contasPagar.valorRestante}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertNumber type="currency"/>
-                </h:outputText>
+                            <p:outputLabel value="Valor Pago"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.valorBaixado}" size="40"
+                                          styleClass="hardgreen font">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
 
-                <p:outputLabel value="Valor"/>
-                <p:inputNumber value="#{contasPagarControle.baixaContasPagar.valor}" id="valorP" size="10"
-                               decimalPlaces="2" decimalSeparator=","
-                               thousandSeparator="." symbol="R$">
-                </p:inputNumber>
+                            <p:outputLabel value="Valor Restante"/>
+                            <h:outputText value="#{contasPagarControle.contasPagar.valorRestante}" size="40"
+                                          styleClass="hardblue font">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
 
-                <p:outputLabel value="Plano pagamento" for="planoPag"/>
-                <p:selectOneMenu value="#{contasPagarControle.contasPagar.planoPagamento}" id="planoPag"
-                                 required="true" requiredMessage="O plano de pagamento é obrigatório!"
-                                 converter="#{contasReceberControle.planoPagamentoConverter}">
-                    <f:selectItems value="#{contasReceberControle.listaPlanoPag}" var="planoPag"
-                                   itemLabel="#{planoPag.nome}"
-                                   itemValue="#{planoPag}"/>
-                </p:selectOneMenu>
-                <p:row>
-                    <p:column styleClass="ui-grid-col-6">
-                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
-                                         action="list.xhtml"/>
-                    </p:column>
-                    <p:column styleClass="ui-grid-col-6">
-                        <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{contasPagarControle.addBaixa()}"/>
+                            <p:outputLabel value="Valor a Pagar"/>
+                            <p:inputNumber value="#{contasPagarControle.baixaContasPagar.valor}" id="valorP" size="10"
+                                           decimalPlaces="2" decimalSeparator=","
+                                           thousandSeparator="." symbol="R$">
+                            </p:inputNumber>
 
-                    </p:column>
+                            <p:outputLabel value="Plano pagamento" for="planoPag"/>
+                            <p:selectOneMenu value="#{contasPagarControle.contasPagar.planoPagamento}" id="planoPag"
+                                             required="true" requiredMessage="O plano de pagamento é obrigatório!"
+                                             converter="#{contasReceberControle.planoPagamentoConverter}">
+                                <f:selectItems value="#{contasReceberControle.listaPlanoPag}" var="planoPag"
+                                               itemLabel="#{planoPag.nome}"
+                                               itemValue="#{planoPag}"/>
+                            </p:selectOneMenu>
 
-                </p:row>
-            </p:panelGrid>
+                        </p:panelGrid>
+                    </h:panelGroup>
 
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:column>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                             actionListener="#{contasPagarControle.addBaixa()}"/>
+
+                        </p:column>
+
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
         </h:form>
 
     </ui:define>

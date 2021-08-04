@@ -11,8 +11,9 @@
 
 
     <ui:define name="body">
-        <h1 align="center">Movimento de Compra</h1>
-        <br/>
+        <div class="titulo-pagina">
+            Movimento de Compra
+        </div>
         <h:form>
             <div class="card">
                 <p:tabView>
@@ -57,7 +58,7 @@
                             <h:panelGroup id="infoPecas">
                                 <p:panel header="Peças" id="painelItens">
                                     <p:panelGrid columns="2"
-                                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+                                                 columnClasses="ui-grid-col-3,ui-grid-col-4"
                                                  layout="grid"
                                                  styleClass="ui-panelgrid-blank ui-fluid"
                                                  style="border:0px none; background-color:transparent;">
@@ -144,7 +145,7 @@
                                      style="border:0px none; background-color:transparent;" id="panelInfoF">
                             <p:panel header="Parcelas">
                                 <p:panelGrid columns="2"
-                                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                             columnClasses="ui-grid-col-4,ui-grid-col-4"
                                              layout="grid"
                                              styleClass="ui-panelgrid-blank ui-fluid"
                                              style="border:0px none; background-color:transparent;">
@@ -164,9 +165,16 @@
 
                             <h:panelGroup>
                                 <p:panel header="Resumo da Venda">
-                                    <p:outputLabel value="Total da compra:" style="font-size: large; color: brown"/>
-                                    <p:outputLabel value="#{compraControle.compra.valorTotal}"
-                                                   style="font-size: large; color: brown">
+                                    <p:outputLabel value="Total de Produtos:" style="font-size: large;"/>
+                                    <p:outputLabel value="#{compraControle.compra.valorTotalProdutos}"
+                                                   style="font-size: large;" styleClass="hardblue font">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <p:outputLabel value="Total da Venda: " style="font-size: large 10px; "/>
+                                    <p:outputLabel value="#{compraControle.compra.valorTotal}" styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                 </p:panel>

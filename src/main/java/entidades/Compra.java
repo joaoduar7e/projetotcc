@@ -27,6 +27,8 @@ public class Compra implements Serializable, ClassePai {
     private Cliente cliente;
     @Column
     private Double valorTotal;
+    @Column
+    private Double valorTotalP;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
     private List<ItensCompra> itensCompras;
@@ -67,6 +69,14 @@ public class Compra implements Serializable, ClassePai {
             valorTotal += it.getSubTotal();
         }
         return valorTotal;
+    }
+
+    public Double getValorTotalProdutos() {
+        valorTotalP = 0d;
+        for (ItensCompra it : itensCompras) {
+            valorTotalP += it.getSubTotal();
+        }
+        return valorTotalP;
     }
 
     public List<ItensCompra> getItensCompras() {

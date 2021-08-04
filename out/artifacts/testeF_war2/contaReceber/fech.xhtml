@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 <ui:composition template="/WEB-INF/template.xhtml">
 
@@ -13,7 +14,7 @@
 
 
         <h:form>
-
+            <p:panel>
             <p:panelGrid columns="2"
                          columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
                          layout="grid"
@@ -21,23 +22,27 @@
                          style="border:0px none; background-color:transparent;">
 
                 <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
-                    Dados do cadastro:
+                    Finalizar conta a receber
                 </p:row>
 
-                <p:outputLabel value="Cliente"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.cliente.nome}" size="40"
-                              styleClass="hardblue font"/>
+                    <p:outputLabel value="ID da venda" rendered="#{contasReceberControle.contasReceber.vendas.id != null}"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.vendas.id}" rendered="#{contasReceberControle.contasReceber.vendas.id != null}" size="40"
+                                  styleClass="hardblue font"/>
 
-                <p:outputLabel value="Data Vencimento"/>
-                <h:outputText value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
-                              styleClass="hardblue font">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-                </h:outputText>
+                <p:outputLabel value="Cliente"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.cliente.nome} #{contasReceberControle.contasReceber.cliente.sobrenome}" size="40"
+                              styleClass="hardblue font"/>
 
                 <p:outputLabel value="Data Emissão"/>
                 <h:outputText value="#{contasReceberControle.contasReceber.dataEmissao}" size="40"
-                              styleClass="hardblue font">
+                              styleClass="hardblue">
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
+
+                <p:outputLabel value="Data Vencimento"/>
+                <h:outputText value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
+                              styleClass="hardred">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </h:outputText>
 
                 <p:outputLabel value="Valor da Conta"/>
@@ -47,17 +52,17 @@
 
                 <p:outputLabel value="Valor Pago"/>
                 <h:outputText value="#{contasReceberControle.contasReceber.valorBaixado}" size="40"
-                              styleClass="hardblue font">
+                              styleClass="hardgreen font">
                     <f:convertNumber type="currency"/>
                 </h:outputText>
 
-                <p:outputLabel value="Valor Rest"/>
+                <p:outputLabel value="Valor Restante"/>
                 <h:outputText value="#{contasReceberControle.contasReceber.valorRestante}" size="40"
                               styleClass="hardblue font">
                     <f:convertNumber type="currency"/>
                 </h:outputText>
 
-                <p:outputLabel value="Valor"/>
+                <p:outputLabel value="Valor a Pagar"/>
                 <p:inputNumber value="#{contasReceberControle.baixaContasReceber.valor}" id="valorP" size="10"
                                decimalPlaces="2" decimalSeparator=","
                                thousandSeparator="." symbol="R$">
@@ -84,7 +89,7 @@
 
                 </p:row>
             </p:panelGrid>
-
+            </p:panel>
         </h:form>
 
     </ui:define>

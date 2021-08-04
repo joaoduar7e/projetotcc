@@ -11,7 +11,11 @@
 
 
     <ui:define name="body">
-        <h2 align="center" style="font-weight: bold;">Movimento de Venda</h2>
+
+        <div class="titulo-pagina">
+            Movimento de venda
+        </div>
+
         <br/>
         <h:form>
             <div class="card">
@@ -59,7 +63,7 @@
                             <h:panelGroup id="infoPecas">
                                 <p:panel header="Peças" id="painelItens">
                                     <p:panelGrid columns="2"
-                                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                                 columnClasses="ui-grid-col-3,ui-grid-col-4"
                                                  layout="grid"
                                                  styleClass="ui-panelgrid-blank ui-fluid"
                                                  style="border:0px none; background-color:transparent;">
@@ -152,7 +156,7 @@
                             <h:panelGroup id="infoServ">
                                 <p:panel header="Serviço" id="painelItens2">
                                     <p:panelGrid columns="2"
-                                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                                 columnClasses="ui-grid-col-3,ui-grid-col-4"
                                                  layout="grid"
                                                  styleClass="ui-panelgrid-blank ui-fluid"
                                                  style="border:0px none; background-color:transparent;">
@@ -243,7 +247,7 @@
                                      style="border:0px none; background-color:transparent;" id="panelInfoF">
                             <p:panel header="Parcelas">
                                 <p:panelGrid columns="2"
-                                             columnClasses="ui-grid-col-2,ui-grid-col-2,ui-grid-col-2,ui-grid-col-2"
+                                             columnClasses="ui-grid-col-3,ui-grid-col-4"
                                              layout="grid"
                                              styleClass="ui-panelgrid-blank ui-fluid"
                                              style="border:0px none; background-color:transparent;">
@@ -271,21 +275,24 @@
 
                             <h:panelGroup>
                                 <p:panel header="Resumo da Venda">
-                                    <p:outputLabel value="Total de Produtos:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="Total de Produtos: " style="font-size: large 10px; "/>
                                     <p:outputLabel value="#{vendaControle.vendas.valorTotalProduto}"
-                                                   style="font-size: large; color: brown">
+                                                   styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                     <br/>
-                                    <p:outputLabel value="Total de Serviços:" style="font-size: large; color: brown"/>
+                                    <br/>
+                                    <br/>
+                                    <p:outputLabel value="Total de Serviços: " style="font-size: large 10px; "/>
                                     <p:outputLabel value="#{vendaControle.vendas.valorTotalServico}"
-                                                   style="font-size: large; color: brown">
+                                                   styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                     <br/>
-                                    <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
-                                    <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
-                                                   style="font-size: large; color: brown">
+                                    <br/>
+                                    <br/>
+                                    <p:outputLabel value="Total da Venda: " style="font-size: large 10px; "/>
+                                    <p:outputLabel value="#{vendaControle.vendas.valorTotal}" styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                 </p:panel>
