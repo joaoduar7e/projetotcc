@@ -99,9 +99,9 @@
                             </h:panelGroup>
 
                             <h:panelGroup>
-                                <p:panel header="Resumo dos produtos" id="painelValores">
-                                    <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
-                                    <p:outputLabel value="#{vendaControle.vendas.valorTotal}" id="campoTotal"
+                                <p:panel header="Resumo das peças" id="painelValores">
+                                    <p:outputLabel value="Total das peças:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="#{vendaControle.vendas.valorTotalProduto}" id="campoTotal"
                                                    style="font-size: large; color: brown">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
@@ -141,6 +141,100 @@
                                              action="vendalista.xhtml"/>
                         </p:panelGrid>
                     </p:tab>
+
+                    <p:tab title="Serviço">
+                        <p:panelGrid columns="2"
+                                     columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;" id="panelInfo2">
+
+                            <h:panelGroup id="infoServ">
+                                <p:panel header="Serviço" id="painelItens2">
+                                    <p:panelGrid columns="2"
+                                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                                 layout="grid"
+                                                 styleClass="ui-panelgrid-blank ui-fluid"
+                                                 style="border:0px none; background-color:transparent;">
+                                        <p:outputLabel value="Serviços" for="serv"/>
+                                        <p:autoComplete value="#{vendaControle.itensServico.servico}"
+                                                        id="serv"
+                                                        completeMethod="#{vendaControle.getListaServicoFiltrando}"
+                                                        var="serv"
+                                                        widgetVar="servWid"
+                                                        onclick="PF('servWid').search('')"
+                                                        itemLabel="#{serv.descricao}"
+                                                        itemValue="#{serv}"
+                                                        converter="#{vendaControle.servicoConverter}"/>
+
+                                        <p:outputLabel value="Quantidade" for="quantidadeS"/>
+                                        <p:inputNumber value="#{vendaControle.itensServico.quantidade}" id="quantidadeS"
+                                                       size="10">
+                                            <f:validateDoubleRange minimum="0.00"/>
+                                        </p:inputNumber>
+
+
+                                        <p:outputLabel value="Preço" for="precoS"/>
+                                        <p:inputNumber value="#{vendaControle.itensServico.preco}" id="precoS" size="10"
+                                                       decimalPlaces="2" decimalSeparator=","
+                                                       thousandSeparator="." symbol="R$">
+                                            <f:validateDoubleRange minimum="0.00"/>
+                                        </p:inputNumber>
+
+
+                                        <p:commandButton value="Adicionar"
+                                                         ajax="false" styleClass="ui-button-raised ui-button-success"
+                                                         update="campoTotal painelItens"
+                                                         actionListener="#{vendaControle.addItensServico()}">
+                                        </p:commandButton>
+                                    </p:panelGrid>
+                                </p:panel>
+                            </h:panelGroup>
+
+                            <h:panelGroup>
+                                <p:panel header="Resumo dos serviços" id="painelValoresS">
+                                    <p:outputLabel value="Total de serviços:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="#{vendaControle.vendas.valorTotalServico}" id="campoTotalS"
+                                                   style="font-size: large; color: brown">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                </p:panel>
+                            </h:panelGroup>
+
+                            <p:dataTable value="#{vendaControle.vendas.itensServico}" var="itS">
+                                <f:facet name="header">
+                                    Lista de serviços
+                                </f:facet>
+                                <p:column headerText="Serviços">
+                                    #{itS.servico.descricao}
+                                </p:column>
+                                <p:column headerText="Preço">
+                                    <p:outputLabel value="#{itS.preco}">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Quantidade">
+                                    #{itS.quantidade}
+                                </p:column>
+                                <p:column headerText="Subtotal">
+                                    <p:outputLabel value="#{itS.subtotal}" id="subTListS">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                </p:column>
+                                <p:column headerText="Operação">
+                                    <p:commandButton icon="pi pi-times"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                     ajax="false" immediate="true"
+                                                     actionListener="#{vendaControle.removerItensServico(itS)}"/>
+                                </p:column>
+                            </p:dataTable>
+                            <br/>
+                            <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
+                                             styleClass="ui-button-raised" immediate="true"
+                                             action="vendalista.xhtml"/>
+                        </p:panelGrid>
+                    </p:tab>
+
                     <p:tab title="Fechamento">
                         <p:panelGrid columns="2"
                                      columnClasses="ui-grid-col-6,ui-grid-col-6"
@@ -177,6 +271,18 @@
 
                             <h:panelGroup>
                                 <p:panel header="Resumo da Venda">
+                                    <p:outputLabel value="Total de Produtos:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="#{vendaControle.vendas.valorTotalProduto}"
+                                                   style="font-size: large; color: brown">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                    <br/>
+                                    <p:outputLabel value="Total de Serviços:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="#{vendaControle.vendas.valorTotalServico}"
+                                                   style="font-size: large; color: brown">
+                                        <f:convertNumber type="currency"/>
+                                    </p:outputLabel>
+                                    <br/>
                                     <p:outputLabel value="Total da venda:" style="font-size: large; color: brown"/>
                                     <p:outputLabel value="#{vendaControle.vendas.valorTotal}"
                                                    style="font-size: large; color: brown">

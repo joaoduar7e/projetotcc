@@ -8,10 +8,7 @@ package controladores;
 import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import entidades.*;
-import facade.ClienteFacade;
-import facade.PecasFacade;
-import facade.PlanoPagamentoFacade;
-import facade.VendaFacade;
+import facade.*;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
 import javax.faces.application.FacesMessage;
@@ -30,6 +27,7 @@ public class VendaControle implements Serializable {
 
     private Vendas vendas;
     private ItensVenda itensVenda;
+    private ItensServico itensServico;
     @Inject
     transient private VendaFacade vendaFacade;
     @Inject
@@ -38,6 +36,9 @@ public class VendaControle implements Serializable {
     @Inject
     transient private PecasFacade pecasFacade;
     private ConverterGenerico pecasConverter;
+    @Inject
+    transient private ServicoFacade servicoFacade;
+    private ConverterGenerico servicoConverter;
     @Inject
     transient private PlanoPagamentoFacade planoPagamentoFacade;
     private ConverterGenerico planoPagamentoConverter;
@@ -112,6 +113,18 @@ public class VendaControle implements Serializable {
         this.clienteConverter = clienteConverter;
     }
 
+    public ConverterGenerico getServicoConverter() {
+        if (servicoConverter == null) {
+            servicoConverter = new ConverterGenerico(servicoFacade);
+        }
+        return servicoConverter;
+    }
+
+    public void setServicoConverter(ConverterGenerico servicoConverter) {
+        this.servicoConverter = servicoConverter;
+    }
+
+
     public ConverterGenerico getPlanoPagamentoConverter() {
         if (planoPagamentoConverter == null) {
             planoPagamentoConverter = new ConverterGenerico(planoPagamentoFacade);
@@ -131,6 +144,10 @@ public class VendaControle implements Serializable {
         return pecasFacade.listaFiltrando(parte, "descricao");
     }
 
+    public List<Servico> getListaServicoFiltrando(String parte) {
+        return servicoFacade.listaFiltrando(parte, "descricao");
+    }
+
     public List<PlanoPagamento> getListaPlanoPagFiltrando(String parte) {
         return planoPagamentoFacade.listaFiltrando(parte, "nome");
     }
@@ -142,6 +159,7 @@ public class VendaControle implements Serializable {
     public void novo() {
         vendas = new Vendas();
         itensVenda = new ItensVenda();
+        itensServico = new ItensServico();
     }
 
 
@@ -151,6 +169,12 @@ public class VendaControle implements Serializable {
                 it.getPecas().setQtdEst(it.getPecas().getQtdEst() - it.getQuantidade());
                 pecasFacade.pecaMerge(it.getPecas());
             }
+            for (ItensServico is : vendas.getItensServico()) {
+                if (is != null) {
+                    servicoFacade.ServMerge(is.getServico());
+                }
+            }
+
             vendaFacade.salvar(vendas);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
         } catch (Exception e) {
@@ -187,8 +211,12 @@ public class VendaControle implements Serializable {
         return vendaFacade.listaTodos();
     }
 
-    public void atualizaItens() {
-        return;
+    public ItensServico getItensServico() {
+        return itensServico;
+    }
+
+    public void setItensServico(ItensServico itensServico) {
+        this.itensServico = itensServico;
     }
 
     public void addItensVenda() {
@@ -239,5 +267,40 @@ public class VendaControle implements Serializable {
     public void removerItensVenda(ItensVenda it) {
         vendas.getItensVendas().remove(it);
     }
+
+
+    public void addItensServico() {
+        ItensServico itTemp = null;
+        if (itensServico.getQuantidade() == 0 || itensServico.getQuantidade() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "A quantidade deve ser maior que 0",
+                            ""));
+            return;
+        }
+        if (itensServico.getPreco() == 0 || itensServico.getPreco() == null) {
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_ERROR,
+                            "O valor deve ser maior que R$0!",
+                            ""));
+            return;
+        } else {
+            if (itTemp == null) {
+                itensServico.setVenda(vendas);
+                vendas.getItensServico().add(itensServico);
+            } else {
+                itTemp.setQuantidade(itTemp.getQuantidade() + itensServico.getQuantidade());
+                itTemp.setPreco(itensServico.getPreco());
+            }
+            itensServico = new ItensServico();
+        }
+    }
+
+    public void removerItensServico(ItensServico it) {
+        vendas.getItensServico().remove(it);
+    }
+
 
 }

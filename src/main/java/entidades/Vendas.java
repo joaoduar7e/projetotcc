@@ -23,10 +23,20 @@ public class Vendas implements Serializable, ClassePai {
     private Cliente cliente;
     @Column
     private Double valorTotal;
+    @Column
+    private Double valorTotalP;
+    @Column
+    private Double valorTotalS;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendas")
     //efeito cascata, quando salva a venda, salva os itens de venda // fetchtype recupera os itens da venda // //mappedby indica que existe a chave estrangeira
     private List<ItensVenda> itensVendas;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendas")
+    //efeito cascata, quando salva a venda, salva os itens de venda // fetchtype recupera os itens da venda // //mappedby indica que existe a chave estrangeira
+    private List<ItensServico> itensServico;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendas")
@@ -39,6 +49,7 @@ public class Vendas implements Serializable, ClassePai {
         dataVenda = new Date(); //pega a data do servidor
         valorTotal = 0d; //faz iniciar zerado o valor ao criar uma venda
         itensVendas = new ArrayList<ItensVenda>(); //instancia a lista
+        itensServico = new ArrayList<ItensServico>();
         ContasRecebers = new ArrayList<ContasReceber>();
     }
 
@@ -79,9 +90,27 @@ public class Vendas implements Serializable, ClassePai {
         for (ItensVenda it : itensVendas) { //percorre o itens venda
             valorTotal = valorTotal + it.getSubtotal();
         }
+        for (ItensServico is : itensServico) { //percorre o itens venda
+            valorTotal = valorTotal + is.getSubtotal();
+        }
         return valorTotal;
     }
 
+    public Double getValorTotalProduto() {
+        valorTotalS = 0d; //inicia com 0
+        for (ItensVenda it : itensVendas) { //percorre o itens venda
+            valorTotalS = valorTotalS + it.getSubtotal();
+        }
+        return valorTotalS;
+    }
+
+    public Double getValorTotalServico() {
+        valorTotalP = 0d; //inicia com 0
+        for (ItensServico is : itensServico) { //percorre o itens venda
+            valorTotalP = valorTotalP + is.getSubtotal();
+        }
+        return valorTotalP;
+    }
 
     public List<ItensVenda> getItensVendas() {
         return itensVendas;
@@ -89,6 +118,14 @@ public class Vendas implements Serializable, ClassePai {
 
     public void setItensVendas(List<ItensVenda> itensVendas) {
         this.itensVendas = itensVendas;
+    }
+
+    public List<ItensServico> getItensServico() {
+        return itensServico;
+    }
+
+    public void setItensServico(List<ItensServico> itensServico) {
+        this.itensServico = itensServico;
     }
 
     public List<ContasReceber> getContasRecebers() {
@@ -99,17 +136,19 @@ public class Vendas implements Serializable, ClassePai {
         this.ContasRecebers = ContasRecebers;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Vendas vendas = (Vendas) o;
-        return Objects.equals(id, vendas.id) && Objects.equals(dataVenda, vendas.dataVenda) && Objects.equals(cliente, vendas.cliente) && Objects.equals(valorTotal, vendas.valorTotal) && Objects.equals(itensVendas, vendas.itensVendas) && Objects.equals(ContasRecebers, vendas.ContasRecebers);
+        return Objects.equals(id, vendas.id) && Objects.equals(dataVenda, vendas.dataVenda) && Objects.equals(cliente, vendas.cliente) && Objects.equals(valorTotal, vendas.valorTotal) && Objects.equals(itensVendas, vendas.itensVendas) && Objects.equals(itensServico, vendas.itensServico) && Objects.equals(ContasRecebers, vendas.ContasRecebers) && Objects.equals(planoPagamento, vendas.planoPagamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dataVenda, cliente, valorTotal, itensVendas, ContasRecebers);
+        return Objects.hash(id, dataVenda, cliente, valorTotal, itensVendas, itensServico, ContasRecebers, planoPagamento);
     }
 
     @Override

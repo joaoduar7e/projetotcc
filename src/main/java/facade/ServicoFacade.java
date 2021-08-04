@@ -15,4 +15,8 @@ public class ServicoFacade extends AbstractFacade<Servico> {
     protected EntityManager getEntityManager(){return em;}
 
     public ServicoFacade(){ super(Servico.class);}
+
+    public void ServMerge(Servico s){
+        em.merge(s);
+    }
 }
