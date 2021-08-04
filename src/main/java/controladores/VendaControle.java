@@ -174,8 +174,17 @@ public class VendaControle implements Serializable {
                     servicoFacade.ServMerge(is.getServico());
                 }
             }
+            if (vendas.getItensServico().isEmpty() && vendas.getItensVendas().isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "É necessário ter pelo menos uma peça ou serviço associado a venda",
+                                ""));
+                return;
+            } else {
+                vendaFacade.salvar(vendas);
+            }
 
-            vendaFacade.salvar(vendas);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
         } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
