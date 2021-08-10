@@ -65,6 +65,9 @@ public class PecasControle implements Serializable {
     }
 
     public void salvar(){
+        if (pecas.getQtdEst() == null){
+            pecas.setQtdEst(Double.valueOf(0));
+        }
         pecasFacade.salvar(pecas);
     }
 }

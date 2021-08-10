@@ -11,11 +11,10 @@
 
 
     <ui:define name="body">
-        <div class="titulo-pagina">
-            Movimento de Compra
-        </div>
+        <br/>
         <h:form>
             <div class="card">
+                <p:panel header="Movimento de compra">
                 <p:tabView>
                     <p:tab title="Cliente">
                         <p:panel header="Clientes">
@@ -94,9 +93,9 @@
 
                             <h:panelGroup>
                                 <p:panel header="Resumo dos produtos" id="painelValores">
-                                    <p:outputLabel value="Total da compra:" style="font-size: large; color: brown"/>
+                                    <p:outputLabel value="Total da compra: " style="font-size: large;"/>
                                     <p:outputLabel value="#{compraControle.compra.valorTotal}" id="campoTotal"
-                                                   style="font-size: large; color: brown">
+                                                   style="font-size: large;" styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                 </p:panel>
@@ -165,7 +164,7 @@
 
                             <h:panelGroup>
                                 <p:panel header="Resumo da Venda">
-                                    <p:outputLabel value="Total de Produtos:" style="font-size: large;"/>
+                                    <p:outputLabel value="Total de Produtos: " style="font-size: large;"/>
                                     <p:outputLabel value="#{compraControle.compra.valorTotalProdutos}"
                                                    style="font-size: large;" styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
@@ -173,8 +172,9 @@
                                     <br/>
                                     <br/>
                                     <br/>
-                                    <p:outputLabel value="Total da Venda: " style="font-size: large 10px; "/>
-                                    <p:outputLabel value="#{compraControle.compra.valorTotal}" styleClass="hardblue font">
+                                    <p:outputLabel value="Total da Venda: " style="font-size: large;"/>
+                                    <p:outputLabel value="#{compraControle.compra.valorTotal}" style="font-size: large;"
+                                                   styleClass="hardblue font">
                                         <f:convertNumber type="currency"/>
                                     </p:outputLabel>
                                 </p:panel>
@@ -203,6 +203,7 @@
                         </p:panelGrid>
                     </p:tab>
                 </p:tabView>
+                </p:panel>
             </div>
 
 

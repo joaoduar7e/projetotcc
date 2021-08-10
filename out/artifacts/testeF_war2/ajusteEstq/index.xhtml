@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+        <br/>
+        <h:form id="ajuste">
+            <p:panel header="Ajuste de estoque">
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-2,ui-grid-col-3,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:row styleClass="my-heading-row">
+                    </p:row>
+
+                    <p:outputLabel value="Peças"/>
+                    <p:autoComplete value="#{ajusteEstControle.ajusteEst.pecas}"
+                                    size="60" id="cliente" required="true"
+                                    requiredMessage="A peça é obrigatória"
+                                    emptyMessage="Nenhuma peça encontrada"
+                                    effect="blind"
+                                    widgetVar="ajustWid"
+                                    onclick="PF('ajustWid').search('')"
+                                    forceSelection="true"
+                                    completeMethod="#{ajusteEstControle.getListaPecaFiltrando}"
+                                    var="ajt"
+                                    itemValue="#{ajt}"
+                                    itemLabel="#{ajt.descricao}"
+                                    converter="#{ajusteEstControle.pecasConverter}">
+                        <p:ajax event="itemSelect"
+                                update="qtdAtual tipo ajuste"/>
+                    </p:autoComplete>
+
+                    <h:panelGroup>
+                        <h:outputText value="Estoque atual: " id="qtdInfo"
+                                      styleClass="hardblue font"/>
+                        <h:outputText value="#{ajusteEstControle.quantidadeEstoque}" id="qtdAtual"
+                                      styleClass="hardgreen font"/>
+                    </h:panelGroup>
+                    <br/>
+
+                    <p:outputLabel value="Quantidade" for="qtd"/>
+                    <p:inputNumber value="#{ajusteEstControle.ajusteEst.qtdTotal}" id="qtd" size="40" required="true"
+                                   requiredMessage="A quantidade deve ser maior que 0"/>
+
+                    <p:outputLabel value="Selecione o tipo de ajuste:" for="tipo"/>
+                    <p:selectOneRadio id="tipo" value="#{ajusteEstControle.ajusteEst.tipo}"
+                                      disabled="#{ajusteEstControle.ajusteEst.pecas == null}">
+                        <f:selectItem itemLabel="Saída" itemValue="S"/>
+                        <f:selectItem itemLabel="Entrada" itemValue="E"/>
+                        <p:ajax update="@this qtdAtual" event="change"/>
+                    </p:selectOneRadio>
+
+                    <p:outputLabel value="Motivo" for="nome"/>
+                    <p:inputText value="#{ajusteEstControle.ajusteEst.motivo}" id="nome" size="40"
+                                 required="true" requiredMessage="O nome é obrigatório!"/>
+
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-6">
+
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:column>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                             actionListener="#{ajusteEstControle.salvar()}" action="list.xhtml"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
+</html>
+

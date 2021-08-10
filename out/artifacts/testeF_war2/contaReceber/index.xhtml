@@ -10,11 +10,9 @@
 <ui:composition template="/WEB-INF/template.xhtml">
 
     <ui:define name="body">
-
-        <h2 align="center" style="font-weight: bold;">Contas a Receber</h2>
-
+        <br/>
         <h:form>
-
+            <p:panel header="Contas a Receber">
             <p:panelGrid columns="2"
                          columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
                          layout="grid"
@@ -59,11 +57,11 @@
                     </p:column>
                     <p:column styleClass="ui-grid-col-6">
                         <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{contasReceberControle.salvar()}"  action="list.xhtml"/>
+                                         actionListener="#{contasReceberControle.salvar()}" action="list.xhtml"/>
                     </p:column>
                 </p:row>
             </p:panelGrid>
-
+            </p:panel>
         </h:form>
 
     </ui:define>

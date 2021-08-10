@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+
+        <h:form>
+            <p:panel>
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-3,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                        Dados do cadastro:
+                    </p:row>
+
+                    <p:outputLabel value="Peça"/>
+                    <h:outputText value="#{ajusteEstControle.ajusteEst.pecas.descricao}" id="nome" size="40"
+                                  styleClass="hardblue font"/>
+
+                    <p:outputLabel value="Quantidade ajustada"/>
+                    <h:outputText value="#{ajusteEstControle.ajusteEst.qtdTotal}" id="preco" size="40"
+                                  styleClass="hardblue"/>
+
+                    <p:outputLabel value="Tipo de movimentação"/>
+                    <h:outputText value="#{ajusteEstControle.ajusteEst.tipo == 'S' ? 'Saída' : 'Entrada'}"
+                                  id="tipoServico"
+                                  styleClass="hardblue"/>
+
+                    <p:outputLabel value="Motivo do ajuste"/>
+                    <h:outputText value="#{ajusteEstControle.ajusteEst.motivo}" id="motivo" styleClass="hardblue "/>
+
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-12">
+
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:column>
+
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
+
