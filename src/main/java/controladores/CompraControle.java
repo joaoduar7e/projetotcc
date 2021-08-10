@@ -132,6 +132,14 @@ public class CompraControle implements Serializable {
                 it.getPecas().setQtdEst(it.getPecas().getQtdEst() + it.getQuantidade());
                 pecasFacade.pecaMerge(it.getPecas());
             }
+            if (compra.getItensCompras().isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "É necessário ter pelo menos uma peça associado a venda",
+                                ""));
+                return;
+            }
             compraFacade.salvar(compra);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
             FacesContext.getCurrentInstance().getExternalContext().redirect("compralista.xhtml");
