@@ -134,6 +134,7 @@ public class CompraControle implements Serializable {
             }
             compraFacade.salvar(compra);
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("compralista.xhtml");
         } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }

@@ -186,6 +186,7 @@ public class VendaControle implements Serializable {
             }
 
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("vendalista.xhtml");
         } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
