@@ -31,7 +31,8 @@
                 <p:outputLabel value="Preço" for="preco"/>
                 <p:inputNumber value="#{pecasControle.pecas.preco}" id="preco" size="40"
                                placeholder="Escreva o preço da peça!"
-                               required="true" requiredMessage="O preco é obrigatorio!">
+                               required="true" requiredMessage="O preco é obrigatorio!" decimalPlaces="2" decimalSeparator=","
+                               thousandSeparator="." symbol="R$">
                 </p:inputNumber>
 
                 <p:outputLabel value="Estoque"/>

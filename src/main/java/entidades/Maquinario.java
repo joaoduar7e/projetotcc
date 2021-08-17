@@ -21,10 +21,7 @@ public class Maquinario implements Serializable, ClassePai  {
     @Temporal(TemporalType.DATE)
     private Date dataCompra;
 
-
-
     // Gets e Sets
-
 
     @Override
     public Long getId() {

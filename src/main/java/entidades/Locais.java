@@ -18,8 +18,6 @@ public class Locais implements Serializable, ClassePai  {
     private Cidade cidade;
 
 
-
-
     // Gets e Sets
 
 

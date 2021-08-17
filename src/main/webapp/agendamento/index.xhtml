@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+
+    <ui:define name="body">
+        <br/>
+        <h:form>
+            <div class="card">
+                <p:panel header="Movimento de Agendamento">
+                    <p:tabView>
+                        <p:tab title="Cliente">
+                            <p:focus for="cliente"></p:focus>
+                            <p:panel header="Clientes">
+                                <p:panelGrid columns="2"
+                                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                             layout="grid"
+                                             styleClass="ui-panelgrid-blank ui-fluid"
+                                             style="border:0px none; background-color:transparent;">
+                                    <p:outputLabel value="Data" for="data"/>
+                                    <p:calendar value="#{agendamentoControle.agendamento.dataAgendamento}" id="data"
+                                                pattern="dd/MM/yyyy" locale="pt_BR" disabled="true"
+                                                required="true" requiredMessage="A data é obrigatória!"/>
+
+                                    <p:outputLabel value=" Cliente" for="cliente"/>
+                                    <p:autoComplete value="#{agendamentoControle.agendamento.cliente}"
+                                                    size="60" id="cliente" required="true"
+                                                    requiredMessage="O cliente é obrigatório!"
+                                                    emptyMessage="Nenhum cliente encontrado"
+                                                    effect="blind"
+                                                    widgetVar="cliWid"
+                                                    onclick="PF('cliWid').search('')"
+                                                    forceSelection="true"
+                                                    completeMethod="#{agendamentoControle.getListaClienteFiltrando}"
+                                                    var="alu"
+                                                    itemValue="#{alu}"
+                                                    itemLabel="#{alu.nome}"
+                                                    converter="#{agendamentoControle.clienteConverter}"/>
+
+                                    <p:outputLabel value="Local" for="local"/>
+                                    <p:autoComplete value="#{agendamentoControle.agendamento.locais}"
+                                                    size="60" id="local" required="true"
+                                                    requiredMessage="O local é obrigatório!"
+                                                    emptyMessage="Nenhum local encontrado"
+                                                    effect="blind"
+                                                    widgetVar="locWid"
+                                                    onclick="PF('locWid').search('')"
+                                                    forceSelection="true"
+                                                    completeMethod="#{agendamentoControle.getListaLocaisFiltrando}"
+                                                    var="loc"
+                                                    itemValue="#{loc}"
+                                                    itemLabel="#{loc.descricao}"
+                                                    converter="#{agendamentoControle.locaisConverter}"/>
+
+                                    <p:outputLabel value="Maquinário" for="maq"/>
+                                    <p:autoComplete value="#{agendamentoControle.agendamento.maquinario}"
+                                                    size="60" id="maq"
+                                                    emptyMessage="Nenhum maquinário encontrado"
+                                                    effect="blind"
+                                                    widgetVar="maqWid"
+                                                    onclick="PF('maqWid').search('')"
+                                                    forceSelection="true"
+                                                    completeMethod="#{agendamentoControle.getListaMaquinarioFiltrando}"
+                                                    var="maq"
+                                                    itemValue="#{maq}"
+                                                    itemLabel="#{maq.nome}"
+                                                    converter="#{agendamentoControle.maquinarioConverter}"/>
+
+                                </p:panelGrid>
+                            </p:panel>
+                            <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
+                                             styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:tab>
+
+                        <p:tab title="Serviço">
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;" id="panelInfo2">
+
+                                <h:panelGroup id="infoServ">
+                                    <p:panel header="Serviço" id="painelItens2">
+                                        <p:panelGrid columns="2"
+                                                     columnClasses="ui-grid-col-3,ui-grid-col-4"
+                                                     layout="grid"
+                                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                                     style="border:0px none; background-color:transparent;">
+                                            <p:outputLabel value="Serviços" for="serv"/>
+                                            <p:autoComplete value="#{agendamentoControle.itensAgendamento.servico}"
+                                                            id="serv"
+                                                            completeMethod="#{agendamentoControle.getListaServicoFiltrando}"
+                                                            var="serv"
+                                                            widgetVar="servWid"
+                                                            onclick="PF('servWid').search('')"
+                                                            itemLabel="#{serv.descricao}"
+                                                            itemValue="#{serv}"
+                                                            converter="#{agendamentoControle.servicoConverter}"/>
+
+                                            <p:outputLabel value="Quantidade" for="quantidadeS"/>
+                                            <p:inputNumber value="#{agendamentoControle.itensAgendamento.quantidade}"
+                                                           id="quantidadeS"
+                                                           size="10">
+                                                <f:validateDoubleRange minimum="0.00"/>
+                                            </p:inputNumber>
+
+
+                                            <p:outputLabel value="Preço" for="precoS"/>
+                                            <p:inputNumber value="#{agendamentoControle.itensAgendamento.preco}" id="precoS"
+                                                           size="10"
+                                                           decimalPlaces="2" decimalSeparator=","
+                                                           thousandSeparator="." symbol="R$">
+                                                <f:validateDoubleRange minimum="0.00"/>
+                                            </p:inputNumber>
+
+                                            <p:commandButton value="Adicionar"
+                                                             ajax="false"
+                                                             styleClass="ui-button-raised ui-button-success"
+                                                             update="campoTotal painelItens"
+                                                             actionListener="#{agendamentoControle.addItensAgendamento()}">
+                                            </p:commandButton>
+                                        </p:panelGrid>
+                                    </p:panel>
+                                </h:panelGroup>
+
+                                <h:panelGroup>
+                                    <p:panel header="Resumo dos serviços" id="painelValoresS">
+                                        <p:outputLabel value="Total de serviços: " style="font-size: large;"/>
+                                        <p:outputLabel value="#{agendamentoControle.agendamento.valorTotal}"
+                                                       id="campoTotalS"
+                                                       style="font-size: large;" styleClass="hardblue font">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+                                    </p:panel>
+                                </h:panelGroup>
+
+                                <p:dataTable value="#{agendamentoControle.agendamento.itensAgendamento}" var="itS">
+                                    <f:facet name="header">
+                                        Lista de serviços
+                                    </f:facet>
+                                    <p:column headerText="Serviços">
+                                        #{itS.servico.descricao}
+                                    </p:column>
+                                    <p:column headerText="Preço">
+                                        <p:outputLabel value="#{itS.preco}">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Quantidade">
+                                        #{itS.quantidade}
+                                    </p:column>
+                                    <p:column headerText="Subtotal">
+                                        <p:outputLabel value="#{itS.subtotal}" id="subTListS">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Operação">
+                                        <p:commandButton icon="pi pi-times"
+                                                         styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                         ajax="false" immediate="true"
+                                                         actionListener="#{agendamentoControle.removerItensAgendamento(itS)}"/>
+                                    </p:column>
+                                </p:dataTable>
+                                <br/>
+                                <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
+                                                 styleClass="ui-button-raised" immediate="true"
+                                                 action="list.xhtml"/>
+                            </p:panelGrid>
+                        </p:tab>
+
+                        <p:tab title="Fechamento">
+                            <p:panelGrid columns="2"
+                                         columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;" id="panelInfoF">
+                                <p:panel header="Parcelas">
+                                    <p:panelGrid columns="2"
+                                                 columnClasses="ui-grid-col-3,ui-grid-col-4"
+                                                 layout="grid"
+                                                 styleClass="ui-panelgrid-blank ui-fluid"
+                                                 style="border:0px none; background-color:transparent;">
+
+
+                                        <p:outputLabel value="Plano pagamento" for="planoPag"/>
+                                        <p:selectOneMenu value="#{agendamentoControle.agendamento.planoPagamento}" id="planoPag"
+                                                         required="true"
+                                                         requiredMessage="O plano de pagamento é obrigatório!"
+                                                         converter="#{agendamentoControle.planoPagamentoConverter}">
+                                            <f:selectItems value="#{agendamentoControle.listaPlanoPag}" var="planoPag"
+                                                           itemLabel="#{planoPag.nome}"
+                                                           itemValue="#{planoPag}"/>
+                                        </p:selectOneMenu>
+
+                                        <p:outputLabel value="Número de parcelas"/>
+                                        <p:inputText value="#{agendamentoControle.numParcelas}"/>
+
+                                        <p:outputLabel value="Data primeira parcela"/>
+                                        <p:calendar value="#{agendamentoControle.dataPrimeiraParcela}"
+                                                    locale="pt_BR" pattern="dd/MM/yyyy"/>
+                                        <p:commandButton value="Gerar Parcela"
+                                                         actionListener="#{agendamentoControle.gerarParcelas()}"
+                                                         ajax="true"/>
+                                    </p:panelGrid>
+                                </p:panel>
+
+                                <h:panelGroup>
+                                    <p:panel header="Resumo da Venda">
+                                        <p:outputLabel value="Total de Serviços: " style="font-size: large 10px; "/>
+                                        <p:outputLabel value="#{agendamentoControle.agendamento.valorTotal}"
+                                                       styleClass="hardblue font">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <p:outputLabel value="Total do Agendamento: " style="font-size: large 10px; "/>
+                                        <p:outputLabel value="#{agendamentoControle.agendamento.valorTotal}"
+                                                       styleClass="hardblue font">
+                                            <f:convertNumber type="currency"/>
+                                        </p:outputLabel>
+                                    </p:panel>
+                                </h:panelGroup>
+
+                                <p:row>
+                                    <p:panelGrid columns="2"
+                                                 columnClasses="ui-grid-col-6,ui-grid-col-6"
+                                                 layout="grid"
+                                                 styleClass="ui-panelgrid-blank ui-fluid"
+                                                 style="border:0px none; background-color:transparent;">
+                                        <p:column styleClass="ui-grid-col-6">
+
+                                            <p:commandButton value="Cancelar" ajax="false" styleClass="ui-button-raised"
+                                                             immediate="true"
+                                                             action="list.xhtml"/>
+                                        </p:column>
+                                        <p:column styleClass="ui-grid-col-6">
+                                            <p:commandButton value="Salvar" ajax="false"
+                                                             styleClass="ui-button-raised ui-button-success"
+                                                             actionListener="#{agendamentoControle.salvar()}"/>
+                                        </p:column>
+                                    </p:panelGrid>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
+            </div>
+
+
+        </h:form>
+    </ui:define>
+    <h:outputStylesheet>
+        body .ui-panelgrid .ui-panelgrid-cell {
+            background-color: transparent;
+        }
+
+
+        .my-heading-row {
+            background-color: var(--surface-c);
+            font-weight: bold;
+        }
+    </h:outputStylesheet>
+</ui:composition>
+
+</html>

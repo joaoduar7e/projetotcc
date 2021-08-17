@@ -18,12 +18,17 @@
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                              paginatorPosition="bottom"
+                             sortField="id"
+                             reflow="true"
                              rowsPerPageTemplate="5,10,{ShowAll|'All'}"
                              emptyMessage="Nenhuma cidade Encontrado">
                     <f:facet name="header">
                         Lista de Cidade
                     </f:facet>
 
+                    <p:column headerText="ID" style="text-align: center">
+                        <h:outputText value="#{cidade.id}"/>
+                    </p:column>
                     <p:column headerText="Nome" style="text-align: center"  sortBy="#{cidade.nome}"
                               filterBy="#{cidade.nome}" filterMatchMode="contains" filterStyle="width: 50%">
                         <h:outputText value="#{cidade.nome}"/>

@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -39,6 +40,8 @@ public class ContasReceber implements Serializable {
     @ManyToOne
     private PlanoPagamento planoPagamento;
 
+    @ManyToOne
+    private Agendamento agendamento;
 
     private Boolean pago = false ;
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -173,24 +176,25 @@ public class ContasReceber implements Serializable {
         this.planoPagamento = planoPagamento;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public Agendamento getAgendamento() {
+        return agendamento;
+    }
+
+    public void setAgendamento(Agendamento agendamento) {
+        this.agendamento = agendamento;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ContasReceber)) {
-            return false;
-        }
-        ContasReceber other = (ContasReceber) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContasReceber that = (ContasReceber) o;
+        return Objects.equals(id, that.id) && Objects.equals(dataEmissao, that.dataEmissao) && Objects.equals(dataVencimento, that.dataVencimento) && Objects.equals(cliente, that.cliente) && Objects.equals(numParcela, that.numParcela) && Objects.equals(observacao, that.observacao) && Objects.equals(vendas, that.vendas) && Objects.equals(valor, that.valor) && Objects.equals(planoPagamento, that.planoPagamento) && Objects.equals(agendamento, that.agendamento) && Objects.equals(pago, that.pago) && Objects.equals(baixaContasRecebers, that.baixaContasRecebers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, dataEmissao, dataVencimento, cliente, numParcela, observacao, vendas, valor, planoPagamento, agendamento, pago, baixaContasRecebers);
     }
 
     @Override

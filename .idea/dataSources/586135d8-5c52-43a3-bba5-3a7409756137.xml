@@ -785,7 +785,7 @@ false Z
 false Zulu
 true posixrules
 </TimeZones>
-      <StartupTime>1628103053</StartupTime>
+      <StartupTime>1629225950</StartupTime>
     </root>
     <database id="2" parent="1" name="postgres">
       <ObjectId>12401</ObjectId>
@@ -795,13 +795,15 @@ true posixrules
     <database id="3" parent="1" name="projetotcc">
       <ObjectId>25907</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1429</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1582</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|25913|25915|1
 sequence|table|25929|25931|1
 sequence|table|25942|25944|1
 sequence|table|25987|25989|1
 sequence|table|26040|26042|1
+sequence|table|33963|33965|1
+sequence|table|33979|33981|1
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_signal_backend">
