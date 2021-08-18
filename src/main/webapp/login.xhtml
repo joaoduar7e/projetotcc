@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</h:head>
+<h:body>
+    <h:form id="formLogin">
+        <div id="card">
+            <div id="card-content">
+                <div id="card-title">
+                    <h2>LOGIN</h2>
+                    <div class="underline-title"></div>
+                </div>
+                <p:panelGrid columns="1" layout="grid" styleClass="cor">
+                    <p:outputLabel value="Login:" for="login" style="padding-top:13px;"/>
+                    <p:inputText id="login" value="#{loginControle.login}"/>
+
+                    <p:outputLabel value="Senha:" for="senha" styleClass="" style="padding-top:22px"/>
+                    <p:password id="senha" value="#{loginControle.senha}" toggleMask="true"/>
+                </p:panelGrid>
+                    <p:commandButton id="botaoLogin"
+                                     style="font-size: 10pt; margin-top: 16px; width: 75%; margin-left: 5px"
+                                     styleClass="rounded-button"
+                                     value="Entrar"
+                                     action="#{loginControle.logar()}"
+                                     ajax="false"/>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+
+<h:outputStylesheet>
+
+    body {
+        background: -webkit-linear-gradient(bottom, #a7d7fa, #27AAE1);
+        background-repeat: no-repeat;
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        place-items: center;
+        overflow: hidden;
+        font-family: poppins;
+    }
+
+    .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
+        text-align: center;
+    }
+
+    .customPanelGrid .ui-panelgrid-content {
+        align-items: center;
+    }
+
+
+    #card-title {
+        font-family: "Raleway Thin", sans-serif;
+        letter-spacing: 4px;
+        padding-bottom: 23px;
+        padding-top: 13px;
+        text-align: center;
+    }
+
+    #card {
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.65);
+        height: 410px;
+        margin: 6rem auto 8.1rem auto;
+        width: 329px;
+    }
+
+    .underline-title {
+        background: -webkit-linear-gradient(right, #a7d7fa, #27AAE1);
+        height: 2px;
+        margin: -1.1rem auto 0 auto;
+        width: 89px;
+    }
+
+    #card-content {
+        padding: 12px 44px;
+    }
+
+    .cor {
+
+        background-color: #ecf0f3;
+    }
+</h:outputStylesheet>
+
+</html>
+
