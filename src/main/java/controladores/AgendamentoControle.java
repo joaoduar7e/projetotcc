@@ -16,10 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Named
 @ViewAccessScoped
@@ -32,6 +29,7 @@ public class AgendamentoControle implements Serializable {
     @Inject
     transient private ClienteFacade clienteFacade;
     private ConverterGenerico clienteConverter;
+    private Cliente cliente;
 
     @Inject
     transient private ServicoFacade servicoFacade;
@@ -163,6 +161,14 @@ public class AgendamentoControle implements Serializable {
         this.itensAgendamento = itensAgendamento;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public List<Cliente> getListaClienteFiltrando(String parte) {
         return clienteFacade.listaFiltrando(parte, "nome", "telefone");
     }
@@ -191,7 +197,7 @@ public class AgendamentoControle implements Serializable {
         return maquinarioFacade.listaTodos();
     }
 
-    public List<Agendamento> getListaAgendameto(){
+    public List<Agendamento> getListaAgendamento(){
         return agendamentoFacade.listaTodos();
     }
 
@@ -200,7 +206,19 @@ public class AgendamentoControle implements Serializable {
         agendamento = new Agendamento();
         itensAgendamento = new ItensAgendamento();
     }
-
+    public void novoCliente() {
+        cliente = new Cliente();
+    }
+    public void finalizaAgendamento(Agendamento ag){
+        agendamento = ag;
+        try {
+            ag.setFinalizado(!ag.getFinalizado());
+            agendamentoFacade.salvar(ag);
+        }
+        catch (Exception e){
+            return;
+        }
+    }
 
     public void salvar() throws Exception {
         try {

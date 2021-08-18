@@ -5,10 +5,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Entity
@@ -25,13 +22,14 @@ public class Agendamento implements Serializable, ClassePai {
     private Cliente cliente;
     private Double valorTotal;
     private Double valorTotalS;
+    private Boolean finalizado = false;
     @ManyToOne
     private Locais locais;
     @ManyToOne
     private Maquinario maquinario;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
-    private List <ItensAgendamento> itensAgendamento;
+    private List<ItensAgendamento> itensAgendamento;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
@@ -47,6 +45,16 @@ public class Agendamento implements Serializable, ClassePai {
         itensAgendamento = new ArrayList<ItensAgendamento>(); //instancia a lista
         ContasRecebers = new ArrayList<ContasReceber>();
     }
+
+    public String getSituacao(){
+        String situ = "";
+        if (!finalizado){
+            return "Aberta";
+        }else{
+            return "Finalizada";
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -138,6 +146,14 @@ public class Agendamento implements Serializable, ClassePai {
 
     public void setContasRecebers(List<ContasReceber> ContasRecebers) {
         this.ContasRecebers = ContasRecebers;
+    }
+
+    public Boolean getFinalizado() {
+        return finalizado;
+    }
+
+    public void setFinalizado(Boolean finalizado) {
+        this.finalizado = finalizado;
     }
 
     @Override
