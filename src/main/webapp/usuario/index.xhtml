@@ -11,66 +11,52 @@
 
     <ui:define name="body">
 
-
         <h:form>
+            <p:panel>
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-            <p:panelGrid columns="2"
-                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+                    <p:row styleClass="my-heading-row">
+                    </p:row>
 
-                <p:row styleClass="my-heading-row">
-                </p:row>
-
-                <p:outputLabel value="Funcionário" for="funcionario"/>
-                <p:selectOneMenu value="#{usuarioControle.usuario.funcionario}" id="funcionario"
-                                 required="true" requiredMessage="O funcionário é obrigatório!"
-                                 converter="#{usuarioControle.funcionarioConverter}">
-                    <f:selectItems value="#{usuarioControle.listaFuncionarios}" var="funcionario"
-                                   itemLabel="#{funcionario.nome}"
-                                   itemValue="#{funcionario}"/>
-                </p:selectOneMenu>
+                    <p:outputLabel value="Funcionário" for="funcionario"/>
+                    <p:selectOneMenu value="#{usuarioControle.usuario.funcionario}" id="funcionario"
+                                     required="true" requiredMessage="O funcionário é obrigatório!"
+                                     converter="#{usuarioControle.funcionarioConverter}">
+                        <f:selectItems value="#{usuarioControle.listaFuncionarios}" var="funcionario"
+                                       itemLabel="#{funcionario.nome}"
+                                       itemValue="#{funcionario}"/>
+                    </p:selectOneMenu>
 
 
-                <p:outputLabel value="Login" for="nome"/>
-                <p:inputText value="#{usuarioControle.usuario.login}" id="nome" size="40"
-                             placeholder="Escreva o nome de login!"
-                             required="true" requiredMessage="O nome é obrigatório!"/>
+                    <p:outputLabel value="Login" for="nome"/>
+                    <p:inputText value="#{usuarioControle.usuario.login}" id="nome" size="40"
+                                 placeholder="Escreva o nome de login!"
+                                 required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Senha" for="toggle"/>
-                <p:password id="toggle" value="#{usuarioControle.usuario.senha}" toggleMask="true" redisplay="true"
-                            required="true" requiredMessage="A senha é obrigatório!"/>
+                    <p:outputLabel value="Senha" for="toggle"/>
+                    <p:password id="toggle" value="#{usuarioControle.usuario.senha}" toggleMask="true" redisplay="true"
+                                required="true" requiredMessage="A senha é obrigatório!"/>
 
-                <p:row>
-                    <p:column styleClass="ui-grid-col-6">
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-6">
 
-                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
-                                         action="list.xhtml"/>
-                    </p:column>
-                    <p:column styleClass="ui-grid-col-6">
-                        <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{usuarioControle.salvar()}" action="list.xhtml"/>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
-
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:column>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                             actionListener="#{usuarioControle.salvar()}" action="list.xhtml"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
         </h:form>
 
     </ui:define>
 </ui:composition>
-<script>
-    <style type="text/css">
-        .ui-panelgrid.showcase-text-align-center .ui-grid-responsive .ui-panelgrid-cell {
-        text - align: center;
-    }
-
-        .customPanelGrid .ui-panelgrid-content {
-        align - items: center;
-    }
-    </style>
-
-</script>
 
 </html>
-

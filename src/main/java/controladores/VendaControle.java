@@ -230,7 +230,9 @@ public class VendaControle implements Serializable {
     }
 
     public void addItensVenda() {
-        Double estoque = itensVenda.getPecas().getQtdEst();
+        Double estoque1 = 0d;
+        estoque1 = itensVenda.getPecas().getQtdEst();
+        Double estoque = estoque1;
         ItensVenda itTemp = null;
         for (ItensVenda it : vendas.getItensVendas()) {
             if (it.getPecas().getId().equals(itensVenda.getPecas().getId())) {

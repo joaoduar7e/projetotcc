@@ -13,42 +13,43 @@
 
         <h:form>
 
-            <p:panelGrid columns="2"
-                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+            <p:panel>
+                <p:panelGrid columns="2"
+                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:row styleClass="my-heading-row">
-                </p:row>
+                    <p:row styleClass="my-heading-row">
+                    </p:row>
 
-                <p:outputLabel value="Nome" for="nome"/>
-                <p:inputText value="#{cidadeControle.cidade.nome}" id="nome" size="40"
-                             placeholder="Escreva o nome da cidade!"
-                             required="true" requiredMessage="O nome é obrigatório!"/>
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText value="#{cidadeControle.cidade.nome}" id="nome" size="40"
+                                 placeholder="Escreva o nome da cidade!"
+                                 required="true" requiredMessage="O nome é obrigatório!"/>
 
-                <p:outputLabel value="Estado" for="estado"/>
-                <p:selectOneMenu value="#{cidadeControle.cidade.estado}" id="estado"
-                                 required="true" requiredMessage="O estado é obrigatório!"
-                                 converter="#{cidadeControle.estadoConverter}">
-                    <f:selectItems  value="#{cidadeControle.listaEstado}" var="estado"
-                                    itemLabel="#{estado.nome}"
-                                    itemValue="#{estado}"/>
-                </p:selectOneMenu>
+                    <p:outputLabel value="Estado" for="estado"/>
+                    <p:selectOneMenu value="#{cidadeControle.cidade.estado}" id="estado"
+                                     required="true" requiredMessage="O estado é obrigatório!"
+                                     converter="#{cidadeControle.estadoConverter}">
+                        <f:selectItems value="#{cidadeControle.listaEstado}" var="estado"
+                                       itemLabel="#{estado.nome}"
+                                       itemValue="#{estado}"/>
+                    </p:selectOneMenu>
 
-                <p:row>
-                    <p:column styleClass="ui-grid-col-6">
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-6">
 
-                        <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
-                                         action="list.xhtml"/>
-                    </p:column>
-                    <p:column styleClass="ui-grid-col-6">
-                        <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                         actionListener="#{cidadeControle.salvar()}"  action="list.xhtml"/>
-                    </p:column>
-                </p:row>
-            </p:panelGrid>
-
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             action="list.xhtml"/>
+                        </p:column>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                             actionListener="#{cidadeControle.salvar()}" action="list.xhtml"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+            </p:panel>
         </h:form>
 
     </ui:define>

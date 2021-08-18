@@ -82,11 +82,12 @@
                                                        decimalPlaces="2" decimalSeparator=","
                                                        thousandSeparator="." symbol="R$">
                                         </p:inputNumber>
+                                        <p:commandButton value="Adicionar"
+                                                         ajax="false" styleClass="ui-button-raised ui-button-success"
+                                                         update="campoTotal painelItens"
+                                                         actionListener="#{compraControle.addItensCompra()}"/>
                                     </p:panelGrid>
-                                    <p:commandButton value="Adicionar"
-                                                     ajax="false" styleClass="ui-button-raised ui-button-success"
-                                                     update="campoTotal painelItens"
-                                                     actionListener="#{compraControle.addItensCompra()}"/>
+
                                 </p:panel>
                             </h:panelGroup>
 
