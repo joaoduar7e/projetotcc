@@ -103,7 +103,8 @@
                             </h:panelGroup>
 
 
-                            <p:dataTable value="#{compraControle.compra.itensCompras}" var="it">
+                            <p:dataTable value="#{compraControle.compra.itensCompras}" var="it" rows="10" reflow="true"
+                                         paginator="true">
                                 <f:facet name="header">
                                     Lista de peças
                                 </f:facet>

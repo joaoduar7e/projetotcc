@@ -13,14 +13,13 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataTable var="pecas" id="pecasTab" value="#{pecasControle.listPecas}" rows="10"
+                <p:dataTable var="pecas" id="pecasTab" value="#{pecasControle.listPecas}" rows="10" reflow="true"
                              paginator="true"
                              paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
                              paginatorPosition="bottom"
                              rowsPerPageTemplate="5,10,{ShowAll|'All'}"
                              emptyMessage="Nenhuma Peça encontrada">
-                    <p:ajax event="rowSelect" listener="#{pecasControle.onRowSelect}"/>
                     <f:facet name="header">
                         Lista de Peças
                     </f:facet>

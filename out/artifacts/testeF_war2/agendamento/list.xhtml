@@ -15,13 +15,14 @@
                 <p:panel>
                     <p:tabView>
                         <p:tab title="Agendamentos em Aberto">
+
                             <p:dataView var="ag" value="#{agendamentoControle.listaAgAberta}" rows="12" paginator="true"
-                                        rowsPerPageTemplate="12,21,30"
-                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                        gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                        gridIcon="pi pi-th-large" listIcon="pi pi-bars"
+                                        layout="grid" gridRowStyleClass="p-lg-6 p-xl-4" flex="true">
+
 
                                 <p:dataViewGridItem>
-                                    <p:card style="width: 25em">
                                         <h:panelGrid columns="2" style="width:100%" cellspacing="20">
                                             <p:outputPanel>
                                                 <h:panelGrid columns="2" cellpadding="7">
@@ -73,7 +74,6 @@
                                                 </h:panelGrid>
                                             </p:outputPanel>
                                         </h:panelGrid>
-                                    </p:card>
                                 </p:dataViewGridItem>
 
                                 <p:dataViewListItem>
