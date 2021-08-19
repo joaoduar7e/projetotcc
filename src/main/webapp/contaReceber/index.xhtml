@@ -34,14 +34,16 @@
                                 converter="#{contasReceberControle.clienteConverter}"/>
 
                 <p:outputLabel value="Data de Emissão"/>
-                <p:datePicker id="dateE" value="#{contasReceberControle.contasReceber.dataEmissao}" size="40"
+                <p:datePicker id="dateE" value="#{contasReceberControle.contasReceber.dataEmissao}" required="true" requiredMessage="Selecione uma data de emissão" size="40"
                               showIcon="true" style="width:auto" locale="pt"/>
 
                 <p:outputLabel value="Data de Vencimento"/>
-                <p:datePicker id="dateV" value="#{contasReceberControle.contasReceber.dataVencimento}" size="40"
+                <p:datePicker id="dateV" value="#{contasReceberControle.contasReceber.dataVencimento}" required="true" requiredMessage="Selecione uma data de vencimento" size="40"
                               showIcon="true" style="width:auto" locale="pt"/>
+
                 <p:outputLabel value="Valor"/>
                 <p:inputNumber value="#{contasReceberControle.contasReceber.valor}" id="valor" size="10"
+                               required="true" requiredMessage="O valor não pode ser nullo"
                                decimalPlaces="2" decimalSeparator=","
                                thousandSeparator="." symbol="R$">
                 </p:inputNumber>

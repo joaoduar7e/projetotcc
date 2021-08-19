@@ -15,6 +15,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.*;
 
@@ -48,6 +50,8 @@ public class AgendamentoControle implements Serializable {
     private ConverterGenerico maquinarioConverter;
 
     private Integer numParcelas;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date DataPrimeiraParcela;
 
     public void gerarParcelas() {
@@ -204,6 +208,9 @@ public class AgendamentoControle implements Serializable {
     public List<Agendamento> getListaA() {
         return agendamentoFacade.listaA();
     }
+    public List<Agendamento> getListaAgAberta() {
+        return agendamentoFacade.listaAgAberta();
+    }
 
     public void novo() {
         agendamento = new Agendamento();
@@ -212,10 +219,16 @@ public class AgendamentoControle implements Serializable {
     public void novoCliente() {
         cliente = new Cliente();
     }
+
     public void finalizaAgendamento(Agendamento ag){
         agendamento = ag;
         try {
             ag.setFinalizado(!ag.getFinalizado());
+            FacesContext.getCurrentInstance().addMessage(
+                    null, new FacesMessage(
+                            FacesMessage.SEVERITY_INFO,
+                            "Situação alterada",
+                            ""));
             agendamentoFacade.salvar(ag);
         }
         catch (Exception e){

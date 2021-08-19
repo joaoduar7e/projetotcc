@@ -12,144 +12,194 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataView var="ag" value="#{agendamentoControle.listaA}" rows="12" paginator="true"
-                            rowsPerPageTemplate="12,21,30"
-                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                            gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+                <p:panel>
+                    <p:tabView>
+                        <p:tab title="Agendamentos em Aberto">
+                            <p:dataView var="ag" value="#{agendamentoControle.listaAgAberta}" rows="12" paginator="true"
+                                        rowsPerPageTemplate="12,21,30"
+                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
-                    <p:dataViewGridItem>
-                        <p:card style="width: 25em">
-                            <h:panelGrid columns="2" style="width:100%" cellspacing="20">
-                                <p:outputPanel>
-                                    <h:panelGrid columns="2" cellpadding="7">
-                                        <h:outputText value="ID:" styleClass="text-secondary"/>
-                                        <h:outputText value="#{ag.id}" styleClass="font"/>
+                                <p:dataViewGridItem>
+                                    <p:card style="width: 25em">
+                                        <h:panelGrid columns="2" style="width:100%" cellspacing="20">
+                                            <p:outputPanel>
+                                                <h:panelGrid columns="2" cellpadding="7">
+                                                    <h:outputText value="ID:" styleClass="text-secondary"/>
+                                                    <h:outputText value="#{ag.id}" styleClass="font"/>
 
-                                        <h:outputText value="Data Agendada:" styleClass="text-secondary"/>
-                                        <p:outputLabel value="#{ag.dataAgendadada}" styleClass="font hardgreen">
-                                            <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
-                                        </p:outputLabel>
+                                                    <h:outputText value="Data Agendada:" styleClass="text-secondary"/>
+                                                    <p:outputLabel value="#{ag.dataAgendadada}"
+                                                                   styleClass="font hardgreen">
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                                    </p:outputLabel>
 
-                                        <h:outputText value="Cliente:" styleClass="text-secondary"/>
-                                        <h:outputText value="#{ag.cliente.nome}"/>
+                                                    <h:outputText value="Cliente:" styleClass="text-secondary"/>
+                                                    <h:outputText value="#{ag.cliente.nome}"/>
 
-                                        <h:outputText value="Total:" styleClass="text-secondary"/>
-                                        <p:outputLabel value="#{ag.valorTotal}">
-                                            <f:convertNumber type="currency"/>
-                                        </p:outputLabel>
+                                                    <h:outputText value="Total:" styleClass="text-secondary"/>
+                                                    <p:outputLabel value="#{ag.valorTotal}">
+                                                        <f:convertNumber type="currency"/>
+                                                    </p:outputLabel>
 
-                                        <h:outputText value="Local:" styleClass="text-secondary"/>
-                                        <h:outputText value="#{ag.locais.descricao}"/>
+                                                    <h:outputText value="Local:" styleClass="text-secondary"/>
+                                                    <h:outputText value="#{ag.locais.descricao}"/>
 
-                                        <h:outputText value="Situação:" styleClass="text-secondary"/>
-                                        <h:outputText value="#{ag.situacao}" styleClass="font hardblue"/>
+                                                    <h:outputText value="Situação:" styleClass="text-secondary"/>
+                                                    <h:outputText value="#{ag.situacao}" styleClass="font hardblue"/>
 
-                                        <h:panelGroup>
-                                            <p:commandButton icon="pi pi-check-circle"
-                                                             actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
-                                                             styleClass="rounded-button ui-button-success ui-button-flat"
-                                                             update="form" ajax="false">
-                                            </p:commandButton>
+                                                    <h:panelGroup>
+                                                        <p:commandButton icon="pi pi-check-circle"
+                                                                         actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
+                                                                         styleClass="rounded-button ui-button-success ui-button-flat"
+                                                                         update="form" ajax="false">
+                                                        </p:commandButton>
 
-                                            <p:commandButton icon="pi pi-info-circle"
-                                                             styleClass="rounded-button ui-button-info-outline ui-button-flat"
-                                                             actionListener="#{agendamentoControle.editar(ag)}"
-                                                             action="view.xhtml"
-                                                             ajax="false"/>
-                                            <p:commandButton icon="pi pi-pencil"
-                                                             styleClass="rounded-button ui-button-warning ui-button-flat"
-                                                             action="index.xhtml"
-                                                             actionListener="#{agendamentoControle.editar(ag)}"
-                                                             ajax="false"/>
-                                            <p:commandButton icon="pi pi-times"
-                                                             styleClass="rounded-button ui-button-danger ui-button-flat"
-                                                             actionListener="#{agendamentoControle.excluir(ag)}"
-                                                             ajax="false"/>
-                                        </h:panelGroup>
+                                                        <p:commandButton icon="pi pi-info-circle"
+                                                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                                         actionListener="#{agendamentoControle.editar(ag)}"
+                                                                         action="view.xhtml"
+                                                                         ajax="false"/>
+                                                        <p:commandButton icon="pi pi-pencil"
+                                                                         styleClass="rounded-button ui-button-warning ui-button-flat"
+                                                                         action="index.xhtml"
+                                                                         actionListener="#{agendamentoControle.editar(ag)}"
+                                                                         ajax="false"/>
+                                                        <p:commandButton icon="pi pi-times"
+                                                                         styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                                         actionListener="#{agendamentoControle.excluir(ag)}"
+                                                                         ajax="false"/>
+                                                    </h:panelGroup>
+                                                </h:panelGrid>
+                                            </p:outputPanel>
+                                        </h:panelGrid>
+                                    </p:card>
+                                </p:dataViewGridItem>
+
+                                <p:dataViewListItem>
+                                    <h:panelGrid columns="2" style="width:100%" cellspacing="20">
+                                        <p:outputPanel>
+                                            <h:panelGrid columns="2" cellpadding="7">
+                                                <h:outputText value="ID:" styleClass="text-secondary"/>
+                                                <h:outputText value="#{ag.id}" styleClass="font"/>
+
+                                                <h:outputText value="Data Agendada:" styleClass="text-secondary"/>
+                                                <p:outputLabel value="#{ag.dataAgendadada}" styleClass="hardgreen font">
+                                                    <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                                </p:outputLabel>
+
+                                                <h:outputText value="Cliente:" styleClass="text-secondary"/>
+                                                <h:outputText value="#{ag.cliente.nome}"/>
+
+                                                <h:outputText value="Total:" styleClass="text-secondary"/>
+                                                <p:outputLabel value="#{ag.valorTotal}">
+                                                    <f:convertNumber type="currency"/>
+                                                </p:outputLabel>
+
+                                                <h:outputText value="Local:" styleClass="text-secondary"/>
+                                                <h:outputText value="#{ag.locais.descricao}"/>
+
+                                                <h:outputText value="Situação:" styleClass="text-secondary"/>
+                                                <h:outputText value="#{ag.situacao}" styleClass="hardblue font"/>
+
+                                                <h:panelGroup>
+                                                    <p:commandButton icon="pi pi-check-circle"
+                                                                     actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
+                                                                     styleClass="rounded-button ui-button-success ui-button-flat"
+                                                                     update="form" ajax="false">
+                                                    </p:commandButton>
+
+                                                    <p:commandButton icon="pi pi-info-circle"
+                                                                     styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                                     actionListener="#{agendamentoControle.editar(ag)}"
+                                                                     action="view.xhtml"
+                                                                     ajax="false"/>
+                                                    <p:commandButton icon="pi pi-pencil"
+                                                                     styleClass="rounded-button ui-button-warning ui-button-flat"
+                                                                     action="index.xhtml"
+                                                                     actionListener="#{agendamentoControle.editar(ag)}"
+                                                                     ajax="false"/>
+                                                    <p:commandButton icon="pi pi-times"
+                                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                                     actionListener="#{agendamentoControle.excluir(ag)}"
+                                                                     ajax="false"/>
+                                                </h:panelGroup>
+
+                                            </h:panelGrid>
+                                        </p:outputPanel>
                                     </h:panelGrid>
-                                </p:outputPanel>
-                            </h:panelGrid>
-                        </p:card>
-                    </p:dataViewGridItem>
+                                </p:dataViewListItem>
+                            </p:dataView>
 
-                    <p:dataViewListItem>
-                        <h:panelGrid columns="2" style="width:100%" cellspacing="20">
-                            <p:outputPanel>
-                                <h:panelGrid columns="2" cellpadding="7">
-                                    <h:outputText value="ID:" styleClass="text-secondary"/>
-                                    <h:outputText value="#{ag.id}" styleClass="font"/>
+                            <p:panelGrid columns="4"
+                                         columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
 
-                                    <h:outputText value="Data Agendada:" styleClass="text-secondary"/>
-                                    <p:outputLabel value="#{ag.dataAgendadada}" styleClass="hardgreen font">
-                                        <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
-                                    </p:outputLabel>
+                                <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                                 action="index.xhtml"
+                                                 actionListener="#{agendamentoControle.novo()}"/>
 
-                                    <h:outputText value="Cliente:" styleClass="text-secondary"/>
-                                    <h:outputText value="#{ag.cliente.nome}"/>
+                            </p:panelGrid>
+                        </p:tab>
 
-                                    <h:outputText value="Total:" styleClass="text-secondary"/>
-                                    <p:outputLabel value="#{ag.valorTotal}">
-                                        <f:convertNumber type="currency"/>
-                                    </p:outputLabel>
+                        <p:tab title="Agendamentos Finalizados">
+                            <div class="card">
+                                <p:dataTable var="agF" value="#{agendamentoControle.listaA}" reflow="true" rows="5"
+                                             paginator="true"
+                                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                             paginatorPosition="bottom"
+                                             rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                                    <p:column headerText="ID">
+                                        <h:outputText value="#{agF.id}"/>
+                                    </p:column>
 
-                                    <h:outputText value="Local:" styleClass="text-secondary"/>
-                                    <h:outputText value="#{ag.locais.descricao}"/>
+                                    <p:column headerText="Data Agendada">
+                                        <h:outputText value="#{agF.dataAgendadada}" styleClass="hardgreen font">
+                                            <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
+                                        </h:outputText>
+                                    </p:column>
 
-                                    <h:outputText value="Situação:" styleClass="text-secondary"/>
-                                    <h:outputText value="#{ag.situacao}" styleClass="hardblue"/>
+                                    <p:column headerText="Cliente">
+                                        <h:outputText value="#{agF.cliente.nome}"/>
+                                    </p:column>
 
-                                    <h:panelGroup>
-                                    <p:commandButton icon="pi pi-check-circle"
-                                                     actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
-                                                     styleClass="rounded-button ui-button-success ui-button-flat"
-                                                     update="form" ajax="false">
-                                    </p:commandButton>
+                                    <p:column headerText="Total">
+                                        <h:outputText value="#{agF.valorTotal}"/>
+                                    </p:column>
 
-                                    <p:commandButton icon="pi pi-info-circle"
-                                                     styleClass="rounded-button ui-button-info-outline ui-button-flat"
-                                                     actionListener="#{agendamentoControle.editar(ag)}"
-                                                     action="view.xhtml"
-                                                     ajax="false"/>
-                                    <p:commandButton icon="pi pi-pencil"
-                                                     styleClass="rounded-button ui-button-warning ui-button-flat"
-                                                     action="index.xhtml"
-                                                     actionListener="#{agendamentoControle.editar(ag)}"
-                                                     ajax="false"/>
-                                    <p:commandButton icon="pi pi-times"
-                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
-                                                     actionListener="#{agendamentoControle.excluir(ag)}"
-                                                     ajax="false"/>
-                                    </h:panelGroup>
+                                    <p:column headerText="Local">
+                                        <h:outputText value="#{agF.locais.descricao}"/>
+                                    </p:column>
 
-                                </h:panelGrid>
-                            </p:outputPanel>
-                        </h:panelGrid>
-                    </p:dataViewListItem>
-                </p:dataView>
+                                    <p:column headerText="Situação">
+                                        <h:outputText value="#{agF.situacao}" styleClass="hardblue font"/>
+                                    </p:column>
 
-                <p:panelGrid columns="4"
-                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
-                             layout="grid"
-                             styleClass="ui-panelgrid-blank ui-fluid"
-                             style="border:0px none; background-color:transparent;">
+                                    <p:column>
+                                        <p:commandButton icon="pi pi-replay"
+                                                         actionListener="#{agendamentoControle.finalizaAgendamento(agF)}"
+                                                         styleClass="rounded-button ui-button-help ui-button-flat"
+                                                         update="form" ajax="false">
+                                        </p:commandButton>
 
-                    <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
-                                     action="index.xhtml"
-                                     actionListener="#{agendamentoControle.novo()}"/>
-
-                </p:panelGrid>
-
-                <p:dialog header="Finalizar agendamento" widgetVar="dlgFinaliza" minHeight="40" width="350"
-                          showEffect="fade">
-                    <p class="p-m-0">Deseja realmente finalizar a venda?</p>
-                    <f:facet name="footer">
-                        <p:commandButton type="button" value="Não" styleClass="ui-button-flat p-mr-2"
-                                         style="width: 6rem"/>
-                        <p:commandButton type="button" value="Sim"
-                                         actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
-                                         style="width: 5rem"/>
-                    </f:facet>
-                </p:dialog>
+                                        <p:commandButton icon="pi pi-info-circle"
+                                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                         actionListener="#{agendamentoControle.editar(agF)}"
+                                                         action="view.xhtml"
+                                                         ajax="false"/>
+                                        <p:commandButton icon="pi pi-times"
+                                                         styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                         actionListener="#{agendamentoControle.excluir(agF)}"
+                                                         ajax="false"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </div>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
 
             </h:form>
         </div>

@@ -13,81 +13,170 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataTable var="contaP" value="#{contasPagarControle.listaContasPagar}" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                             paginatorPosition="bottom"
-                             rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-                             emptyMessage="Nenhum tipoServico Encontrado">
-                    <f:facet name="header">
-                        Lista de Contas a Pagar
-                    </f:facet>
+                <p:panel>
+                    <p:tabView>
+                        <p:tab title="Contas a Pagar">
+                            <p:dataTable var="contaP" value="#{contasPagarControle.listaCpPagar}" rows="10"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                         paginatorPosition="bottom"
+                                         rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                                         emptyMessage="Nenhuma conta Encontrada">
 
-                    <p:column headerText="ID" width="50px" style="text-align: center" filterBy="#{contaP.id}"
-                              filterStyle="width: 100%;"
-                              filterMatchMode="contains">
-                        <h:outputText value="#{contaP.id}"/>
-                    </p:column>
-                    <p:column headerText="Cliente" style="text-align: center"
-                              filterBy="#{contaP.cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
-                        <h:outputText value="#{contaP.cliente.nome}"/>
-                    </p:column>
-                    <p:column headerText="Num. Parcela"  style="text-align: center">
-                        <h:outputText value="#{contaP.numParcela}"/>
-                    </p:column>
-                    <p:column headerText="Valor"  filterBy="#{contaP.valor}" style="text-align: center"
-                              filterStyle="width: 50%" filterMatchMode="contains">
-                        <h:outputText value="#{contaP.valor}">
-                            <f:convertNumber type="currency"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Data Emissão"  style="text-align: center">
-                        <h:outputText value="#{contaP.dataEmissao}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Data Vencimento"  style="text-align: center">
-                        <h:outputText value="#{contaP.dataVencimento}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Observação"  style="text-align: center" filterBy="#{contaP.observacao}"
-                              filterStyle="width: 100%;"
-                              filterMatchMode="contains">
-                        <h:outputText value="#{contaP.observacao} - #{contaP.compra.id}"/>
-                    </p:column>
-                    <p:column headerText="Situação" style="text-align: center" filterBy="#{contaP.situacao}"
-                              filterStyle="width: 50%" filterMatchMode="contains">
-                        #{contaP.situacao}
-                    </p:column>
-                    <p:column headerText="Ações"  style="text-align: center">
-                        <p:commandButton icon="pi pi-check-circle"
-                                         styleClass="rounded-button ui-button-success ui-button-flat"
-                                         actionListener="#{contasPagarControle.baixar(contaP)}" action="fech.xhtml"
-                                         ajax="false" disabled="#{contaP.pago == true}"/>
+                                <p:column headerText="ID" width="50px" style="text-align: center"
+                                          filterBy="#{contaP.id}"
+                                          filterStyle="width: 100%;"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.id}"/>
+                                </p:column>
+                                <p:column headerText="Cliente" style="text-align: center"
+                                          filterBy="#{contaP.cliente.nome}" filterMatchMode="contains"
+                                          filterStyle="width: 50%">
+                                    <h:outputText value="#{contaP.cliente.nome}"/>
+                                </p:column>
+                                <p:column headerText="Num. Parcela" style="text-align: center">
+                                    <h:outputText value="#{contaP.numParcela}"/>
+                                </p:column>
+                                <p:column headerText="Valor" filterBy="#{contaP.valor}" style="text-align: center"
+                                          filterStyle="width: 50%" filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.valor}">
+                                        <f:convertNumber type="currency"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Data Emissão" style="text-align: center">
+                                    <h:outputText value="#{contaP.dataEmissao}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Data Vencimento" style="text-align: center">
+                                    <h:outputText value="#{contaP.dataVencimento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Observação" style="text-align: center"
+                                          filterBy="#{contaP.observacao}"
+                                          filterStyle="width: 100%;"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.observacao} - #{contaP.compra.id}"/>
+                                </p:column>
+                                <p:column headerText="Situação" style="text-align: center" filterBy="#{contaP.situacao}"
+                                          filterStyle="width: 50%" filterMatchMode="contains">
+                                    #{contaP.situacao}
+                                </p:column>
+                                <p:column headerText="Ações" style="text-align: center">
+                                    <p:commandButton icon="pi pi-check-circle"
+                                                     styleClass="rounded-button ui-button-success ui-button-flat"
+                                                     actionListener="#{contasPagarControle.baixar(contaP)}"
+                                                     action="fech.xhtml"
+                                                     ajax="false" disabled="#{contaP.pago == true}"/>
 
-                        <p:commandButton icon="pi pi-info-circle"
-                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
-                                         actionListener="#{contasPagarControle.editar(contaP)}" action="view.xhtml"
-                                         ajax="false"/>
+                                    <p:commandButton icon="pi pi-info-circle"
+                                                     styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                     actionListener="#{contasPagarControle.editar(contaP)}"
+                                                     action="view.xhtml"
+                                                     ajax="false"/>
 
-                        <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
-                                         actionListener="#{contasPagarControle.excluir(contaP)}"
-                                         ajax="false" />
-                    </p:column>
-                </p:dataTable>
+                                    <p:commandButton icon="pi pi-times"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                     actionListener="#{contasPagarControle.excluir(contaP)}"
+                                                     ajax="false"/>
+                                </p:column>
+                            </p:dataTable>
 
-                <p:panelGrid columns="4"
-                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
-                             layout="grid"
-                             styleClass="ui-panelgrid-blank ui-fluid"
-                             style="border:0px none; background-color:transparent;">
+                            <p:panelGrid columns="4"
+                                         columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
 
-                    <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
-                                     action="index.xhtml"
-                                     actionListener="#{contasPagarControle.novo()}"/>
-                </p:panelGrid>
+                                <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                                 action="index.xhtml"
+                                                 actionListener="#{contasPagarControle.novo()}"/>
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab title="Contas Pagas">
+                            <p:dataTable var="contaP" value="#{contasPagarControle.listaCpPaga}" rows="10"
+                                         paginator="true"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                         paginatorPosition="bottom"
+                                         rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                                         emptyMessage="Nenhuma conta Encontrada">
+
+                                <p:column headerText="ID" width="50px" style="text-align: center"
+                                          filterBy="#{contaP.id}"
+                                          filterStyle="width: 100%;"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.id}"/>
+                                </p:column>
+                                <p:column headerText="Cliente" style="text-align: center"
+                                          filterBy="#{contaP.cliente.nome}" filterMatchMode="contains"
+                                          filterStyle="width: 50%">
+                                    <h:outputText value="#{contaP.cliente.nome}"/>
+                                </p:column>
+                                <p:column headerText="Num. Parcela" style="text-align: center">
+                                    <h:outputText value="#{contaP.numParcela}"/>
+                                </p:column>
+                                <p:column headerText="Valor" filterBy="#{contaP.valor}" style="text-align: center"
+                                          filterStyle="width: 50%" filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.valor}">
+                                        <f:convertNumber type="currency"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Data Emissão" style="text-align: center">
+                                    <h:outputText value="#{contaP.dataEmissao}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Data Vencimento" style="text-align: center">
+                                    <h:outputText value="#{contaP.dataVencimento}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Observação" style="text-align: center"
+                                          filterBy="#{contaP.observacao}"
+                                          filterStyle="width: 100%;"
+                                          filterMatchMode="contains">
+                                    <h:outputText value="#{contaP.observacao} - #{contaP.compra.id}"/>
+                                </p:column>
+                                <p:column headerText="Situação" style="text-align: center" filterBy="#{contaP.situacao}"
+                                          filterStyle="width: 50%" filterMatchMode="contains">
+                                    #{contaP.situacao}
+                                </p:column>
+                                <p:column headerText="Ações" style="text-align: center">
+                                    <p:commandButton icon="pi pi-check-circle"
+                                                     styleClass="rounded-button ui-button-success ui-button-flat"
+                                                     actionListener="#{contasPagarControle.baixar(contaP)}"
+                                                     action="fech.xhtml"
+                                                     ajax="false" disabled="#{contaP.pago == true}"/>
+
+                                    <p:commandButton icon="pi pi-info-circle"
+                                                     styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                     actionListener="#{contasPagarControle.editar(contaP)}"
+                                                     action="view.xhtml"
+                                                     ajax="false"/>
+
+                                    <p:commandButton icon="pi pi-times"
+                                                     styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                     actionListener="#{contasPagarControle.excluir(contaP)}"
+                                                     ajax="false"/>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:panelGrid columns="4"
+                                         columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                                         layout="grid"
+                                         styleClass="ui-panelgrid-blank ui-fluid"
+                                         style="border:0px none; background-color:transparent;">
+
+                                <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                                 action="index.xhtml"
+                                                 actionListener="#{contasPagarControle.novo()}"/>
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </p:panel>
             </h:form>
         </div>
 

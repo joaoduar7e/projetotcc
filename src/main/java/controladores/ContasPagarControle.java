@@ -47,6 +47,9 @@ public class ContasPagarControle implements Serializable {
         }   else {
             baixaContasPagar.setContasPagar(contasPagar);
             contasPagar.getBaixaContasPagar().add(baixaContasPagar);
+            if(contasPagar.getValorRestante() == 0){
+                contasPagar.setPago(true);
+            }
             baixaContasPagar = new BaixaContasPagar();
             salvar();
             FacesContext.getCurrentInstance().getExternalContext().redirect("list.xhtml");
@@ -137,6 +140,13 @@ public class ContasPagarControle implements Serializable {
 
     public List<ContasPagar> getListaContasPagar() {
         return contasPagarFacade.listaTodos();
+    }
+    public List<ContasPagar> getListaCpPaga(){
+        return contasPagarFacade.listaCpPaga();
+    }
+
+    public List<ContasPagar> getListaCpPagar(){
+        return contasPagarFacade.listaCpPagar();
     }
 
 }

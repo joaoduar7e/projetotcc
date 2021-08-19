@@ -24,12 +24,17 @@
                                              layout="grid"
                                              styleClass="ui-panelgrid-blank ui-fluid"
                                              style="border:0px none; background-color:transparent;">
-                                    <p:outputLabel value="Data" for="data"/>
+                                    <p:outputLabel value="Data:" for="data"/>
                                     <p:calendar value="#{agendamentoControle.agendamento.dataAgendamento}" id="data"
                                                 pattern="dd/MM/yyyy" locale="pt_BR" disabled="true"
                                                 required="true" requiredMessage="A data é obrigatória!"/>
 
-                                    <p:outputLabel value=" Cliente" for="cliente"/>
+                                    <p:outputLabel value="Agendar para a data:" for="dataA"/>
+                                    <p:calendar value="#{agendamentoControle.agendamento.dataAgendadada}" id="dataA"
+                                                pattern="dd/MM/yyyy" locale="pt_BR"
+                                                required="true" requiredMessage="A data é obrigatória!"/>
+
+                                    <p:outputLabel value=" Cliente:" for="cliente"/>
                                     <h:panelGroup>
                                         <p:autoComplete value="#{agendamentoControle.agendamento.cliente}"
                                                         size="60" id="cliente" required="true"
@@ -44,13 +49,15 @@
                                                         itemValue="#{alu}"
                                                         itemLabel="#{alu.nome}"
                                                         converter="#{agendamentoControle.clienteConverter}"/>
-                                        <p:commandButton icon="pi pi-plus-circle" title="Adicionar cliente" id="btAddCli"
-                                                         styleClass="rounded-button ui-button-success" actionListener="#{agendamentoControle.novoCliente}"
+                                        <p:commandButton icon="pi pi-plus-circle" title="Adicionar cliente"
+                                                         id="btAddCli"
+                                                         styleClass="rounded-button ui-button-success"
+                                                         actionListener="#{agendamentoControle.novoCliente}"
                                                          onclick="PF('addCliente').show()"/>
                                     </h:panelGroup>
 
 
-                                    <p:outputLabel value="Local" for="local"/>
+                                    <p:outputLabel value="Local:" for="local"/>
                                     <p:autoComplete value="#{agendamentoControle.agendamento.locais}"
                                                     size="60" id="local" required="true"
                                                     requiredMessage="O local é obrigatório!"
@@ -65,7 +72,7 @@
                                                     itemLabel="#{loc.descricao}"
                                                     converter="#{agendamentoControle.locaisConverter}"/>
 
-                                    <p:outputLabel value="Maquinário" for="maq"/>
+                                    <p:outputLabel value="Maquinário:" for="maq"/>
                                     <p:autoComplete value="#{agendamentoControle.agendamento.maquinario}"
                                                     size="60" id="maq"
                                                     emptyMessage="Nenhum maquinário encontrado"
@@ -100,7 +107,7 @@
                                                      layout="grid"
                                                      styleClass="ui-panelgrid-blank ui-fluid"
                                                      style="border:0px none; background-color:transparent;">
-                                            <p:outputLabel value="Serviços" for="serv"/>
+                                            <p:outputLabel value="Serviços:" for="serv"/>
                                             <p:autoComplete value="#{agendamentoControle.itensAgendamento.servico}"
                                                             id="serv"
                                                             completeMethod="#{agendamentoControle.getListaServicoFiltrando}"
@@ -111,7 +118,7 @@
                                                             itemValue="#{serv}"
                                                             converter="#{agendamentoControle.servicoConverter}"/>
 
-                                            <p:outputLabel value="Quantidade" for="quantidadeS"/>
+                                            <p:outputLabel value="Quantidade:" for="quantidadeS"/>
                                             <p:inputNumber value="#{agendamentoControle.itensAgendamento.quantidade}"
                                                            id="quantidadeS"
                                                            size="10">
@@ -119,7 +126,7 @@
                                             </p:inputNumber>
 
 
-                                            <p:outputLabel value="Preço" for="precoS"/>
+                                            <p:outputLabel value="Preço:" for="precoS"/>
                                             <p:inputNumber value="#{agendamentoControle.itensAgendamento.preco}"
                                                            id="precoS"
                                                            size="10"
@@ -197,7 +204,7 @@
                                                  style="border:0px none; background-color:transparent;">
 
 
-                                        <p:outputLabel value="Plano pagamento" for="planoPag"/>
+                                        <p:outputLabel value="Plano pagamento:" for="planoPag"/>
                                         <p:selectOneMenu value="#{agendamentoControle.agendamento.planoPagamento}"
                                                          id="planoPag"
                                                          required="true"
@@ -208,12 +215,14 @@
                                                            itemValue="#{planoPag}"/>
                                         </p:selectOneMenu>
 
-                                        <p:outputLabel value="Número de parcelas"/>
-                                        <p:inputText value="#{agendamentoControle.numParcelas}"/>
+                                        <p:outputLabel value="Número de parcelas:"/>
+                                        <p:inputText value="#{agendamentoControle.numParcelas}" required="true"
+                                                     requiredMessage="Número de parcelas não pode ser vazio"/>
 
-                                        <p:outputLabel value="Data primeira parcela"/>
+                                        <p:outputLabel value="Data primeira parcela:"/>
                                         <p:calendar value="#{agendamentoControle.dataPrimeiraParcela}"
-                                                    locale="pt_BR" pattern="dd/MM/yyyy"/>
+                                                    locale="pt_BR" pattern="dd/MM/yyyy"
+                                                    required="true"/>
                                         <p:commandButton value="Gerar Parcela"
                                                          actionListener="#{agendamentoControle.gerarParcelas()}"
                                                          ajax="true"/>
@@ -266,7 +275,8 @@
 
         </h:form>
 
-        <p:dialog header="Cadastrar Cliente" id="dialogCli" widgetVar="addCliente" minHeight="150" width="90%" showEffect="fade" modal="true">
+        <p:dialog header="Cadastrar Cliente" id="dialogCli" widgetVar="addCliente" minHeight="150" width="90%"
+                  showEffect="fade" modal="true">
             <h:form>
 
                 <p:panelGrid columns="4"
@@ -344,11 +354,13 @@
                     <p:row>
                         <p:column styleClass="ui-grid-col-6">
 
-                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true" onclick="PF('addCliente').hide()"/>
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             onclick="PF('addCliente').hide()"/>
                         </p:column>
                         <p:column styleClass="ui-grid-col-6">
                             <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
-                                             actionListener="#{clienteControle.salvar()}" update="@this cliente btAddCli" onclick="PF('addCliente').hide()"/>
+                                             actionListener="#{clienteControle.salvar()}"
+                                             update="@this cliente btAddCli" onclick="PF('addCliente').hide()"/>
                         </p:column>
                     </p:row>
                 </p:panelGrid>

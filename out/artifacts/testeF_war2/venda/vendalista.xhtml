@@ -10,7 +10,7 @@
 <ui:composition template="/WEB-INF/template.xhtml">
     <ui:define name="body">
         <h:form>
-            <p:dataTable var="ve" value="#{vendaControle.listaVendas}" rows="10"
+            <p:dataTable var="ve" value="#{vendaControle.listaVendas}" rows="10" reflow="true"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"

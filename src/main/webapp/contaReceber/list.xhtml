@@ -16,8 +16,8 @@
             <h:form id="form">
                 <p:panel>
                 <p:tabView>
-                    <p:tab title="Contas a receber">
-                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrReceber}" rows="10"
+                    <p:tab title="Contas a Receber">
+                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrReceber}" rows="10"  reflow="true"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
@@ -93,7 +93,7 @@
                         </p:panelGrid>
                     </p:tab>
                     <p:tab title="Contas Recebidas">
-                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrRecebida}" rows="10"
+                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrRecebida}" rows="10" reflow="true"
                                      paginator="true"
                                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"

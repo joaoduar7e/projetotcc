@@ -23,7 +23,16 @@ public class AgendamentoFacade extends AbstractFacade<Agendamento> {
     public List<Agendamento> listaA() {
         Query q = getEntityManager().createQuery("from "
                 + "Agendamento as a "
-                + "order by a.dataAgendadada");
+                + "where a.finalizado = true "
+                + "order by a.finalizado, a.dataAgendadada");
+        return q.getResultList();
+    }
+
+    public List<Agendamento> listaAgAberta() {
+        Query q = getEntityManager().createQuery("from "
+                + "Agendamento as a "
+                + "where a.finalizado = false "
+                + "order by a.finalizado, a.dataAgendadada");
         return q.getResultList();
     }
 }
