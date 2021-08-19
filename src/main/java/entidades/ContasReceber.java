@@ -44,7 +44,7 @@ public class ContasReceber implements Serializable {
     private Boolean pago = false ;
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,
-            mappedBy = "contasReceber")
+            mappedBy = "ContasReceber")
     private List<BaixaContasReceber> baixaContasRecebers;
 
     public String getSituacao(){
@@ -199,5 +199,5 @@ public class ContasReceber implements Serializable {
     public String toString() {
         return "entidades.ContasReceber[ id=" + id + " ]";
     }
-    
+
 }

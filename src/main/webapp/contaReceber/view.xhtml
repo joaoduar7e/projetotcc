@@ -59,6 +59,11 @@
                                   styleClass="hardgreen ">
                         <f:convertNumber type="currency"/>
                     </h:outputText>
+                    <p:outputLabel value="Valor Restante"/>
+                    <h:outputText value="#{contasReceberControle.contasReceber.valorRestante}" size="40"
+                                  styleClass="hardgreen ">
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
 
                     <p:outputLabel value="Observação"/>
                     <h:outputText value="#{contasReceberControle.contasReceber.observacao}" id="obs" size="40"

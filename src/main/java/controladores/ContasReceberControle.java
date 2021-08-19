@@ -48,6 +48,9 @@ public class ContasReceberControle implements Serializable {
         }   else {
             baixaContasReceber.setContasReceber(contasReceber);
             contasReceber.getBaixaContasRecebers().add(baixaContasReceber);
+            if(contasReceber.getValorRestante() == 0){
+                contasReceber.setPago(true);
+            }
             baixaContasReceber = new BaixaContasReceber();
             salvar();
             FacesContext.getCurrentInstance().getExternalContext()
