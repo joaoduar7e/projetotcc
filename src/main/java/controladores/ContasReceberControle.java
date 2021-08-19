@@ -8,10 +8,7 @@ package controladores;
 import controladores.util.JsfUtil;
 import converter.ConverterGenerico;
 import converter.MoneyConverter;
-import entidades.BaixaContasReceber;
-import entidades.Cliente;
-import entidades.ContasReceber;
-import entidades.PlanoPagamento;
+import entidades.*;
 import facade.ClienteFacade;
 import facade.ContasReceberFacade;
 import facade.PlanoPagamentoFacade;
@@ -151,5 +148,12 @@ public class ContasReceberControle implements Serializable {
         return contasReceberFacade.listaTodos();
     }
 
+    public List<ContasReceber> getListaCrRecebida() {
+        return contasReceberFacade.listaCrPaga();
+    }
+
+    public List<ContasReceber> getListaCrReceber() {
+        return contasReceberFacade.listaCrPagar();
+    }
 
 }

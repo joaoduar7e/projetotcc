@@ -2,6 +2,7 @@ package facade;
 
 import entidades.Agendamento;
 import entidades.Cidade;
+import entidades.ContasReceber;
 import entidades.Servico;
 
 import javax.inject.Inject;
@@ -18,4 +19,11 @@ public class AgendamentoFacade extends AbstractFacade<Agendamento> {
     protected EntityManager getEntityManager(){return em;}
 
     public AgendamentoFacade(){ super(Agendamento.class);}
+
+    public List<Agendamento> listaA() {
+        Query q = getEntityManager().createQuery("from "
+                + "Agendamento as a "
+                + "order by a.dataAgendadada");
+        return q.getResultList();
+    }
 }

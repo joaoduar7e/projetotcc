@@ -201,6 +201,9 @@ public class AgendamentoControle implements Serializable {
         return agendamentoFacade.listaTodos();
     }
 
+    public List<Agendamento> getListaA() {
+        return agendamentoFacade.listaA();
+    }
 
     public void novo() {
         agendamento = new Agendamento();

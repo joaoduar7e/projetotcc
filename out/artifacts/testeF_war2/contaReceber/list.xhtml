@@ -14,78 +14,160 @@
 
         <div class="card">
             <h:form id="form">
-                <p:dataTable var="contaR" value="#{contasReceberControle.listaContasRecebers}" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
-                             paginatorPosition="bottom"
-                             rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-                             emptyMessage="Nenhum tipoServico Encontrado">
-                    <f:facet name="header">
-                        Lista de Contas a Receber
-                    </f:facet>
+                <p:tabView>
+                    <p:tab title="Contas á receber">
+                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrReceber}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     paginatorPosition="bottom"
+                                     rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                                     emptyMessage="Nenhuma conta Encontrada">
 
-                    <p:column headerText="ID" width="50px" style="text-align: center" filterBy="#{contaR.id}"
-                              filterStyle="width: 100%;"
-                              filterMatchMode="contains">
-                        <h:outputText value="#{contaR.id}"/>
-                    </p:column>
-                    <p:column headerText="Cliente" style="text-align: center"
-                              filterBy="#{contaR.cliente.nome}" filterMatchMode="contains" filterStyle="width: 50%">
-                        <h:outputText value="#{contaR.cliente.nome}"/>
-                    </p:column>
-                    <p:column headerText="Num. Parcela" style="text-align: center">
-                        <h:outputText value="#{contaR.numParcela}"/>
-                    </p:column>
-                    <p:column headerText="Valor" filterBy="#{contaR.valor}" style="text-align: center"
-                              filterStyle="width: 50%" filterMatchMode="contains">
-                        <h:outputText value="#{contaR.valor}">
-                            <f:convertNumber type="currency"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Data Emissão" style="text-align: center">
-                        <h:outputText value="#{contaR.dataEmissao}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Data Vencimento" style="text-align: center">
-                        <h:outputText value="#{contaR.dataVencimento}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </p:column>
-                    <p:column headerText="Observação" style="text-align: center" filterBy="#{contaR.observacao}" filterStyle="width: 50%"
-                              filterMatchMode="contains">
-                        <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
-                    </p:column>
-                    <p:column headerText="Situação" style="text-align: center" filterBy="#{contaR.situacao}"
-                              filterStyle="width: 50%" filterMatchMode="contains">
-                        #{contaR.situacao}
-                    </p:column>
-                    <p:column headerText="Ações" style="text-align: center">
-                        <p:commandButton icon="pi pi-check-circle"
-                                         styleClass="rounded-button ui-button-success ui-button-flat"
-                                         actionListener="#{contasReceberControle.baixar(contaR)}" action="fech.xhtml"
-                                         ajax="false" disabled="#{contaR.pago == true}"/>
-                        <p:commandButton icon="pi pi-info-circle"
-                                         styleClass="rounded-button ui-button-info-outline ui-button-flat"
-                                         actionListener="#{contasReceberControle.editar(contaR)}" action="view.xhtml"
-                                         ajax="false"/>
-                        <p:commandButton icon="pi pi-times" styleClass="rounded-button ui-button-danger ui-button-flat"
-                                         actionListener="#{contasReceberControle.excluir(contaR)}"
-                                         ajax="false"/>
-                    </p:column>
-                </p:dataTable>
+                            <p:column headerText="ID" width="50px" style="text-align: center" filterBy="#{contaR.id}"
+                                      filterStyle="width: 100%;"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{contaR.id}"/>
+                            </p:column>
+                            <p:column headerText="Cliente" style="text-align: center"
+                                      filterBy="#{contaR.cliente.nome}" filterMatchMode="contains"
+                                      filterStyle="width: 50%">
+                                <h:outputText value="#{contaR.cliente.nome}"/>
+                            </p:column>
+                            <p:column headerText="Num. Parcela" style="text-align: center">
+                                <h:outputText value="#{contaR.numParcela}"/>
+                            </p:column>
+                            <p:column headerText="Valor" filterBy="#{contaR.valor}" style="text-align: center"
+                                      filterStyle="width: 50%" filterMatchMode="contains">
+                                <h:outputText value="#{contaR.valor}">
+                                    <f:convertNumber type="currency"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Data Emissão" style="text-align: center">
+                                <h:outputText value="#{contaR.dataEmissao}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Data Vencimento" style="text-align: center">
+                                <h:outputText value="#{contaR.dataVencimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Observação" style="text-align: center" filterBy="#{contaR.observacao}"
+                                      filterStyle="width: 50%"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
+                            </p:column>
+                            <p:column headerText="Situação" style="text-align: center" filterBy="#{contaR.situacao}"
+                                      filterStyle="width: 50%" filterMatchMode="contains">
+                                #{contaR.situacao}
+                            </p:column>
+                            <p:column headerText="Ações" style="text-align: center">
+                                <p:commandButton icon="pi pi-check-circle"
+                                                 styleClass="rounded-button ui-button-success ui-button-flat"
+                                                 actionListener="#{contasReceberControle.baixar(contaR)}"
+                                                 action="fech.xhtml"
+                                                 ajax="false" disabled="#{contaR.pago == true}"/>
+                                <p:commandButton icon="pi pi-info-circle"
+                                                 styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                 actionListener="#{contasReceberControle.editar(contaR)}"
+                                                 action="view.xhtml"
+                                                 ajax="false"/>
+                                <p:commandButton icon="pi pi-times"
+                                                 styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                 actionListener="#{contasReceberControle.excluir(contaR)}"
+                                                 ajax="false"/>
+                            </p:column>
+                        </p:dataTable>
 
-                <p:panelGrid columns="4"
-                             columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
-                             layout="grid"
-                             styleClass="ui-panelgrid-blank ui-fluid"
-                             style="border:0px none; background-color:transparent;">
+                        <p:panelGrid columns="4"
+                                     columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;">
 
-                    <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
-                                     action="index.xhtml"
-                                     actionListener="#{contasReceberControle.novo()}"/>
-                </p:panelGrid>
+                            <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                             action="index.xhtml"
+                                             actionListener="#{contasReceberControle.novo()}"/>
+                        </p:panelGrid>
+                    </p:tab>
+                    <p:tab title="Contas Recebidas">
+                        <p:dataTable var="contaR" value="#{contasReceberControle.listaCrRecebida}" rows="10"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                                     paginatorPosition="bottom"
+                                     rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+                                     emptyMessage="Nenhuma conta Encontrada">
+
+                            <p:column headerText="ID" width="50px" style="text-align: center" filterBy="#{contaR.id}"
+                                      filterStyle="width: 100%;"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{contaR.id}"/>
+                            </p:column>
+                            <p:column headerText="Cliente" style="text-align: center"
+                                      filterBy="#{contaR.cliente.nome}" filterMatchMode="contains"
+                                      filterStyle="width: 50%">
+                                <h:outputText value="#{contaR.cliente.nome}"/>
+                            </p:column>
+                            <p:column headerText="Num. Parcela" style="text-align: center">
+                                <h:outputText value="#{contaR.numParcela}"/>
+                            </p:column>
+                            <p:column headerText="Valor" filterBy="#{contaR.valor}" style="text-align: center"
+                                      filterStyle="width: 50%" filterMatchMode="contains">
+                                <h:outputText value="#{contaR.valor}">
+                                    <f:convertNumber type="currency"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Data Emissão" style="text-align: center">
+                                <h:outputText value="#{contaR.dataEmissao}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Data Vencimento" style="text-align: center">
+                                <h:outputText value="#{contaR.dataVencimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Observação" style="text-align: center" filterBy="#{contaR.observacao}"
+                                      filterStyle="width: 50%"
+                                      filterMatchMode="contains">
+                                <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
+                            </p:column>
+                            <p:column headerText="Situação" style="text-align: center" filterBy="#{contaR.situacao}"
+                                      filterStyle="width: 50%" filterMatchMode="contains">
+                                #{contaR.situacao}
+                            </p:column>
+                            <p:column headerText="Ações" style="text-align: center">
+                                <p:commandButton icon="pi pi-check-circle"
+                                                 styleClass="rounded-button ui-button-success ui-button-flat"
+                                                 actionListener="#{contasReceberControle.baixar(contaR)}"
+                                                 action="fech.xhtml"
+                                                 ajax="false" disabled="#{contaR.pago == true}"/>
+                                <p:commandButton icon="pi pi-info-circle"
+                                                 styleClass="rounded-button ui-button-info-outline ui-button-flat"
+                                                 actionListener="#{contasReceberControle.editar(contaR)}"
+                                                 action="view.xhtml"
+                                                 ajax="false"/>
+                                <p:commandButton icon="pi pi-times"
+                                                 styleClass="rounded-button ui-button-danger ui-button-flat"
+                                                 actionListener="#{contasReceberControle.excluir(contaR)}"
+                                                 ajax="false"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:panelGrid columns="4"
+                                     columnClasses="ui-grid-col-12,ui-grid-col-4,ui-grid-col-4,ui-grid-col-4"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;">
+
+                            <p:commandButton value="Novo" ajax="false" styleClass="ui-button-raised"
+                                             action="index.xhtml"
+                                             actionListener="#{contasReceberControle.novo()}"/>
+                        </p:panelGrid>
+                    </p:tab>
+                </p:tabView>
             </h:form>
         </div>
     </ui:define>
