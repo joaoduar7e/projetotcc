@@ -6,19 +6,22 @@
 	<queryString>
 		<![CDATA[select *
 from contasreceber as c
-left join cliente as cli on cli.id=c.id
-left join planopagamento as p on p.id=c.id]]>
+inner join cliente as cli on cli.id=c.id
+left join planopagamento as p on p.id=c.id
+left join vendas as v on v.id=c.id
+left join agendamento as a on a.id=c.id]]>
 	</queryString>
 	<field name="id" class="java.lang.Long"/>
 	<field name="dataemissao" class="java.sql.Timestamp"/>
 	<field name="datavencimento" class="java.sql.Timestamp"/>
 	<field name="numparcela" class="java.lang.Integer"/>
 	<field name="observacao" class="java.lang.String"/>
-	<field name="valor" class="java.lang.Double"/>
-	<field name="cliente_id" class="java.lang.Long"/>
-	<field name="vendas_id" class="java.lang.Long"/>
 	<field name="pago" class="java.lang.Boolean"/>
+	<field name="valor" class="java.lang.Double"/>
+	<field name="agendamento_id" class="java.lang.Long"/>
+	<field name="cliente_id" class="java.lang.Long"/>
 	<field name="planopagamento_id" class="java.lang.Long"/>
+	<field name="vendas_id" class="java.lang.Long"/>
 	<field name="apelido" class="java.lang.String"/>
 	<field name="bairro" class="java.lang.String"/>
 	<field name="cpfcpnj" class="java.lang.String"/>
@@ -29,6 +32,15 @@ left join planopagamento as p on p.id=c.id]]>
 	<field name="sobrenome" class="java.lang.String"/>
 	<field name="telefone" class="java.lang.String"/>
 	<field name="cidade_id" class="java.lang.Long"/>
+	<field name="datavenda" class="java.sql.Timestamp"/>
+	<field name="valortotal" class="java.lang.Double"/>
+	<field name="valortotalp" class="java.lang.Double"/>
+	<field name="valortotals" class="java.lang.Double"/>
+	<field name="dataagendadada" class="java.sql.Timestamp"/>
+	<field name="dataagendamento" class="java.sql.Timestamp"/>
+	<field name="locais_id" class="java.lang.Long"/>
+	<field name="maquinario_id" class="java.lang.Long"/>
+	<field name="finalizado" class="java.lang.Boolean"/>
 	<group name="Group1"/>
 	<group name="Group3"/>
 	<group name="Group4"/>

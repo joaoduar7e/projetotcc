@@ -57,7 +57,7 @@
                             <p:column headerText="Observação" style="text-align: center" filterBy="#{contaR.observacao}"
                                       filterStyle="width: 50%"
                                       filterMatchMode="contains">
-                                <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id}"/>
+                                <h:outputText value="#{contaR.observacao} - #{contaR.vendas.id != null? contaR.vendas.id : contaR.agendamento.id}"/>
                             </p:column>
                             <p:column headerText="Situação" style="text-align: center" filterBy="#{contaR.situacao}"
                                       filterStyle="width: 50%" filterMatchMode="contains">

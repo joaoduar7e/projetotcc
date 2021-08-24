@@ -32,7 +32,7 @@ public class AgendamentoFacade extends AbstractFacade<Agendamento> {
         Query q = getEntityManager().createQuery("from "
                 + "Agendamento as a "
                 + "where a.finalizado = false "
-                + "order by a.finalizado, a.dataAgendadada");
+                + "order by a.dataAgendadada");
         return q.getResultList();
     }
 }

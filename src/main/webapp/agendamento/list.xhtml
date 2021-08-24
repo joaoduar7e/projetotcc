@@ -17,19 +17,19 @@
                         <p:tab title="Agendamentos em Aberto">
 
                             <p:dataView var="ag" value="#{agendamentoControle.listaAgAberta}" rows="12" paginator="true"
-                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                                        gridIcon="pi pi-th-large" listIcon="pi pi-bars"
-                                        layout="grid" gridRowStyleClass="p-lg-6 p-xl-4" flex="true">
-
+                                        rowsPerPageTemplate="6,12,16"
+                                        paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        gridIcon="pi pi-th-large" listIcon="pi pi-bars">
 
                                 <p:dataViewGridItem>
-                                        <h:panelGrid columns="2" style="width:100%" cellspacing="20">
+                                        <h:panelGrid columns="2" style="width:100%" cellspacing="7">
                                             <p:outputPanel>
                                                 <h:panelGrid columns="2" cellpadding="7">
                                                     <h:outputText value="ID:" styleClass="text-secondary"/>
                                                     <h:outputText value="#{ag.id}" styleClass="font"/>
 
-                                                    <h:outputText value="Data Agendada:" styleClass="text-secondary"/>
+                                                    <h:outputText value="Data Agendada:"
+                                                                  styleClass="text-secondary"/>
                                                     <p:outputLabel value="#{ag.dataAgendadada}"
                                                                    styleClass="font hardgreen">
                                                         <f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"/>
@@ -47,10 +47,11 @@
                                                     <h:outputText value="#{ag.locais.descricao}"/>
 
                                                     <h:outputText value="Situação:" styleClass="text-secondary"/>
-                                                    <h:outputText value="#{ag.situacao}" styleClass="font hardblue"/>
+                                                    <h:outputText value="#{ag.situacao}"
+                                                                  styleClass="font hardblue"/>
 
                                                     <h:panelGroup>
-                                                        <p:commandButton icon="pi pi-check-circle"
+                                                        <p:commandButton icon="pi pi-check-circle" title="Finalizar"
                                                                          actionListener="#{agendamentoControle.finalizaAgendamento(ag)}"
                                                                          styleClass="rounded-button ui-button-success ui-button-flat"
                                                                          update="form" ajax="false">
@@ -179,7 +180,7 @@
                                     </p:column>
 
                                     <p:column>
-                                        <p:commandButton icon="pi pi-replay"
+                                        <p:commandButton icon="pi pi-replay" title="Estornar"
                                                          actionListener="#{agendamentoControle.finalizaAgendamento(agF)}"
                                                          styleClass="rounded-button ui-button-help ui-button-flat"
                                                          update="form" ajax="false">
@@ -216,6 +217,32 @@
             background-color: var(--surface-c);
             font-weight: bold;
         }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 25%;
+            padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding in columns */
+        .row {margin: 0 -5px;}
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Style the counter cards */
+        .cardA {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
     </h:outputStylesheet>
 </ui:composition>
 

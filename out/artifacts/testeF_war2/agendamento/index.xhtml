@@ -220,16 +220,11 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="Número de parcelas:"/>
-                                        <p:inputText value="#{agendamentoControle.numParcelas}" required="true"
-                                                     requiredMessage="Número de parcelas não pode ser vazio"/>
+                                        <p:inputText value="#{agendamentoControle.numParcelas}"/>
 
                                         <p:outputLabel value="Data primeira parcela:"/>
                                         <p:calendar value="#{agendamentoControle.dataPrimeiraParcela}"
-                                                    locale="pt_BR" pattern="dd/MM/yyyy"
-                                                    required="true"/>
-                                        <p:commandButton value="Gerar Parcela"
-                                                         actionListener="#{agendamentoControle.gerarParcelas()}"
-                                                         ajax="true"/>
+                                                    locale="pt_BR" pattern="dd/MM/yyyy"/>
                                     </p:panelGrid>
                                 </p:panel>
 

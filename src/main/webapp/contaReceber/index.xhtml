@@ -26,6 +26,7 @@
                 <p:autoComplete value="#{contasReceberControle.contasReceber.cliente}"
                                 completeMethod="#{contasReceberControle.getListaClientesFiltrando}"
                                 var="fun" id="cliente" forceSelection="true"
+                                required="true" requiredMessage="Selecione um cliente"
                                 size="40"
                                 widgetVar="prodWid"
                                 onclick="PF('prodWid').search('')"
@@ -49,7 +50,7 @@
                 </p:inputNumber>
 
                 <p:outputLabel value="Observação"/>
-                <p:inputText value="#{contasReceberControle.contasReceber.observacao}" id="endereco" size="40"/>
+                <p:inputText value="#{contasReceberControle.contasReceber.observacao}" id="endereco" size="40" required="true" requiredMessage="A observação não pode ser vazia"/>
 
                 <p:row>
                     <p:column styleClass="ui-grid-col-6">

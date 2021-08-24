@@ -197,17 +197,18 @@ public class AgendamentoControle implements Serializable {
         return planoPagamentoFacade.listaTodos();
     }
 
-    public List<Maquinario> getListaMaquinario(){
+    public List<Maquinario> getListaMaquinario() {
         return maquinarioFacade.listaTodos();
     }
 
-    public List<Agendamento> getListaAgendamento(){
+    public List<Agendamento> getListaAgendamento() {
         return agendamentoFacade.listaTodos();
     }
 
     public List<Agendamento> getListaA() {
         return agendamentoFacade.listaA();
     }
+
     public List<Agendamento> getListaAgAberta() {
         return agendamentoFacade.listaAgAberta();
     }
@@ -216,11 +217,12 @@ public class AgendamentoControle implements Serializable {
         agendamento = new Agendamento();
         itensAgendamento = new ItensAgendamento();
     }
+
     public void novoCliente() {
         cliente = new Cliente();
     }
 
-    public void finalizaAgendamento(Agendamento ag){
+    public void finalizaAgendamento(Agendamento ag) {
         agendamento = ag;
         try {
             ag.setFinalizado(!ag.getFinalizado());
@@ -230,8 +232,7 @@ public class AgendamentoControle implements Serializable {
                             "Situação alterada",
                             ""));
             agendamentoFacade.salvar(ag);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return;
         }
     }
@@ -250,7 +251,15 @@ public class AgendamentoControle implements Serializable {
                                 "É necessário ter pelo menos um serviço associado ao agendamento",
                                 ""));
                 return;
+            } else if (getDataPrimeiraParcela() == null || getNumParcelas() == null) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "A Data e Número das parcelas não podem ser vazios",
+                                ""));
+                return;
             } else {
+                gerarParcelas();
                 agendamentoFacade.salvar(agendamento);
             }
 
