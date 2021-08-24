@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form>
+            <p:panelGrid columns="4"
+                         columnClasses="ui-grid-col-12"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:row styleClass="my-heading-row" style="font-weight: bold">
+                    Relátorio de Locais
+                </p:row>
+            </p:panelGrid>
+
+            <p:panelGrid columns="1"
+                         columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:commandButton value="PDF" ajax="false"
+                                 styleClass="ui-button-secondary"
+                                 action="#{relatorioControle.geraRelatorioLocais()}"
+                                 icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
+            </p:panelGrid>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
+
