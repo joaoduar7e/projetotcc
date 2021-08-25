@@ -50,27 +50,33 @@
             </p:submenu>
 
             <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
-            <p:submenu label="Cadastrais" icon="pi pi-fw pi-plus-circle">
-                <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relCliente/relCliente.xhtml"/>
-                <p:menuitem value="Relatório de cidade" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relCidade/relCidade.xhtml"/>
-                <p:menuitem value="Relatório de estado" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relEstado/relEstado.xhtml"/>
-                <p:menuitem value="Relatório de funcionário" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relFuncionario/relFunc.xhtml"/>
-                <p:menuitem value="Relatório de locais" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relLocais/relLocais.xhtml"/>
-                <p:menuitem value="Relatório de serviço" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relServ/relServ.xhtml"/>
-                <p:menuitem value="Relatório de tipo de serviço" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relTipoS/relTipoS.xhtml"/>
-            </p:submenu>
+                <p:submenu label="Cadastrais" icon="pi pi-fw pi-plus-circle">
+                    <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relCliente/relCliente.xhtml"/>
+                    <p:menuitem value="Relatório de cidade" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relCidade/relCidade.xhtml"/>
+                    <p:menuitem value="Relatório de estado" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relEstado/relEstado.xhtml"/>
+                    <p:menuitem value="Relatório de funcionário" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relFuncionario/relFunc.xhtml"/>
+                    <p:menuitem value="Relatório de locais" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relLocais/relLocais.xhtml"/>
+                    <p:menuitem value="Relatório de maquinário" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relMaquinario/relMaquinario.xhtml"/>
+                    <p:menuitem value="Relatório de peça" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relPeca/relPeca.xhtml"/>
+                    <p:menuitem value="Relatório de serviço" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relServ/relServ.xhtml"/>
+                    <p:menuitem value="Relatório de tipo de serviço" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relTipoS/relTipoS.xhtml"/>
+                    <p:menuitem value="Relatório de usuário" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relUsuario/relUsuario.xhtml"/>
+                </p:submenu>
 
-            <p:submenu label="Financeiro" icon="pi pi-fw pi-plus-circle">
-                <p:menuitem value="Relatório de contas receber" icon="pi pi-fw pi-user" ajax="false"
-                            outcome="/relatorio/relContaR/relContasReceber.xhtml"/>
-            </p:submenu>
+                <p:submenu label="Financeiro" icon="pi pi-fw pi-plus-circle">
+                    <p:menuitem value="Relatório de contas receber" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relContaR/relContasReceber.xhtml"/>
+                </p:submenu>
             </p:submenu>
 
 
@@ -84,16 +90,19 @@
     <ui:insert name="body"/>
 
     <h:outputStylesheet>
-        .centerL{
+        .centerL {
             text-align: center;
         }
+
         .hardblue {
             color: #27AAE1;
         }
-        .hardred{
+
+        .hardred {
             color: #ff1c00;
         }
-        .hardgreen{
+
+        .hardgreen {
             color: green;
         }
 

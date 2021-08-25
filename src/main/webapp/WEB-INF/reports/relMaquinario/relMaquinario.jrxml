@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relFuncionario" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c5c87a2-98a7-42fb-b79b-8353efa76157">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select s.id as sid, s.descricao as servico, s.preco as preco, ts.descricao as tipoS
-from servico as s
-inner join tiposervico as ts on ts.id = s.tiposervico_id]]>
+		<![CDATA[select * from maquinario]]>
 	</queryString>
-	<field name="sid" class="java.lang.Long"/>
-	<field name="servico" class="java.lang.String"/>
-	<field name="preco" class="java.lang.String"/>
-	<field name="tipos" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="ano" class="java.math.BigDecimal"/>
+	<field name="datacompra" class="java.sql.Date"/>
+	<field name="marca" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="observacao" class="java.lang.String"/>
 	<group name="Group1"/>
 	<group name="Group3"/>
 	<group name="Group4"/>
@@ -27,7 +27,7 @@ inner join tiposervico as ts on ts.id = s.tiposervico_id]]>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Relátorio de serviços]]></text>
+					<text><![CDATA[Relátorio de maquinário]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -38,7 +38,7 @@ inner join tiposervico as ts on ts.id = s.tiposervico_id]]>
 	<columnHeader>
 		<band height="22">
 			<staticText>
-				<reportElement mode="Transparent" x="0" y="1" width="68" height="21" uuid="b500f485-ecca-492f-94d3-e9eba775d8b4"/>
+				<reportElement mode="Transparent" x="0" y="1" width="45" height="21" uuid="b500f485-ecca-492f-94d3-e9eba775d8b4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -48,26 +48,39 @@ inner join tiposervico as ts on ts.id = s.tiposervico_id]]>
 				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="e0d6e162-0702-4c37-adfc-99ff5ac82fec"/>
 			</line>
 			<staticText>
-				<reportElement x="291" y="0" width="104" height="21" uuid="338d844a-d2f3-4587-9f0b-62ab754614b9"/>
+				<reportElement x="458" y="1" width="97" height="21" uuid="338d844a-d2f3-4587-9f0b-62ab754614b9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Preço]]></text>
+				<text><![CDATA[Observação]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="191" height="21" uuid="43c0a71a-3cd3-44ab-aa24-796a96894b47"/>
+				<reportElement x="45" y="0" width="124" height="21" uuid="43c0a71a-3cd3-44ab-aa24-796a96894b47"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Serviço
-]]></text>
+				<text><![CDATA[Descrição]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="395" y="1" width="160" height="21" uuid="db38da4d-4215-4e58-aa94-90b216bdae34"/>
+				<reportElement x="169" y="0" width="129" height="21" uuid="94b9e197-8045-4c0e-a9a9-55c96fd49cab"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo Serviço]]></text>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="1" width="79" height="21" uuid="bc1fe1fc-8e5a-4dff-9b72-2f1fec776061"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="0" width="86" height="21" uuid="d8ea655f-253d-4dc3-9f76-29627349869b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data compra]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -77,36 +90,52 @@ inner join tiposervico as ts on ts.id = s.tiposervico_id]]>
 				<reportElement x="0" y="0" width="555" height="22" forecolor="#E6E4E4" backcolor="#E6E4E4" uuid="da0bdc1b-dbfd-4bc4-8dc1-7a4da54852e8"/>
 			</rectangle>
 			<textField>
-				<reportElement x="0" y="0" width="68" height="22" uuid="0310710e-2a13-49c4-a77e-dc4f2b526be9"/>
+				<reportElement x="0" y="0" width="45" height="22" uuid="0310710e-2a13-49c4-a77e-dc4f2b526be9"/>
 				<box leftPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{sid}]]></textFieldExpression>
-			</textField>
-			<textField pattern="¤ #,##0.00">
-				<reportElement x="291" y="0" width="104" height="22" uuid="75b5a9e2-1de6-4ecb-a626-a58ae7211a4a"/>
-				<box leftPadding="2"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
-					<font size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{preco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="191" height="22" uuid="7a73a7c0-71ce-4b3c-8494-32879c92fcd8"/>
+				<reportElement x="458" y="1" width="97" height="22" uuid="75b5a9e2-1de6-4ecb-a626-a58ae7211a4a"/>
 				<box leftPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{servico}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="395" y="2" width="160" height="22" uuid="04c3c671-bab6-4095-88d2-b46eb2928cef"/>
+				<reportElement x="45" y="0" width="124" height="22" uuid="7a73a7c0-71ce-4b3c-8494-32879c92fcd8"/>
 				<box leftPadding="2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
 					<font size="8" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tipos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="169" y="1" width="124" height="22" uuid="ef4c5fea-70e3-4425-af0e-e94f8c91a0ba"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0">
+				<reportElement x="293" y="2" width="79" height="22" uuid="a324ab2c-8d9c-42a2-a5d2-9b3fd6e0d945"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ano}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="372" y="-1" width="86" height="25" uuid="3ae1ffce-597e-47dc-b047-cec4ffcdbda5"/>
+				<box leftPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datacompra}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
