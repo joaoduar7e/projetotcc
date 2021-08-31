@@ -13,6 +13,7 @@
 </h:head>
 <h:body>
     <h:form id="formLogin">
+        <p:messages id="mes"/>
         <div id="card">
             <div id="card-content">
                 <div id="card-title">
@@ -29,6 +30,7 @@
                     <p:commandButton id="botaoLogin"
                                      style="font-size: 10pt; margin-top: 16px; width: 75%; margin-left: 5px"
                                      styleClass="rounded-button"
+                                     update="mes"
                                      value="Entrar"
                                      action="#{loginControle.logar()}"
                                      ajax="false"/>

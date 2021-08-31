@@ -24,7 +24,7 @@ public class LoginControle implements Serializable {
 
     @Inject
     transient private UsuarioFacade usuarioFacade;
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();
     private String login;
     private String senha;
     private Boolean logado = false;
@@ -36,7 +36,7 @@ public class LoginControle implements Serializable {
             return "index?faces-redirect=true";
         } else {
             logado = false;
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário não encontrado no sistema", "");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário e/ou senha inválidos", "");
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
         return null;

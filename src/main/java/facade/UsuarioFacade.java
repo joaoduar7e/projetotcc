@@ -23,12 +23,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
 
-    public void UsuMerge(Usuario u){
-        em.merge(u);
-    }
-
     public Usuario pesquisaUsuario(String login, String senha) {
-        Query query = em.createQuery("FROM Usuario AS u WHERE u.login='" + login + "' AND u.senha='" + Criptografia.md5(senha) + "'");
+        Query query = em.createQuery("FROM Usuario AS u WHERE u.login='" + login + "' AND u.senha='" + senha + "'");
         if (query.getResultList().size() == 1) {
             return (Usuario) query.getResultList().get(0);
         }
