@@ -403,6 +403,40 @@ public class RelatorioControle implements Serializable {
     }
 
 
+// Expediente
 
+    public void geraRelatorioVenda() {
+        try {
+            JasperReport relatorio;
+            String arquivoJasper = "relVenda.jasper";
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.responseComplete();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            //gera relatorio com as classes do jasper
+            HashMap p = new HashMap();
+//            p.put("param", filtros);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relVenda/" + arquivoJasper), p, JpaUtil.getConnection());
+            ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, dadosByte);
+            exporter.exportReport();
+            byte[] bytes = dadosByte.toByteArray();
+            if (bytes != null && bytes.length > 0) {
+                int recorte = arquivoJasper.indexOf(".");
+                String nomePDF = arquivoJasper.substring(0, recorte);
+                HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+                response.setContentType("application/pdf");
+                response.setHeader("Content-disposition", "inline; filename=\"" + nomePDF + ".pdf\"");
+                response.setContentLength(bytes.length);
+                ServletOutputStream outputStream = response.getOutputStream();
+                outputStream.write(bytes, 0, bytes.length);
+                outputStream.flush();
+                outputStream.close();
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e.getMessage());
+        }
+    }
 
 }

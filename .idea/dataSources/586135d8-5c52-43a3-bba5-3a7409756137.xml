@@ -795,7 +795,7 @@ true posixrules
     <database id="3" parent="1" name="projetotcc">
       <ObjectId>34040</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1928</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1953</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|34041|34043|1
 sequence|table|34049|34051|1
@@ -853,7 +853,7 @@ UC/10
 </Acl>
       <StateNumber>340</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1929</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1954</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="11" parent="3" name="plpgsql">

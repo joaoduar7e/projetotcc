@@ -37,6 +37,17 @@
     </h:form>
 </h:body>
 
+<h:outputScript>
+    document.addEventListener("keypress", function(e) {
+        if(e.key === 'Enter') {
+
+            var btn = document.querySelector("#botaoLogin");
+
+            btn.click();
+
+        }
+    });
+</h:outputScript>
 <h:outputStylesheet>
 
     body {
