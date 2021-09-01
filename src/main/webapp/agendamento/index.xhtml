@@ -160,7 +160,8 @@
                                     </p:panel>
                                 </h:panelGroup>
 
-                                <p:dataTable value="#{agendamentoControle.agendamento.itensAgendamento}" var="itS" rows="10" reflow="true"
+                                <p:dataTable value="#{agendamentoControle.agendamento.itensAgendamento}" var="itS"
+                                             rows="10" reflow="true"
                                              paginator="true">
                                     <f:facet name="header">
                                         Lista de serviços
@@ -221,7 +222,12 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="Número de parcelas:"/>
-                                        <p:inputText value="#{agendamentoControle.numParcelas}"/>
+                                        <h:panelGroup>
+                                            <p:inputText value="#{agendamentoControle.numParcelas}" style="width: 30%"/>
+                                            <i class="pi pi-info-circle"
+                                               title="As parcelas serão geradas automaticamente ao finalizar o agendamento"></i>
+                                        </h:panelGroup>
+
 
                                         <p:outputLabel value="Data primeira parcela:"/>
                                         <p:calendar value="#{agendamentoControle.dataPrimeiraParcela}"

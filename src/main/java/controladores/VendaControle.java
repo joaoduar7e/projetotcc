@@ -181,13 +181,24 @@ public class VendaControle implements Serializable {
                                 "É necessário ter pelo menos uma peça ou serviço associado a venda",
                                 ""));
                 return;
+
+            } else if (getDataPrimeiraParcela() == null || getNumParcelas() == null) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "A Data e Número das parcelas não podem ser vazios",
+                                ""));
+                return;
             } else {
+                gerarParcelas();
+
                 vendaFacade.salvar(vendas);
             }
 
             JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
             FacesContext.getCurrentInstance().getExternalContext().redirect("vendalista.xhtml");
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
 

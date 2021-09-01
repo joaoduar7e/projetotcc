@@ -112,7 +112,8 @@
                                     </p:panel>
                                 </h:panelGroup>
 
-                                <p:dataTable value="#{vendaControle.vendas.itensVendas}" var="it" rows="10" reflow="true"
+                                <p:dataTable value="#{vendaControle.vendas.itensVendas}" var="it" rows="10"
+                                             reflow="true"
                                              paginator="true">
                                     <f:facet name="header">
                                         Lista de peças
@@ -210,7 +211,8 @@
                                     </p:panel>
                                 </h:panelGroup>
 
-                                <p:dataTable value="#{vendaControle.vendas.itensServico}" var="itS" rows="10" reflow="true"
+                                <p:dataTable value="#{vendaControle.vendas.itensServico}" var="itS" rows="10"
+                                             reflow="true"
                                              paginator="true">
                                     <f:facet name="header">
                                         Lista de serviços
@@ -268,14 +270,15 @@
                                         </p:selectOneMenu>
 
                                         <p:outputLabel value="Número de parcelas"/>
-                                        <p:inputText value="#{vendaControle.numParcelas}"/>
+                                        <h:panelGroup>
+                                            <p:inputText value="#{vendaControle.numParcelas}" style="width: 30%"/>
+                                            <i class="pi pi-info-circle"
+                                               title="As parcelas serão geradas automaticamente ao finalizar a venda"></i>
+                                        </h:panelGroup>
 
                                         <p:outputLabel value="Data primeira parcela"/>
                                         <p:calendar value="#{vendaControle.dataPrimeiraParcela}"
                                                     locale="pt_BR" pattern="dd/MM/yyyy"/>
-                                        <p:commandButton value="Gerar Parcela"
-                                                         actionListener="#{vendaControle.gerarParcelas()}"
-                                                         ajax="true"/>
                                     </p:panelGrid>
                                 </p:panel>
 

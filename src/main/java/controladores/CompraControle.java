@@ -139,15 +139,26 @@ public class CompraControle implements Serializable {
                                 "É necessário ter pelo menos uma peça associado a venda",
                                 ""));
                 return;
+
+            } else if (getDataPrimeiraParcela() == null || getNumParcelas() == null) {
+                FacesContext.getCurrentInstance().addMessage(
+                        null, new FacesMessage(
+                                FacesMessage.SEVERITY_ERROR,
+                                "A Data e Número das parcelas não podem ser vazios",
+                                ""));
+                return;
+            } else {
+                gerarParcelas();
+                compraFacade.salvar(compra);
+                JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("compralista.xhtml");
+
             }
-            compraFacade.salvar(compra);
-            JsfUtil.adicionarMenssagemSucesso("Salvo com sucesso");
-            FacesContext.getCurrentInstance().getExternalContext().redirect("compralista.xhtml");
         } catch (Exception e) {
             JsfUtil.adicionarMenssagemErro("Falha ao salvar");
         }
-
     }
+
 
     public void editar(Compra ve) {
         compra = ve;
