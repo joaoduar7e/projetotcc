@@ -53,6 +53,10 @@ public class AjusteEstControle implements Serializable {
         return ajusteEstFacade.listaTodos();
     }
 
+    public List<AjusteEst> getListaAjusteEstoq() {
+        return ajusteEstFacade.listaAjusteEstoq();
+    }
+
     public Double getQuantidadeEstoque() {
         Double quantidadeAtual = 0d;
         try {

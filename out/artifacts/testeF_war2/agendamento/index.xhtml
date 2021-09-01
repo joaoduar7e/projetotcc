@@ -60,6 +60,7 @@
 
 
                                     <p:outputLabel value="Local:" for="local"/>
+                                    <h:panelGroup>
                                     <p:autoComplete value="#{agendamentoControle.agendamento.locais}"
                                                     size="60" id="local" required="true"
                                                     requiredMessage="O local é obrigatório!"
@@ -70,12 +71,20 @@
                                                     forceSelection="true"
                                                     completeMethod="#{agendamentoControle.getListaLocaisFiltrando}"
                                                     var="loc"
-                                                    inputStyle="width: 100%;"
+                                                    style="width: 75%"
+                                                    inputStyle="width: 75%;"
                                                     itemValue="#{loc}"
                                                     itemLabel="#{loc.descricao}"
                                                     converter="#{agendamentoControle.locaisConverter}"/>
+                                    <p:commandButton icon="pi pi-plus-circle" title="Adicionar local"
+                                                     id="btAddLocal"
+                                                     styleClass="rounded-button ui-button-success"
+                                                     action="#{agendamentoControle.novoCliente}"
+                                                     onclick="PF('addLocal').show()"/>
+                                </h:panelGroup>
 
-                                    <p:outputLabel value="Maquinário:" for="maq"/>
+
+                                <p:outputLabel value="Maquinário:" for="maq"/>
                                     <p:autoComplete value="#{agendamentoControle.agendamento.maquinario}"
                                                     size="60" id="maq"
                                                     emptyMessage="Nenhum maquinário encontrado"
@@ -374,6 +383,58 @@
             </h:form>
         </p:dialog>
 
+        <p:dialog header="Cadastrar Local" id="dialogLocal" widgetVar="addLocal" minHeight="150" width="90%"
+                  showEffect="fade" modal="true">
+            <h:form>
+                <p:panel>
+                    <p:panelGrid columns="2"
+                                 columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent;">
+
+                        <p:row styleClass="my-heading-row">
+                        </p:row>
+                        <p:outputLabel value="Cidade"/>
+                        <p:autoComplete value="#{locaisControle.locais.cidade}"
+                                        completeMethod="#{locaisControle.getListaCidadeFiltrando}"
+                                        var="cid" id="cidadeL" forceSelection="true"
+                                        size="40"
+                                        widgetVar="prodWid"
+                                        onclick="PF('prodWid').search('')"
+                                        itemLabel="#{cid.nome}"
+                                        itemValue="#{cid}"
+                                        converter="#{locaisControle.cidadeConverter}"/>
+
+                        <p:outputLabel value="Descrição" for="nomeL"/>
+                        <p:inputText value="#{locaisControle.locais.descricao}" id="nomeL" size="40"
+                                     placeholder="Escreva o nome do local!"
+                                     required="true" requiredMessage="O nome é obrigatório!"/>
+
+                        <p:outputLabel value="Observação"/>
+                        <p:inputText value="#{locaisControle.locais.observacao}" id="obsL" size="40"
+                                     placeholder="Escreva a observação do local!"/>
+
+                        <p:outputLabel value="Distância"/>
+                        <p:inputText value="#{locaisControle.locais.distancia}" id="distancia" size="40"
+                                     placeholder="Escreva o distância do local!"/>
+
+
+                        <p:row>
+                            <p:column styleClass="ui-grid-col-6">
+
+                                <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                                 onclick="PF('addLocal').hide()"/>
+                            </p:column>
+                            <p:column styleClass="ui-grid-col-6">
+                                <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                                 actionListener="#{locaisControle.salvar()}" update="@this cliente btAddCli" onclick="PF('addLocal').hide()"/>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                </p:panel>
+            </h:form>
+        </p:dialog>
 
     </ui:define>
     <h:outputStylesheet>

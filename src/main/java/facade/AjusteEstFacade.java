@@ -11,6 +11,8 @@ import entidades.Vendas;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class AjusteEstFacade extends AbstractFacade<AjusteEst> {
 
@@ -28,6 +30,13 @@ public class AjusteEstFacade extends AbstractFacade<AjusteEst> {
 
     public void ajusteMerge(AjusteEst ae){
         em.merge(ae);
+    }
+
+    public List<AjusteEst> listaAjusteEstoq() {
+        Query q = getEntityManager().createQuery("from "
+                + "AjusteEst as ae "
+                + "order by ae.id desc");
+        return q.getResultList();
     }
 
 }

@@ -70,6 +70,7 @@ public class LocaisControle implements Serializable {
 
     public void salvar() {
         locaisFacade.salvar(locais);
+        locais = new Locais();
     }
 
 
