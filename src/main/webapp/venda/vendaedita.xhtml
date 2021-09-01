@@ -13,7 +13,6 @@
     <ui:define name="body">
         <br/>
         <h:form>
-            <p:messages id="mes"/>
             <div class="card">
                 <p:panel header="Movimento de venda">
                     <p:tabView>
@@ -82,7 +81,22 @@
                                                             onclick="PF('prodWid').search('')"
                                                             itemLabel="#{prod.descricao}"
                                                             itemValue="#{prod}"
-                                                            converter="#{vendaControle.pecasConverter}"/>
+                                                            converter="#{vendaControle.pecasConverter}">
+                                                <f:facet name="itemtip">
+                                                    <p:panelGrid columns="2" layout="grid">
+                                                        <h:outputText value="ID:"/>
+                                                        <h:outputText value="#{prod.id}"
+                                                                      styleClass="hardblue"/>
+
+                                                        <h:outputText value="Estq:"/>
+                                                        <h:panelGroup>
+                                                            <h:outputText value=" #{prod.qtdEst}"
+                                                                          styleClass="hardblue"/>
+                                                        </h:panelGroup>
+
+                                                    </p:panelGrid>
+                                                </f:facet>
+                                            </p:autoComplete>
 
                                             <p:outputLabel value="Quantidade" for="quantidade"/>
                                             <p:inputNumber value="#{vendaControle.itensVenda.quantidade}"
