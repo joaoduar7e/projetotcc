@@ -121,6 +121,11 @@ public class CompraControle implements Serializable {
         return compraFacade.listaTodos();
     }
 
+    public List<Compra> getListaCompraOrd() {
+        return compraFacade.listaCompraOrd();
+    }
+
+
     public void novo() {
         compra = new Compra();
         itensCompra = new ItensCompra();

@@ -5,12 +5,15 @@
  */
 package facade;
 
+import entidades.Agendamento;
 import entidades.ItensVenda;
 import entidades.Pecas;
 import entidades.Vendas;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class VendaFacade extends AbstractFacade<Vendas> {
 
@@ -24,6 +27,13 @@ public class VendaFacade extends AbstractFacade<Vendas> {
 
     public VendaFacade() {
         super(Vendas.class);
+    }
+
+    public List<Vendas> listaVendaOrd() {
+        Query q = getEntityManager().createQuery("from "
+                + "Vendas as v "
+                + "order by v.id desc");
+        return q.getResultList();
     }
 
 }

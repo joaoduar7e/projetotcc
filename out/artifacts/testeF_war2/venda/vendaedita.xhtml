@@ -13,6 +13,7 @@
     <ui:define name="body">
         <br/>
         <h:form>
+            <p:messages id="mes"/>
             <div class="card">
                 <p:panel header="Movimento de venda">
                     <p:tabView>
@@ -30,20 +31,28 @@
                                                 required="true" requiredMessage="A data é obrigatória!"/>
 
                                     <p:outputLabel value=" Cliente" for="cliente"/>
-                                    <p:autoComplete value="#{vendaControle.vendas.cliente}"
-                                                    size="60" id="cliente" required="true"
-                                                    requiredMessage="O cliente é obrigatório!"
-                                                    emptyMessage="Nenhum cliente encontrado"
-                                                    effect="blind"
-                                                    widgetVar="cliWid"
-                                                    onclick="PF('cliWid').search('')"
-                                                    forceSelection="true"
-                                                    completeMethod="#{vendaControle.getListaClienteFiltrando}"
-                                                    var="alu"
-                                                    inputStyle="width: 100%;"
-                                                    itemValue="#{alu}"
-                                                    itemLabel="#{alu.nome}"
-                                                    converter="#{vendaControle.clienteConverter}"/>
+                                    <h:panelGroup>
+                                        <p:autoComplete value="#{vendaControle.vendas.cliente}"
+                                                        size="60" id="cliente" required="true"
+                                                        requiredMessage="O cliente é obrigatório!"
+                                                        emptyMessage="Nenhum cliente encontrado"
+                                                        effect="blind"
+                                                        widgetVar="cliWid"
+                                                        onclick="PF('cliWid').search('')"
+                                                        forceSelection="true"
+                                                        completeMethod="#{vendaControle.getListaClienteFiltrando}"
+                                                        var="alu"
+                                                        style="width: 75%"
+                                                        inputStyle="width: 75%;"
+                                                        itemValue="#{alu}"
+                                                        itemLabel="#{alu.nome}"
+                                                        converter="#{vendaControle.clienteConverter}"/>
+                                        <p:commandButton icon="pi pi-plus-circle" title="Adicionar cliente"
+                                                         id="btAddCli"
+                                                         styleClass="rounded-button ui-button-success"
+                                                         action="#{agendamentoControle.novoCliente}"
+                                                         onclick="PF('addCliente').show()"/>
+                                    </h:panelGroup>
                                 </p:panelGrid>
                             </p:panel>
                             <p:commandButton value="Cancelar" icon="pi pi-undo" iconPos="right" ajax="false"
@@ -332,9 +341,101 @@
                     </p:tabView>
                 </p:panel>
             </div>
-
-
         </h:form>
+
+        <p:dialog header="Cadastrar Cliente" id="dialogCli" widgetVar="addCliente" minHeight="150" width="90%"
+                  showEffect="fade" modal="true">
+            <h:form>
+
+                <p:panelGrid columns="4"
+                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:row styleClass="my-heading-row" style="font-weight: bold">
+                        Dados Cliente
+                    </p:row>
+
+                    <p:outputLabel value="CPF / CNPJ" for="cpfcnpj"/>
+
+                    <p:inputMask id="cpfcnpj" value="#{clienteControle.cliente.cpfcpnj}"
+                                 requiredMessage="Campo CPF/CNPJ é obrigatório!" type="number"
+                                 required="true" placeHolder="">
+                    </p:inputMask>
+
+                    <p:outputLabel value="Data de nascimento" for="dateA"/>
+                    <p:datePicker id="dateA" value="#{clienteControle.cliente.dataNascimento}" size="40"
+                                  showIcon="true" style="width:auto"/>
+
+                    <p:outputLabel value="Nome" for="nome"/>
+                    <p:inputText value="#{clienteControle.cliente.nome}" id="nome" size="40"
+                                 placeholder="Escreva o nome do cliente!"
+                                 requiredMessage="O nome é obrigatório!" required="true"/>
+
+                    <p:outputLabel value="Sobrenome" for="sobrenome"/>
+                    <p:inputText value="#{clienteControle.cliente.sobrenome}" id="sobrenome" size="40"
+                                 placeholder="Escreva o sobrenome do cliente!"/>
+
+                    <p:outputLabel value="Apelido" for="apelido"/>
+                    <p:inputText value="#{clienteControle.cliente.apelido}" id="apelido" size="40"
+                                 placeholder="Escreva o apelido do cliente!"/>
+
+                    <p:outputLabel value="Telefone" for="telefone"/>
+                    <p:inputMask mask="(99)9999-9999"
+                                 value="#{clienteControle.cliente.telefone}" id="telefone" size="40"
+                                 placeholder="O Telefone deve conter apenas números"
+                                 required="true" requiredMessage="O telefone é obrigatório"> </p:inputMask>
+
+                    <p:row id="my-row-id" styleClass="my-heading-row" style="font-weight: bold">
+                        Endereço
+                    </p:row>
+
+
+                    <p:outputLabel value="Cidade"/>
+                    <p:autoComplete value="#{clienteControle.cliente.cidade}"
+                                    completeMethod="#{clienteControle.getListaCidadeFiltrando}"
+                                    var="cid" id="cidade" forceSelection="true"
+                                    size="40"
+                                    widgetVar="cidWid"
+                                    onclick="PF('cidWid').search('')"
+                                    itemLabel="#{cid.nome}"
+                                    itemValue="#{cid}"
+                                    converter="#{clienteControle.cidadeConverter}"/>
+
+                    <p:outputLabel value="Logradouro"/>
+                    <p:inputText value="#{clienteControle.cliente.logradouro}" id="endereco" size="40"
+                                 placeholder="Escreva o logradouro de endereço do cliente!"/>
+
+                    <p:outputLabel value="Número"/>
+                    <p:inputText value="#{clienteControle.cliente.numero}" id="numero" size="40"
+                                 placeholder="Escreva o número de endereço do cliente!"/>
+
+                    <p:outputLabel value="Bairro"/>
+                    <p:inputText value="#{clienteControle.cliente.bairro}" id="bairro" size="40"
+                                 placeholder="Escreva o bairro de endereço do cliente!"/>
+
+                    <p:outputLabel value="Observação"/>
+                    <p:inputText value="#{clienteControle.cliente.observacao}" id="obs" size="40"
+                                 placeholder="Escreva a observação de endereço do cliente!"/>
+
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-6">
+
+                            <p:commandButton value="Voltar" ajax="false" styleClass="ui-button-raised" immediate="true"
+                                             onclick="PF('addCliente').hide()"/>
+                        </p:column>
+                        <p:column styleClass="ui-grid-col-6">
+                            <p:commandButton value="Salvar" ajax="false" styleClass="ui-button-raised ui-button-success"
+                                             actionListener="#{clienteControle.salvar()}"
+                                             update="@this cliente btAddCli" onclick="PF('addCliente').hide()"/>
+                        </p:column>
+                    </p:row>
+                </p:panelGrid>
+
+            </h:form>
+        </p:dialog>
+
     </ui:define>
 </ui:composition>
 

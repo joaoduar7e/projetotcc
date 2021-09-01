@@ -6,9 +6,12 @@
 package facade;
 
 import entidades.Compra;
+import entidades.Vendas;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 
 public class CompraFacade  extends AbstractFacade<Compra> {
@@ -22,5 +25,12 @@ public class CompraFacade  extends AbstractFacade<Compra> {
 
     public CompraFacade() {
         super(Compra.class);
+    }
+
+    public List<Compra> listaCompraOrd() {
+        Query q = getEntityManager().createQuery("from "
+                + "Compra as c "
+                + "order by c.id desc");
+        return q.getResultList();
     }
 }

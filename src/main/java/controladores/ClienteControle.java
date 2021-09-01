@@ -66,8 +66,8 @@ public class ClienteControle implements Serializable {
     }
 
     public void salvar() {
-
         clienteFacade.salvar(cliente);
+        cliente = new Cliente();
     }
 
 }

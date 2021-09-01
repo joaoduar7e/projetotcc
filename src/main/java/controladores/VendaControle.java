@@ -232,6 +232,11 @@ public class VendaControle implements Serializable {
         return vendaFacade.listaTodos();
     }
 
+    public List<Vendas> getListaVendasOrd() {
+        return vendaFacade.listaVendaOrd();
+    }
+
+
     public ItensServico getItensServico() {
         return itensServico;
     }
