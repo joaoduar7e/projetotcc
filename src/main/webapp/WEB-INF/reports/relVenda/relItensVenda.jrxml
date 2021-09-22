@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relItensVenda" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="243ff503-c767-48ce-a5e7-915cebfc433d">
 	<property name="ireport.zoom" value="1.3310000000000024"/>
-	<property name="ireport.x" value="64"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="VENDA_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select p.descricao as pdesc, p.preco as ppreco, p.id as pid, itv.preco AS itvpreco,
-       itv.quantidade as itvqtd, p.preco * itv.quantidade as totalItenV
+       itv.quantidade as itvqtd, itv.preco * itv.quantidade as totalItenV
 from itensvenda as itv
          inner join pecas as p on p.id=itv.pecas_id
          inner join vendas as v on v.id=itv.vendas_id
+where itv.vendas_id = $P{VENDA_ID}
 order by  p.descricao]]>
 	</queryString>
 	<field name="pdesc" class="java.lang.String"/>
@@ -124,7 +128,7 @@ order by  p.descricao]]>
 					<font size="7"/>
 					<paragraph rightIndent="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{ppreco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{itvpreco}]]></textFieldExpression>
 			</textField>
 			<textField pattern="¤ #,##0.00">
 				<reportElement stretchType="RelativeToBandHeight" x="459" y="0" width="96" height="12" uuid="f356aa91-ad4e-4b45-ad6f-f81796e25014"/>

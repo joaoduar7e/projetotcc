@@ -414,7 +414,6 @@ public class RelatorioControle implements Serializable {
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
             //gera relatorio com as classes do jasper
             HashMap p = new HashMap();
-//            p.put("param", filtros);
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relVenda/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();

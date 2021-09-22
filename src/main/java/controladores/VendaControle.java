@@ -255,6 +255,7 @@ public class VendaControle implements Serializable {
                 itTemp = it;
                 estoque = estoque - it.getQuantidade();
             }
+            JsfUtil.adicionarMenssagemErro("O produto já está adicionado no list, caso queira fazer uma alteração, exclue tal e adicione novemente");
             return;
         }
         if (estoque - itensVenda.getQuantidade() < 0 || estoque - itensVenda.getQuantidade() == -1) {
