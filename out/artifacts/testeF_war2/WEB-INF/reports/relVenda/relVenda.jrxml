@@ -22,7 +22,7 @@ from vendas v
          LEFT JOIN pecas AS prod ON prod.id=itv.id
 
 GROUP BY v.id, c.nome, c.sobrenome, c.telefone, itv.id, its.id
-order by v.datavenda, v.id]]>
+order by v.datavenda DESC, v.id]]>
 	</queryString>
 	<field name="id" class="java.lang.Long"/>
 	<field name="valorserv" class="java.lang.Double"/>

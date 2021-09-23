@@ -13,7 +13,7 @@
        s.preco                  as servpreco, its.quantidade * its.preco as totalPs
 from itensservico as its
          inner join servico as s on s.id = its.servico_id
-         inner join vendas as v on v.id = its.vendas_id
+         left join vendas as c on c.id = its.vendas_id
 where its.vendas_id=$P{VENDA_ID}
 order by s.descricao]]>
 	</queryString>
@@ -127,7 +127,7 @@ order by s.descricao]]>
 					<font size="7"/>
 					<paragraph rightIndent="5"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{servpreco}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{itspreco}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="12" uuid="2698f446-f1b5-4ee5-86dd-e00fda443cdd"/>

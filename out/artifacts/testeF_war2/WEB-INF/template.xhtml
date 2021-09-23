@@ -79,8 +79,15 @@
                 </p:submenu>
 
                 <p:submenu label="Expediente" icon="pi pi-fw pi-plus-circle">
+                    <p:menuitem value="Relatório de agendamento" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relAgendamento/relAgenda.xhtml"/>
+                    <p:menuitem value="Relatório de ajuste de estoque" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relAjuste/relAjuste.xhtml"/>
+                    <p:menuitem value="Relatório de compras" icon="pi pi-fw pi-user" ajax="false"
+                                outcome="/relatorio/relCompra/relCompra.xhtml"/>
                     <p:menuitem value="Relatório de vendas" icon="pi pi-fw pi-user" ajax="false"
                                 outcome="/relatorio/relVenda/relVenda.xhtml"/>
+
                 </p:submenu>
             </p:submenu>
 
