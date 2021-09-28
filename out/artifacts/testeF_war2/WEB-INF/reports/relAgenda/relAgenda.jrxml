@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relCidade" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c5c87a2-98a7-42fb-b79b-8353efa76157">
+	<property name="ireport.zoom" value="1.331000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Joao\\Desktop\\io\\src\\main\\webapp\\WEB-INF\\reports\\relAgenda\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.id, a.valortotals as valorServ,
+       a.valortotal as valorTotal, c.nome as cliNome, c.sobrenome,
+       c.telefone as telefone, a.dataagendamento, its.id, a.dataagendadada, a.finalizado
+
+from agendamento a
+         INNER join cliente c on c.id = a.cliente_id
+
+
+         LEFT JOIN itensagendamento AS its ON a.id=its.id
+         LEFT JOIN servico AS serv ON serv.id=its.id
+
+
+GROUP BY a.id, c.nome, c.sobrenome, c.telefone, its.id
+order by a.dataagendadada, a.id]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="valorserv" class="java.lang.Double"/>
+	<field name="valortotal" class="java.lang.Double"/>
+	<field name="clinome" class="java.lang.String"/>
+	<field name="sobrenome" class="java.lang.String"/>
+	<field name="telefone" class="java.lang.String"/>
+	<field name="dataagendamento" class="java.sql.Timestamp"/>
+	<field name="dataagendadada" class="java.sql.Timestamp"/>
+	<field name="finalizado" class="java.lang.Boolean"/>
+	<group name="cliente" keepTogether="true">
+		<groupExpression><![CDATA[$F{id}]]></groupExpression>
+		<groupHeader>
+			<band height="69">
+				<rectangle>
+					<reportElement x="0" y="15" width="555" height="20" uuid="b654d400-0047-4dfe-8c44-6814481e972d"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="0" y="35" width="555" height="32" uuid="c8a4914a-a78c-4bda-88c0-cb452326802a"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="11" y="47" width="93" height="20" uuid="6e04af75-c04b-4db7-886f-cfeffd0f3ff6"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="441" y="47" width="108" height="20" uuid="e8b465cd-54eb-441d-8063-58ff18fae064"/>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Opaque" x="6" y="9" width="84" height="12" uuid="b3472fe2-dd16-43bf-88cd-9c857b3cc2e9"/>
+					<box leftPadding="0">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[CLIENTE]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="18" y="21" width="337" height="13" uuid="5f3a66c0-f02e-461e-adbe-c6b3ad09ee71"/>
+					<textElement verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{clinome} + " " + $F{sobrenome}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="446" y="43" width="99" height="12" uuid="82ef1df0-49c7-4bea-adc9-6a08d8f63c09"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AGENDADO PARA]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="446" y="55" width="99" height="13" uuid="e5ed862b-7eac-4daf-b5fc-5e681721a88c"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataagendadada}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="18" y="43" width="79" height="12" uuid="feaaea29-0e85-491e-bfa2-ee62d8fad51e"/>
+					<box leftPadding="0">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[AGENDAMENTO ID]]></text>
+				</staticText>
+				<textField pattern="">
+					<reportElement x="13" y="55" width="84" height="13" uuid="f6de001f-1308-433a-ae4a-bd1c2578d84f"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="304" y="47" width="119" height="20" uuid="16976c9a-32d3-49a0-b576-21eadc2e113b"/>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Opaque" x="314" y="43" width="98" height="12" uuid="baa217cd-3670-493c-a49f-a074dcebf652"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DATA AGENDAMENTO]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="314" y="54" width="99" height="13" uuid="f906182d-95d0-4ead-ba9a-134d499941a3"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{dataagendamento}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="171" y="47" width="119" height="20" uuid="0aaafed9-0ded-4d67-91c5-1fa66a87c416"/>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Opaque" x="182" y="42" width="98" height="12" uuid="f5e1d40a-0206-49a5-99ef-8d2b6e01fb18"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[STATUS]]></text>
+				</staticText>
+				<textField pattern="">
+					<reportElement x="182" y="53" width="98" height="13" uuid="52b70462-b374-4591-9157-043f6c5f97ec"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{finalizado} ? "Finalizado" : "Aberto"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="423" y="9" width="84" height="12" uuid="b1134489-c167-410e-9329-9178e932b84c"/>
+					<box leftPadding="0">
+						<pen lineWidth="0.75"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true" isUnderline="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[TELEFONE]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="423" y="21" width="84" height="13" uuid="56904cf1-9fea-4759-999f-3defae8e5e1a"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="70">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="90" backcolor="#006699" uuid="a32490ab-4c9b-4e9e-8cc0-e21e9e85db26"/>
+				<staticText>
+					<reportElement x="20" y="20" width="436" height="43" forecolor="#FFFFFF" uuid="d3908390-b5ec-4f12-9e8e-56619252b567"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relátorio de agendamento]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<detail>
+		<band height="20">
+			<subreport>
+				<reportElement x="0" y="0" width="557" height="12" isRemoveLineWhenBlank="true" uuid="9f9d8cc9-ef47-4d01-b518-ceb544a61a50"/>
+				<subreportParameter name="VENDA_ID">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "relItensServico.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="d9b38353-81bc-4777-8b33-07b497510ebb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="b8487cde-468b-4a15-bdba-576314d0bd29"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="51bed243-a872-455d-b481-db1952c9ceee"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

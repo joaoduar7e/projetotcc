@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relItensVenda" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="243ff503-c767-48ce-a5e7-915cebfc433d">
+	<property name="ireport.zoom" value="1.3310000000000024"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="VENDA_ID" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select s.id as sid, its.preco                as itspreco,
+       its.quantidade           as itsqtd,
+       s.descricao              as servnome,
+       s.preco                  as servpreco, its.quantidade * its.preco as totalPs
+from itensagendamento as its
+         inner join servico as s on s.id = its.servico_id
+         inner join agendamento as c on c.id = its.agendamento_id
+where its.agendamento_id=$P{VENDA_ID}
+order by s.descricao]]>
+	</queryString>
+	<field name="sid" class="java.lang.Long"/>
+	<field name="itspreco" class="java.lang.Double"/>
+	<field name="itsqtd" class="java.lang.Double"/>
+	<field name="servnome" class="java.lang.String"/>
+	<field name="servpreco" class="java.lang.String"/>
+	<field name="totalps" class="java.lang.Double"/>
+	<pageHeader>
+		<band height="17">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="17" uuid="63f583de-2e1f-41de-833a-5d5d20f4febd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="17" uuid="38a2079f-74f2-4b3f-8b2e-448037bd4985"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Rounded MT Bold"/>
+				</textElement>
+				<text><![CDATA[ITENS DO AGENDAMENTO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="40" height="12" backcolor="#DCDCDC" uuid="01ee9874-ff5e-4da4-8d5b-0e73b0a57cbd"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Cod]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="40" y="0" width="226" height="12" backcolor="#DCDCDC" uuid="98745de2-2f5e-41bf-8351-53025725e93d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="255" y="0" width="100" height="12" backcolor="#DCDCDC" uuid="3e1f5ec8-b1a0-4ad9-b601-ec3510203486"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="355" y="0" width="104" height="12" backcolor="#DCDCDC" uuid="a627a559-a29e-41f1-9d54-e314f6938273"/>
+				<box rightPadding="2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Vr. Unit.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="459" y="0" width="96" height="12" backcolor="#DCDCDC" uuid="a99a016f-0876-48c8-92e7-2750d16a4dc5"/>
+				<box rightPadding="2">
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Vr. Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="40" y="0" width="215" height="12" uuid="f365ea78-63d6-46f8-9e4f-d372311b7edb"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servnome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.000">
+				<reportElement stretchType="RelativeToBandHeight" x="255" y="0" width="100" height="12" uuid="6c8957bb-8c8f-4f2d-b0a9-5c7f7febb1d1"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itsqtd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="355" y="0" width="104" height="12" uuid="b6d36997-98aa-4523-b083-4e108f68fbea"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itspreco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="12" uuid="2698f446-f1b5-4ee5-86dd-e00fda443cdd"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="459" y="0" width="96" height="12" uuid="3d5daa7d-e70e-4d65-a073-bcb8e2adb286"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{totalps}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

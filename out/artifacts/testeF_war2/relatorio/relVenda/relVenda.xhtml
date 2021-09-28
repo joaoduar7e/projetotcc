@@ -30,6 +30,22 @@
                          styleClass="ui-panelgrid-blank ui-fluid"
                          style="border:0px none; background-color:transparent;">
 
+            <p:panelGrid columns="2"
+                         columnClasses="ui-grid-col-3,ui-grid-col-3"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+                <p:outputLabel value="Data Inicial" for="data"/>
+                <p:calendar value="#{relatorioControle.dataInicio}" id="data"
+                            pattern="dd/MM/yyyy" locale="pt_BR"
+                            required="true" requiredMessage="A data é obrigatória!"/>
+                <p:outputLabel value="Data Final" for="data"/>
+                <p:calendar value="#{relatorioControle.dataFim}" id="dataF"
+                            pattern="dd/MM/yyyy" locale="pt_BR"
+                            required="true" requiredMessage="A data é obrigatória!"/>
+
+            </p:panelGrid>
+
                 <p:commandButton value="PDF" ajax="false"
                                  styleClass="ui-button-secondary"
                                  action="#{relatorioControle.geraRelatorioVenda()}"

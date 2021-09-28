@@ -14,15 +14,30 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Named
 @ViewAccessScoped
 public class RelatorioControle implements Serializable {
 
-    // Cadastrais
+    private final SimpleDateFormat DATA_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+    private String consultaProd = "TODOS";
+    private Boolean apenasEst = false;
+
+    private Date dataInicio = new Date();
+    private Date dataFim = new Date();
+
+    HashMap p = new HashMap();
+
+    // Cadastrais
     public void geraRelatorioCliente() {
         try {
             JasperReport relatorio;
@@ -158,6 +173,7 @@ public class RelatorioControle implements Serializable {
             System.out.println("erro: " + e.getMessage());
         }
     }
+
     public void geraRelatorioLocais() {
         try {
             JasperReport relatorio;
@@ -191,6 +207,7 @@ public class RelatorioControle implements Serializable {
             System.out.println("erro: " + e.getMessage());
         }
     }
+
     public void geraRelatorioMaq() {
         try {
             JasperReport relatorio;
@@ -224,6 +241,7 @@ public class RelatorioControle implements Serializable {
             System.out.println("erro: " + e.getMessage());
         }
     }
+
     public void geraRelatorioPecas() {
         try {
             JasperReport relatorio;
@@ -257,8 +275,6 @@ public class RelatorioControle implements Serializable {
             System.out.println("erro: " + e.getMessage());
         }
     }
-
-
 
 
     public void geraRelatorioServico() {
@@ -362,8 +378,6 @@ public class RelatorioControle implements Serializable {
             System.out.println("erro: " + e.getMessage());
         }
     }
-
-
 
 
     //Financeiro
@@ -473,6 +487,7 @@ public class RelatorioControle implements Serializable {
     }
 
     public void geraRelatorioAjuste() {
+        String consulta = "";
         try {
             JasperReport relatorio;
             String arquivoJasper = "relAjuste.jasper";
@@ -539,21 +554,33 @@ public class RelatorioControle implements Serializable {
         }
     }
 
-    public void geraRelatorioVenda() {
+    public void geraRelatorioEstoque() {
         try {
+            String condicao = "";
             JasperReport relatorio;
-            String arquivoJasper = "relVenda.jasper";
+            String arquivoJasper = "relEstoque.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
             //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
-            JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relVenda/" + arquivoJasper), p, JpaUtil.getConnection());
+
+
+            if (apenasEst) {
+                condicao = " where p.qtdEst > 0 ";
+            } else {
+                condicao = "";
+
+            }
+            p.put("condicaoEst", condicao);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relEstoque/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, dadosByte);
             exporter.exportReport();
+
+
             byte[] bytes = dadosByte.toByteArray();
             if (bytes != null && bytes.length > 0) {
                 int recorte = arquivoJasper.indexOf(".");
@@ -572,6 +599,76 @@ public class RelatorioControle implements Serializable {
         }
     }
 
+    public void geraRelatorioVenda() {
+        try {
+            JasperReport relatorio;
+            String arquivoJasper = "relVenda.jasper";
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.responseComplete();
+            ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+            //gera relatorio com as classes do jasper
+            HashMap p = new HashMap();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relVenda/" + arquivoJasper), p, JpaUtil.getConnection());
+            ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, dadosByte);
+            exporter.exportReport();
+            byte[] bytes = dadosByte.toByteArray();
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+            if (bytes != null && bytes.length > 0) {
+                int recorte = arquivoJasper.indexOf(".");
+                String nomePDF = arquivoJasper.substring(0, recorte);
+                HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+                response.setContentType("application/pdf");
+                response.setHeader("Content-disposition", "inline; filename=\"" + nomePDF + ".pdf\"");
+                response.setContentLength(bytes.length);
+                ServletOutputStream outputStream = response.getOutputStream();
+                outputStream.write(bytes, 0, bytes.length);
+                outputStream.flush();
+                outputStream.close();
+            }
+        } catch (Exception e) {
+            System.out.println("erro: " + e.getMessage());
+        }
+    }
 
 
+    // Gets e Sets
+
+
+    public String getConsultaProd() {
+        return consultaProd;
+    }
+
+    public void setConsultaProd(String consultaProd) {
+        this.consultaProd = consultaProd;
+    }
+
+    public Boolean getApenasEst() {
+        return apenasEst;
+    }
+
+    public void setApenasEst(Boolean apenasEst) {
+        this.apenasEst = apenasEst;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
 }

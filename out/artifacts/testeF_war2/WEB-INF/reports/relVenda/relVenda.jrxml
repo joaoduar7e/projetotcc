@@ -6,6 +6,12 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["C:\\Users\\Joao\\Desktop\\io\\src\\main\\webapp\\WEB-INF\\reports\\relVenda\\"]]></defaultValueExpression>
 	</parameter>
+	<parameter name="dataI" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataF" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select v.id, v.valortotalp as valorServ, valortotals as valorProd,
        v.valortotal as valorTotal, c.nome as cliNome, c.sobrenome,
@@ -20,7 +26,7 @@ from vendas v
 
          LEFT JOIN itensvenda AS itv ON v.id=itv.id
          LEFT JOIN pecas AS prod ON prod.id=itv.id
-
+where DATE(v.datavenda) BETWEEN  $P{dataI} and $P{dataF}
 GROUP BY v.id, c.nome, c.sobrenome, c.telefone, itv.id, its.id
 order by v.datavenda DESC, v.id]]>
 	</queryString>
