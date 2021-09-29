@@ -1,5 +1,7 @@
 package controladores;
 
+import entidades.Cliente;
+import entidades.Pecas;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -29,7 +31,11 @@ public class RelatorioControle implements Serializable {
 
     private final SimpleDateFormat DATA_FORMAT = new SimpleDateFormat("dd/MM/yyyy");
 
+    private Cliente cliente;
+    private Pecas produtos;
+
     private String consultaProd = "TODOS";
+
     private Boolean apenasEst = false;
 
     private Date dataInicio = new Date();
@@ -571,6 +577,15 @@ public class RelatorioControle implements Serializable {
                 condicao = "";
 
             }
+
+            if (produtos != null) {
+                if (condicao == "") {
+                    condicao += " where p.id  = " + produtos.getId();
+                } else {
+                    condicao += " AND p.id  = " + produtos.getId();
+                }
+            }
+            System.out.println(consultaProd);
             p.put("condicaoEst", condicao);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relEstoque/" + arquivoJasper), p, JpaUtil.getConnection());
@@ -618,6 +633,7 @@ public class RelatorioControle implements Serializable {
 
             p.put("dataI", dataInicio);
             p.put("dataF", dataFim);
+
 
             if (bytes != null && bytes.length > 0) {
                 int recorte = arquivoJasper.indexOf(".");
@@ -670,5 +686,21 @@ public class RelatorioControle implements Serializable {
 
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Pecas getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Pecas produtos) {
+        this.produtos = produtos;
     }
 }
