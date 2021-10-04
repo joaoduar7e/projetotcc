@@ -22,6 +22,11 @@
                     <p:row styleClass="my-heading-row">
                     </p:row>
 
+                    <p:outputLabel value="Data" for="data"/>
+                    <p:calendar value="#{ajusteEstControle.ajusteEst.dataVenda}" id="data"
+                                pattern="dd/MM/yyyy" locale="pt_BR" disabled="true"
+                                required="true" requiredMessage="A data é obrigatória!"/>
+
                     <p:outputLabel value="Peças"/>
                     <p:autoComplete value="#{ajusteEstControle.ajusteEst.pecas}"
                                     size="60" id="cliente" required="true"

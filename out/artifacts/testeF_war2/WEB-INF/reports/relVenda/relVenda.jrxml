@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relCidade" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c5c87a2-98a7-42fb-b79b-8353efa76157">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relVenda" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c5c87a2-98a7-42fb-b79b-8353efa76157">
 	<property name="ireport.zoom" value="1.331000000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -12,6 +12,7 @@
 	<parameter name="dataF" class="java.util.Date">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="condicao" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select v.id, v.valortotalp as valorServ, valortotals as valorProd,
        v.valortotal as valorTotal, c.nome as cliNome, c.sobrenome,
@@ -26,7 +27,8 @@ from vendas v
 
          LEFT JOIN itensvenda AS itv ON v.id=itv.id
          LEFT JOIN pecas AS prod ON prod.id=itv.id
-where DATE(v.datavenda) BETWEEN  $P{dataI} and $P{dataF}
+where date(v.datavenda) between $P{dataI} and $P{dataF}
+$P!{condicao}
 GROUP BY v.id, c.nome, c.sobrenome, c.telefone, itv.id, its.id
 order by v.datavenda DESC, v.id]]>
 	</queryString>

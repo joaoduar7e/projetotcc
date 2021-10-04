@@ -12,6 +12,7 @@
     <ui:define name="body">
 
         <h:form>
+            <p:panel>
             <p:panelGrid columns="4"
                          columnClasses="ui-grid-col-12"
                          layout="grid"
@@ -24,17 +25,72 @@
                 </p:row>
             </p:panelGrid>
 
-            <p:panelGrid columns="1"
+            <p:panelGrid columns="1" id="gridC"
                          columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
                          layout="grid"
                          styleClass="ui-panelgrid-blank ui-fluid"
                          style="border:0px none; background-color:transparent;">
+
+                <h:panelGroup id="panelC">
+                    <p:outputLabel value="Pesquisar por: "/>
+                    <br/>
+                    <p:selectOneRadio value="#{relatorioControle.consultaProd}"
+                                      style="display: inline;">
+
+                        <f:selectItem itemValue="TODOS" itemLabel="Todos os Clientes"/>
+                        <f:selectItem itemValue="CLIENTE" itemLabel="Por Cliente"/>
+                        <p:ajax event="change" update=" @this panelC gridC"/>
+                    </p:selectOneRadio>
+
+
+                    <p:panelGrid columns="1"
+                                 columnClasses="ui-grid-col-6,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                                 layout="grid"
+                                 styleClass="ui-panelgrid-blank ui-fluid"
+                                 style="border:0px none; background-color:transparent;">
+
+
+                        <p:outputLabel value=" Cliente" for="cliente"
+                                       rendered="#{relatorioControle.consultaProd == 'CLIENTE'}"/>
+                        <p:autoComplete value="#{relatorioControle.cliente}"
+                                        size="60" id="cliente" required="true"
+                                        requiredMessage="O cliente é obrigatório!"
+                                        emptyMessage="Nenhum cliente encontrado"
+                                        effect="blind"
+                                        widgetVar="cliWid"
+                                        onclick="PF('cliWid').search('')"
+                                        forceSelection="true"
+                                        completeMethod="#{vendaControle.getListaClienteFiltrando}"
+                                        var="alu"
+                                        style="width: 75%"
+                                        inputStyle="width: 75%;"
+                                        itemValue="#{alu}"
+                                        itemLabel="#{alu.nome}"
+                                        rendered="#{relatorioControle.consultaProd == 'CLIENTE'}"
+                                        converter="#{compraControle.clienteConverter}"/>
+                    </p:panelGrid>
+
+                </h:panelGroup>
+
+                <p:panelGrid columns="1"
+                             columnClasses="ui-grid-col-3,ui-grid-col-3"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:outputLabel for="range" value="Selecione o período da data de compra:"/>
+                    <p:datePicker id="range" selectionMode="range" value="#{relatorioControle.range}"
+                                  required="true" requiredMessage="Selecione a data de busca" readonlyInput="true"/>
+
+                </p:panelGrid>
 
                 <p:commandButton value="PDF" ajax="false"
                                  styleClass="ui-button-secondary"
                                  action="#{relatorioControle.geraRelatorioCompra()}"
                                  icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
             </p:panelGrid>
+            </p:panel>
+
         </h:form>
 
     </ui:define>

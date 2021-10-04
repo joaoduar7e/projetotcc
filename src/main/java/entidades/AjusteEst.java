@@ -28,6 +28,9 @@ public class AjusteEst implements Serializable, ClassePai {
     @Column
     private String tipo = "S";
 
+    public AjusteEst() { //metodo construtors
+        dataVenda = new Date(); //pega a data do servidor
+    }
 
     @Override
     public Long getId() {

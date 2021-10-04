@@ -39,11 +39,10 @@
                     </p:selectBooleanCheckbox>
 
                     <p:panelGrid columns="1" id="gridProd"
-                                 columnClasses="ui-grid-col-6,ui-grid-col-3"
+                                 columnClasses="ui-grid-col-/,ui-grid-col-3"
                                  layout="grid"
                                  styleClass="ui-panelgrid-blank ui-fluid"
                                  style="border:0px none; background-color:transparent;">
-
 
                         <p:selectOneRadio value="#{relatorioControle.consultaProd}"
                                           style="display: inline;">
@@ -68,8 +67,6 @@
                                             rendered="#{relatorioControle.consultaProd == 'PRODUTO'}"
                                             converter="#{vendaControle.pecasConverter}"/>
                         </h:panelGroup>
-
-
                     </p:panelGrid>
 
 

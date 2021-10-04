@@ -12,29 +12,63 @@
     <ui:define name="body">
 
         <h:form>
-            <p:panelGrid columns="4"
-                         columnClasses="ui-grid-col-12"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+            <p:panel>
+                <p:panelGrid columns="4" id="gridAE"
+                             columnClasses="ui-grid-col-12"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:row styleClass="my-heading-row" style="font-weight: bold">
-                    Relátorio de Ajuste de estoque
+                    <p:row styleClass="my-heading-row" style="font-weight: bold">
+                        Relátorio de Ajuste de estoque
 
-                </p:row>
-            </p:panelGrid>
+                    </p:row>
+                </p:panelGrid>
 
-            <p:panelGrid columns="1"
-                         columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+                <p:panelGrid columns="1" id="gridProd"
+                             columnClasses="ui-grid-col-6,ui-grid-col-3"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:commandButton value="PDF" ajax="false"
-                                 styleClass="ui-button-secondary"
-                                 action="#{relatorioControle.geraRelatorioAjuste()}"
-                                 icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
-            </p:panelGrid>
+                    <p:selectOneRadio value="#{relatorioControle.consultaProd}"
+                                      style="display: inline;">
+
+                        <f:selectItem itemValue="TODOS" itemLabel="Todos os Produtos"/>
+                        <f:selectItem itemValue="PRODUTO" itemLabel="Por produto"/>
+                        <p:ajax event="change" update=" @this panelP gridProd gridAE"/>
+                    </p:selectOneRadio>
+
+                    <h:panelGroup id="panelP">
+                        <p:outputLabel value="Peças" for="pecas"
+                                       rendered="#{relatorioControle.consultaProd == 'PRODUTO'}"/>
+                        <p:autoComplete value="#{relatorioControle.produtos}"
+                                        id="pecas"
+                                        completeMethod="#{vendaControle.getListaPecaFiltrando}"
+                                        var="prod"
+                                        widgetVar="prodWid"
+                                        onclick="PF('prodWid').search('')"
+                                        itemLabel="#{prod.descricao}"
+                                        itemValue="#{prod}"
+                                        required="true"
+                                        rendered="#{relatorioControle.consultaProd == 'PRODUTO'}"
+                                        converter="#{vendaControle.pecasConverter}"/>
+                    </h:panelGroup>
+                </p:panelGrid>
+
+                <p:panelGrid columns="1"
+                             columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:commandButton value="PDF" ajax="false"
+                                     styleClass="ui-button-secondary"
+                                     action="#{relatorioControle.geraRelatorioAjuste()}"
+                                     icon="pi pi-file-pdf" style="align-items: center"
+                                     onclick="this.form.target='_blank'"/>
+                </p:panelGrid>
+            </p:panel>
         </h:form>
 
     </ui:define>

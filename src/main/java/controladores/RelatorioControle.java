@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -35,11 +36,14 @@ public class RelatorioControle implements Serializable {
     private Pecas produtos;
 
     private String consultaProd = "TODOS";
+    private String statusAgendamento = "TODOS";
 
     private Boolean apenasEst = false;
 
     private Date dataInicio = new Date();
     private Date dataFim = new Date();
+
+    private List<Date> range;
 
     HashMap p = new HashMap();
 
@@ -390,14 +394,27 @@ public class RelatorioControle implements Serializable {
 
     public void geraRelatorioContasReceber() {
         try {
+            String consulta = "";
             JasperReport relatorio;
             String arquivoJasper = "relContaReceber.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
-//            p.put("param", filtros);
+
+            dataInicio = range.get(0);
+            dataFim = range.get(1);
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+            if (cliente != null) {
+                consulta += " AND c.id = " + cliente.getId();
+            }
+
+
+            p.put("condicao", consulta);
+
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relContaReceber/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -424,14 +441,26 @@ public class RelatorioControle implements Serializable {
 
     public void geraRelatorioContasPagar() {
         try {
+            String consulta = "";
             JasperReport relatorio;
             String arquivoJasper = "relContaPagar.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
-//            p.put("param", filtros);
+
+            dataInicio = range.get(0);
+            dataFim = range.get(1);
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+            if (cliente != null) {
+                consulta += " AND c.id = " + cliente.getId();
+            }
+
+
+            p.put("condicao", consulta);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relContaPagar/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -461,13 +490,42 @@ public class RelatorioControle implements Serializable {
 
     public void geraRelatorioAgenda() {
         try {
+            String consulta = "";
             JasperReport relatorio;
             String arquivoJasper = "relAgenda.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
+
+            dataInicio = range.get(0);
+            dataFim = range.get(1);
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+
+            switch (statusAgendamento) {
+                case "ABERTO":
+                    consulta = " AND a.finalizado = false";
+                    break;
+                case "FINALIZADO":
+                    consulta = " AND a.finalizado = true";
+                    break;
+                case "TODOS":
+                    consulta = "";
+                    break;
+                default:
+                    // code block
+            }
+
+            if (cliente != null) {
+                consulta += " AND c.id = " + cliente.getId();
+            }
+
+
+            p.put("condicaoStatus", consulta);
+
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relAgenda/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -493,15 +551,24 @@ public class RelatorioControle implements Serializable {
     }
 
     public void geraRelatorioAjuste() {
-        String consulta = "";
         try {
+            String condicao = "";
             JasperReport relatorio;
             String arquivoJasper = "relAjuste.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
+
+            if (produtos != null) {
+                if (condicao == "") {
+                    condicao += " where p.id  = " + produtos.getId();
+                } else {
+                    condicao += " AND p.id  = " + produtos.getId();
+                }
+            }
+
+            p.put("condicao", condicao);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relAjuste/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -529,13 +596,28 @@ public class RelatorioControle implements Serializable {
 
     public void geraRelatorioCompra() {
         try {
+            String consulta = "";
             JasperReport relatorio;
             String arquivoJasper = "relCompra.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
+
+
+            dataInicio = range.get(0);
+            dataFim = range.get(1);
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+
+            if (cliente != null) {
+                consulta += " AND c.id = " + cliente.getId();
+            }
+
+
+            p.put("condicaoStatus", consulta);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relCompra/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -585,7 +667,7 @@ public class RelatorioControle implements Serializable {
                     condicao += " AND p.id  = " + produtos.getId();
                 }
             }
-            System.out.println(consultaProd);
+
             p.put("condicaoEst", condicao);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relEstoque/" + arquivoJasper), p, JpaUtil.getConnection());
@@ -594,8 +676,6 @@ public class RelatorioControle implements Serializable {
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, dadosByte);
             exporter.exportReport();
-
-
             byte[] bytes = dadosByte.toByteArray();
             if (bytes != null && bytes.length > 0) {
                 int recorte = arquivoJasper.indexOf(".");
@@ -616,13 +696,25 @@ public class RelatorioControle implements Serializable {
 
     public void geraRelatorioVenda() {
         try {
+            String consulta = "";
             JasperReport relatorio;
             String arquivoJasper = "relVenda.jasper";
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.responseComplete();
             ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-            //gera relatorio com as classes do jasper
-            HashMap p = new HashMap();
+
+            dataInicio = range.get(0);
+            dataFim = range.get(1);
+
+            p.put("dataI", dataInicio);
+            p.put("dataF", dataFim);
+
+            if (cliente != null) {
+                consulta += " AND c.id = " + cliente.getId();
+            }
+
+            p.put("condicao", consulta);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(scontext.getRealPath("/WEB-INF/reports/relVenda/" + arquivoJasper), p, JpaUtil.getConnection());
             ByteArrayOutputStream dadosByte = new ByteArrayOutputStream();
             JRPdfExporter exporter = new JRPdfExporter();
@@ -630,11 +722,6 @@ public class RelatorioControle implements Serializable {
             exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, dadosByte);
             exporter.exportReport();
             byte[] bytes = dadosByte.toByteArray();
-
-            p.put("dataI", dataInicio);
-            p.put("dataF", dataFim);
-
-
             if (bytes != null && bytes.length > 0) {
                 int recorte = arquivoJasper.indexOf(".");
                 String nomePDF = arquivoJasper.substring(0, recorte);
@@ -702,5 +789,21 @@ public class RelatorioControle implements Serializable {
 
     public void setProdutos(Pecas produtos) {
         this.produtos = produtos;
+    }
+
+    public String getStatusAgendamento() {
+        return statusAgendamento;
+    }
+
+    public void setStatusAgendamento(String statusAgendamento) {
+        this.statusAgendamento = statusAgendamento;
+    }
+
+    public List<Date> getRange() {
+        return range;
+    }
+
+    public void setRange(List<Date> range) {
+        this.range = range;
     }
 }
