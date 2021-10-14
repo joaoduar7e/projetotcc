@@ -72,18 +72,6 @@
 
                 </h:panelGroup>
 
-                <p:panelGrid columns="1"
-                             columnClasses="ui-grid-col-3,ui-grid-col-3"
-                             layout="grid"
-                             styleClass="ui-panelgrid-blank ui-fluid"
-                             style="border:0px none; background-color:transparent;">
-
-                    <p:outputLabel for="range" value="Selecione o período da data de compra:"/>
-                    <p:datePicker id="range" selectionMode="range" value="#{relatorioControle.range}"
-                                  required="true" requiredMessage="Selecione a data de busca" readonlyInput="true"/>
-
-                </p:panelGrid>
-
                 <p:commandButton value="PDF" ajax="false"
                                  styleClass="ui-button-secondary"
                                  action="#{relatorioControle.geraRelatorioCompra()}"

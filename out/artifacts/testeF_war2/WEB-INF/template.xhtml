@@ -51,47 +51,55 @@
 
             <p:submenu label="Relatórios" icon="pi pi-fw pi-file">
                 <p:submenu label="Cadastrais" icon="pi pi-fw pi-plus-circle">
-                    <p:menuitem value="Relatório de cliente" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de cliente" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relCliente/relCliente.xhtml"/>
-                    <p:menuitem value="Relatório de cidade" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de cidade" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relCidade/relCidade.xhtml"/>
-                    <p:menuitem value="Relatório de estado" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de estado" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relEstado/relEstado.xhtml"/>
-                    <p:menuitem value="Relatório de funcionário" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de funcionário" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relFuncionario/relFunc.xhtml"/>
-                    <p:menuitem value="Relatório de locais" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de locais" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relLocais/relLocais.xhtml"/>
-                    <p:menuitem value="Relatório de maquinário" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de maquinário" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relMaquinario/relMaquinario.xhtml"/>
-                    <p:menuitem value="Relatório de peça" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de peça" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relPeca/relPeca.xhtml"/>
-                    <p:menuitem value="Relatório de serviço" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de serviço" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relServ/relServ.xhtml"/>
-                    <p:menuitem value="Relatório de tipo de serviço" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de tipo de serviço" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relTipoS/relTipoS.xhtml"/>
-                    <p:menuitem value="Relatório de usuário" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de usuário" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relUsuario/relUsuario.xhtml"/>
                 </p:submenu>
 
-                <p:submenu label="Financeiro" icon="pi pi-fw pi-plus-circle">
-                    <p:menuitem value="Relatório de contas receber" icon="pi pi-fw pi-user" ajax="false"
+                <p:submenu label="Financeiro" icon="pi pi-fw pi-money-bill">
+                    <p:menuitem value="Relatório de contas receber" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relContaR/relContasReceber.xhtml"/>
-                    <p:menuitem value="Relatório de contas a pagar" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de contas a pagar" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relContaPagar/relContaPagar.xhtml"/>
                 </p:submenu>
 
-                <p:submenu label="Expediente" icon="pi pi-fw pi-plus-circle">
-                    <p:menuitem value="Relatório de agendamento" icon="pi pi-fw pi-user" ajax="false"
+                <p:submenu label="Expediente" icon="pi pi-fw pi-shopping-cart">
+                    <p:menuitem value="Relatório de agendamento" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relAgendamento/relAgenda.xhtml"/>
-                    <p:menuitem value="Relatório de ajuste de estoque" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de ajuste de estoque" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relAjuste/relAjuste.xhtml"/>
-                    <p:menuitem value="Relatório de estoque" icon="pi pi-fw pi-user" ajax="false"
-                                outcome="/relatorio/relEstoque/relEstoque.xhtml"/>
-                    <p:menuitem value="Relatório de compras" icon="pi pi-fw pi-user" ajax="false"
+
+                    <p:menuitem value="Relatório de compras" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relCompra/relCompra.xhtml"/>
-                    <p:menuitem value="Relatório de vendas" icon="pi pi-fw pi-user" ajax="false"
+                    <p:menuitem value="Relatório de vendas" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relVenda/relVenda.xhtml"/>
 
+                </p:submenu>
+
+                <p:submenu label="Gerenciais" icon="pi pi-fw pi-ticket">
+                    <p:menuitem value="Relatório de estoque" icon="pi pi-file-o" ajax="false"
+                                outcome="/relatorio/relEstoque/relEstoque.xhtml"/>
+                    <p:menuitem value="Relatório de serviços realizados" icon="pi pi-file-o" ajax="false"
+                                outcome="/relatorio/relServicoPorPeriodo/relServicoPorPeriodo.xhtml"/>
+                    <p:menuitem value="Relatório de melhores clientes" icon="pi pi-file-o" ajax="false"
+                                outcome="/relatorio/relMelhoresCliente/relMelhoresCliente.xhtml"/>
                 </p:submenu>
             </p:submenu>
 

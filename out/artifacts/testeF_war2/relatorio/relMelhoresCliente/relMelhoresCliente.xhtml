@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+        <h:form>
+            <p:panel>
+            <p:panelGrid columns="4"
+                         columnClasses="ui-grid-col-12"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:row styleClass="my-heading-row" style="font-weight: bold">
+                    Relatório de melhores clientes
+                </p:row>
+            </p:panelGrid>
+
+            <p:panelGrid columns="1" id="gridC"
+                         columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+
+                <p:panelGrid columns="1" id="gridProd"
+                             columnClasses="ui-grid-col-/,ui-grid-col-3"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+
+                    <h:panelGroup id="panelC">
+                        <p:outputLabel value="Pesquisar por: "/>
+                        <br/>
+                        <p:selectOneRadio value="#{relatorioControle.consultaProd}"
+                                          style="display: inline;">
+
+                            <f:selectItem itemValue="TODOS" itemLabel="Todos os Clientes"/>
+                            <f:selectItem itemValue="CLIENTE" itemLabel="Por Cliente"/>
+                            <p:ajax event="change" update=" @this panelC "/>
+                        </p:selectOneRadio>
+
+
+                        <p:panelGrid columns="1"
+                                     columnClasses="ui-grid-col-6,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                                     layout="grid"
+                                     styleClass="ui-panelgrid-blank ui-fluid"
+                                     style="border:0px none; background-color:transparent;">
+
+
+                            <p:outputLabel value=" Cliente" for="cliente"
+                                           rendered="#{relatorioControle.consultaProd == 'CLIENTE'}"/>
+                            <p:autoComplete value="#{relatorioControle.cliente}"
+                                            size="60" id="cliente" required="true"
+                                            requiredMessage="O cliente é obrigatório!"
+                                            emptyMessage="Nenhum cliente encontrado"
+                                            effect="blind"
+                                            widgetVar="cliWid"
+                                            onclick="PF('cliWid').search('')"
+                                            forceSelection="true"
+                                            completeMethod="#{vendaControle.getListaClienteFiltrando}"
+                                            var="alu"
+                                            style="width: 75%"
+                                            inputStyle="width: 75%;"
+                                            itemValue="#{alu}"
+                                            itemLabel="#{alu.nome}"
+                                            rendered="#{relatorioControle.consultaProd == 'CLIENTE'}"
+                                            converter="#{compraControle.clienteConverter}"/>
+                        </p:panelGrid>
+
+                    </h:panelGroup>
+                </p:panelGrid>
+
+
+                <p:panelGrid columns="1"
+                             columnClasses="ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+
+                    <p:outputLabel for="range" value="Selecione o período desejado:"/>
+                    <p:datePicker id="range" selectionMode="range" value="#{relatorioControle.range}"
+                                  required="true" requiredMessage="Selecione a data de busca" readonlyInput="true"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="PDF" ajax="false"
+                                 styleClass="ui-button-secondary"
+                                 action="#{relatorioControle.geraRelatorioMelhoresClientes()}"
+                                 icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
+            </p:panelGrid>
+            </p:panel>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
+
