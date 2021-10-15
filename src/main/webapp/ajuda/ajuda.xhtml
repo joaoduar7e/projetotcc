@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="body">
+
+
+        <h:form>
+            <p:panel header="AJUDA">
+                <p:panelGrid columns="1"
+                             columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:row styleClass="my-heading-row" style="font-weight: bold">
+                        <div>Aqui será apresentado alguns tutoriais e dicas que irão lhe ajudar a usar a aplicação de forma mais fácil.</div>
+                    </p:row>
+                    <div>As telas são bem intuitivas e simples de entender, tendo basimente o "mesmo" processo de cadastro e movimentações entre elas.</div>
+
+                    <br/>
+
+                    <p:tabView>
+                        <p:tab title="Cadastro de Cliente">
+                            <p:row styleClass="my-heading-row" style="font-weight: bold">
+                                CADASTRO DE CLIENTE
+                            </p:row>
+
+                            <div>Primeiramento devemos ir em Cadastro > Cliente</div>
+                            <p:graphicImage  value="/img/cadCli1.jpg" width="750"/>
+
+                            <div>Após isso será apresentado a lista de clientes cadastrados.</div>
+                            <div>Para cadastrar um novo clientes basta selecionar o botão > "NOVO".</div>
+                            <p:graphicImage  value="/img/cadCli2.jpg" width="750"/>
+
+                            <div>Logo será carregado a página onde será possível realizar o cadastro de cliente. Onde é possível preencher diversas informações do cliente.</div>
+                            <div>Sendo informações obrigatorias no preenchimento os campos que contém um " * ".</div>
+                            <div>Assim que preencher as informações necessarias, basta clicar em "SALVAR" e seu cliente será salvo com todas as informações informadas.</div>
+                            <p:graphicImage  value="/img/cadCli3.jpg" width="750"/>
+
+                            <div>Dessa forma seu cliente já estará cadatrado e disponível na lista de clientes.</div>
+
+                        </p:tab>
+
+                        <p:tab title="Vendas">
+                            <p:row styleClass="my-heading-row" style="font-weight: bold">
+                                CADASTRO DE VENDAS
+                            </p:row>
+
+                            <div>Primeiramento devemos ir em Expediente > Venda </div>
+                            <p:graphicImage  value="/img/Venda1.jpg" width="750"/>
+
+                            <div>Após isso será apresentado a lista de vendas realizadas.</div>
+                            <div>Para realizar uma nova venda, basta clicarmos no botão "NOVO".</div>
+                            <p:graphicImage  value="/img/Venda2.jpg" width="750"/>
+
+
+                            <div>Na tela de venda temos diversas opções, como selecionar o cliente que realizou a venda, podemos selecionar as peças e serviços que irão conter na venda.</div>
+                            <div>Sendo necessario que a venda  possua pelo menos um produto ou serviço adicionado a ela.</div>
+                            <p:graphicImage  value="/img/Venda3.jpg" width="750"/>
+
+                            <div>O processo de adicionar uma peça ou serviço é o mesmo, devemos selecionar um item e informar a quantidade e preço que esse item terá. E selecionar o botão
+                            de "ADICIONAR" para adicionar o item a venda.</div>
+
+                            <div> Assim que adicionado é possível visualizar o item na parte inferior da página.</div>
+                            <p:graphicImage  value="/img/Venda4.jpg" width="750"/>
+
+                            <div>E por fim selecionar a forma de pagamento que será utilizada, o número de parcelas (Que será gerado automaticamente ao salvar a venda) e a data de vencimento da parcela.</div>
+                            <div>Também é possível visualizar o valor total da venda.</div>
+                            <p:graphicImage  value="/img/Venda5.jpg" width="750"/>
+
+                        </p:tab>
+
+                        <p:tab title="Ajuste Estoque">
+                            <p:row styleClass="my-heading-row" style="font-weight: bold">
+                                AJUSTE ESTOQUE
+                            </p:row>
+
+                            <div>Caso seja necessario realizar alguma movimentação/alteração em releação ao estoque de produtos, a opção de Ajuste de Estoque irá lhe ajudar.</div>
+                            <div>Atraves dessa tela podemos realizar movimentações no estoque de produtos, como entrada e saída de estoque.</div>
+                            <div>Para acessar essa tela, devemos ir em Expediente > Ajuste Estoque.</div>
+                            <p:graphicImage  value="/img/Ajuste1.jpg" width="750"/>
+                            <div>Após isso será apresentado uma lista com as movimentações realizadas.</div>
+                            <div>Para realizar um novo ajuste basta selecionar o botão "NOVO".</div>
+                            <p:graphicImage  value="/img/Ajuste2.jpg" width="750"/>
+
+                            <div>Nessa tela deve ser informado a peça que deseja realizar a movimentação.
+                                O tipo de movimentação que deseja realizar(Saída ou Entrada). Como também a quantidade que será movimentada</div>
+                            <div>Após conferir as informações, basta clicar no botão "SALVAR".</div>
+                            <p:graphicImage  value="/img/Ajuste3.jpg" width="750"/>
+
+                        </p:tab>
+
+                    </p:tabView>
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+</html>
+

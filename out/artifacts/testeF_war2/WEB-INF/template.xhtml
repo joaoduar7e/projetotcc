@@ -100,13 +100,23 @@
                                 outcome="/relatorio/relServicoPorPeriodo/relServicoPorPeriodo.xhtml"/>
                     <p:menuitem value="Relatório de melhores clientes" icon="pi pi-file-o" ajax="false"
                                 outcome="/relatorio/relMelhoresCliente/relMelhoresCliente.xhtml"/>
+                    <p:menuitem value="Relatório de gastos" icon="pi pi-file-o" ajax="false"
+                                outcome="/relatorio/relGastos/relGastos.xhtml"/>
+                    <p:menuitem value="Relatório de faturamento" icon="pi pi-file-o" ajax="false"
+                                outcome="/relatorio/relFaturamento/relFaturamento.xhtml"/>
                 </p:submenu>
             </p:submenu>
 
 
             <p:divider layout="vertical"/>
 
+            <p:menuitem value="Ajuda" icon="pi pi-fw pi-question-circle" ajax="false"
+                        outcome="/ajuda/ajuda.xhtml"/>
+
+            <p:divider layout="vertical"/>
+
             <p:menuitem value="Sair" icon="pi pi-fw pi-power-off" action="#{loginControle.logoff()}"/>
+
         </p:menubar>
 
     </h:form>
