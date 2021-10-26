@@ -12,28 +12,31 @@
     <ui:define name="body">
 
         <h:form>
-            <p:panelGrid columns="4"
-                         columnClasses="ui-grid-col-12"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+            <p:panel>
+                <p:panelGrid columns="4"
+                             columnClasses="ui-grid-col-12"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:row styleClass="my-heading-row" style="font-weight: bold">
-                    Relátorio de Funcionários
-                </p:row>
-            </p:panelGrid>
+                    <p:row styleClass="my-heading-row" style="font-weight: bold">
+                        Relátorio de Funcionários
+                    </p:row>
+                </p:panelGrid>
 
-            <p:panelGrid columns="1"
-                         columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
-                         layout="grid"
-                         styleClass="ui-panelgrid-blank ui-fluid"
-                         style="border:0px none; background-color:transparent;">
+                <p:panelGrid columns="1"
+                             columnClasses="ui-grid-col-12,ui-grid-col-6,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
 
-                <p:commandButton value="PDF" ajax="false"
-                                 styleClass="ui-button-secondary"
-                                 action="#{relatorioControle.geraRelatorioFunc()}"
-                                 icon="pi pi-file-pdf" style="align-items: center" onclick="this.form.target='_blank'"/>
-            </p:panelGrid>
+                    <p:commandButton value="PDF" ajax="false"
+                                     styleClass="ui-button-secondary"
+                                     action="#{relatorioControle.geraRelatorioFunc()}"
+                                     icon="pi pi-file-pdf" style="align-items: center"
+                                     onclick="this.form.target='_blank'"/>
+                </p:panelGrid>
+            </p:panel>
         </h:form>
 
     </ui:define>

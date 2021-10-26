@@ -1,6 +1,5 @@
 package facade;
 
-import entidades.Pessoa;
 import entidades.Servico;
 import entidades.Usuario;
 import utils.Criptografia;

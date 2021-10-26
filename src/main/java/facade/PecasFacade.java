@@ -1,7 +1,6 @@
 package facade;
 
 import entidades.Pecas;
-import entidades.Pessoa;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

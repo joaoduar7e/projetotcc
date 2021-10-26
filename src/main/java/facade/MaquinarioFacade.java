@@ -1,8 +1,6 @@
 package facade;
 
 import entidades.Maquinario;
-import entidades.Pais;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 

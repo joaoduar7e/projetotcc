@@ -1,6 +1,6 @@
 package facade;
 
-import entidades.Pessoa;
+
 import entidades.TipoServico;
 
 import javax.inject.Inject;
